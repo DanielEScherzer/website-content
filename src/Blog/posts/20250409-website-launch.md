@@ -53,4 +53,22 @@ at the same time I also purchased the production domain
 
 ## Launching the site
 
-Currently in the process of launching...
+After purchasing the VPS and the domains, I was finally ready. I published my
+work to GitHub, and deployed it to the VPS. My directory structure on the VPS
+looks as follows:
+* `/home/non-root/website-traefik` is a clone of
+gh:DanielEScherzer/website-traefik that manages the infrastructure
+* `/home/non-root/production.dev` is a clone of
+gh:DanielEScherzer/website-content with the content, with a `.env` file setting
+	- `DEPLOYMENT_HOST_NAME=scherzer.dev`
+	- `MATOMO_DB_PASSWORD=[redacted here]`
+	- `COMPOSE_PROFILES=matomo`
+* `/home/non-root/staging.xyz` is a clone of the same content, with a different
+`.env` file, setting
+	- `DEPLOYMENT_HOST_NAME=[redacted here]`
+	- `DANIEL_WEBSITE_STAGING=1`
+
+I deployed an initial version of my content with this blog post incomplete, so
+as of writing both production and staging are showing the content from commit
+`b35c425312f646550732877e956d6447fe3c0c15`, but when you read this the sites
+will have been updated.
