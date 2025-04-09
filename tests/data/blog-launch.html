@@ -44,4 +44,30 @@ production running at the same time, supported with Traefik) was going to work,
 at the same time I also purchased the production domain
 <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://scherzer.dev">scherzer.dev</a> from GoDaddy, and a VPS from BrownRice.</p>
 <h2>Launching the site</h2>
+<p>After purchasing the VPS and the domains, I was finally ready. I published my
+work to GitHub, and deployed it to the VPS. My directory structure on the VPS
+looks as follows:</p>
+<ul>
+<li><code>/home/non-root/website-traefik</code> is a clone of
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/DanielEScherzer/website-traefik">DanielEScherzer/website-traefik</a> that manages the infrastructure</li>
+<li><code>/home/non-root/production.dev</code> is a clone of
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/DanielEScherzer/website-content">DanielEScherzer/website-content</a> with the content, with a <code>.env</code> file setting
+<ul>
+<li><code>DEPLOYMENT_HOST_NAME=scherzer.dev</code></li>
+<li><code>MATOMO_DB_PASSWORD=[redacted here]</code></li>
+<li><code>COMPOSE_PROFILES=matomo</code></li>
+</ul>
+</li>
+<li><code>/home/non-root/staging.xyz</code> is a clone of the same content, with a different
+<code>.env</code> file, setting:
+<ul>
+<li><code>DEPLOYMENT_HOST_NAME=[redacted here]</code></li>
+<li><code>DANIEL_WEBSITE_STAGING=1</code></li>
+</ul>
+</li>
+</ul>
+<p>I deployed an initial version of my content with this blog post incomplete, so
+as of writing both production and staging are showing the content from commit
+<code>b35c425312f646550732877e956d6447fe3c0c15</code>, but when you read this the sites
+will have been updated.</p>
 </div><div class="des-footer"><div class="des-footer--content">Content is © 2025 Daniel Scherzer</div></div></body></html>

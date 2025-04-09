@@ -192,7 +192,7 @@ END,
 					FluentHTML::make(
 						'a',
 						[
-							'href' => 'https://github.com/DanielEScherzer/website-source',
+							'href' => 'https://github.com/DanielEScherzer/website-content',
 							'target' => '_blank',
 							'class' => 'external-link',
 						],
