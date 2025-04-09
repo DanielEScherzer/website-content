@@ -60,6 +60,7 @@ class BlogDisplay {
 		if ( $realDisplay ) {
 			$env->addExtension( new HeadingPermalinkExtension() );
 			$env->addExtension( new TableOfContentsExtension() );
+			$env->addExtension( new PygmentsHighlightExtension() );
 
 			$env->addEventListener(
 				DocumentParsedEvent::class,

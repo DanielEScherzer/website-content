@@ -15,4 +15,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 # For test coverage
 RUN pecl install pcov
 
+# For code highlighting
+RUN apt-get install -y python3
+RUN apt-get satisfy "python3 (>= 3.11, <= 3.12)"
+RUN apt-get install -y python3-pip
+# Docker environment, nothing is going to break
+RUN pip install Pygments==2.19.1 --break-system-packages
+
 RUN a2enmod rewrite

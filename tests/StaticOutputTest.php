@@ -61,6 +61,11 @@ class StaticOutputTest extends TestCase {
 		yield 'Blog - exists' => [ 'GET', '/Blog/20250409-website-launch', 'blog-launch.html' ];
 		yield 'Blog - missing' => [ 'GET', '/Blog/missing', 'blog-missing.html' ];
 		yield 'Blog - index' => [ 'GET', '/Blog', 'blog-index.html' ];
+		yield 'Blog - pygments highlight' => [
+			'GET',
+			'/Blog/20250410-attribs-on-constants',
+			'blog-highlighting.html',
+		];
 
 		// Error 404
 		yield 'Missing' => [ 'GET', '/Missing', 'Missing.html' ];

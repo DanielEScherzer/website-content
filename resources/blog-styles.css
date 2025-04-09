@@ -22,6 +22,10 @@
 	margin-bottom: 0px;
 }
 
+.blog-content .pygments-highlight pre {
+	background-color: #f8f8f8;
+}
+
 .blog-page.content-wrapper {
 	width: 100%;
 	display: grid;

@@ -7,10 +7,12 @@ use DanielEScherzer\HTMLBuilder\FluentHTML;
 use DanielEScherzer\HTMLBuilder\RawHTML;
 use DanielWebsite\Blog\BlogDisplay;
 use DanielWebsite\Blog\BlogPostStore;
+use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Emphasis;
 use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;
 use League\CommonMark\Node\Inline\Text;
+use League\CommonMark\Node\Node;
 use League\CommonMark\Node\Query;
 use League\CommonMark\Parser\MarkdownParser;
 use League\CommonMark\Renderer\HtmlRenderer;
@@ -69,6 +71,20 @@ class BlogPostPage extends BasePage {
 		$firstHeading->insertAfter( $dateWrapper );
 
 		$renderer = new HtmlRenderer( $env );
+
+		// Check if we should load the extra styles for highlighting
+		$code = ( new Query() )
+			->where( Query::type( FencedCode::class ) )
+			->where(
+				static function ( Node $node ): bool {
+					$infoWords = $node->getInfoWords();
+					return $infoWords && $infoWords[0] !== '';
+				}
+			)
+			->findAll( $parsedResult );
+		if ( iterator_count( $code ) ) {
+			$this->addStyleSheet( 'blog-pygments.css' );
+		}
 
 		// Extract TOC
 		$toc = ( new Query() )
