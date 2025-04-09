@@ -1,0 +1,134 @@
+/* Styles for Turing Machine simulator */
+
+/* Allow scrolling down a bit, increase default font size */
+body {
+    padding-bottom: 150px;
+    font-size: 12pt;
+}
+
+/* Center headings */
+h1 {
+    text-align: center;
+}
+
+/* Details of the transitions and states, among other things */
+pre {
+    background-color: lightgrey;
+}
+
+/* Tape contents should be bigger */
+.machine-tape {
+    font-size: 20pt;
+}
+
+/* Tape cells */
+.machine-tape-cell {
+    border: 3px solid black;
+    width: 60px;
+    height: 60px;
+    /* Grid to allow vertical centering text */
+    display: inline-grid;
+    margin: 2px;
+    /* Always align the cell with the top even if has contents */
+    vertical-align: top;
+    /* Horizontal center */
+    text-align: center;
+    /* Vertical center */
+    align-items: center;
+}
+
+/*
+    Extra styles for some specific cells based on dedicated classes:
+    - current cell
+    - empty cells
+*/
+
+.machine-tape-cell--current {
+    border-color: blue;
+}
+.machine-tape-cell--empty {
+    background-color: lightgrey;
+}
+
+/* User controls */
+.feature-control-desc {
+    display: block;
+}
+.feature-control-wrapper {
+    margin: 10px;
+}
+#individual-feature-controls {
+    column-count: 2;
+}
+#all-feature-controls,
+#other-controls {
+    border: 1px solid black;
+    width: fit-content;
+    margin-left: 10px;
+    padding: 10px;
+    vertical-align: top;
+}
+#other-controls label {
+    display: block;
+}
+#config-load-stored {
+    margin-right: 10px;
+}
+#config-callback-cell {
+    width: 100%;
+    align-items: center;
+}
+#config-callback-cell textarea {
+    width: 90%;
+}
+
+#popup-error-wrapper,
+#popup-error-dialog {
+    /* Take up the entire screen */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+#popup-error-wrapper {
+    /* Opacity */
+    background-color: #FFFFFFA6;
+}
+#popup-error-dialog {
+    /* Expand to match content but don't take entire screen */
+    width: fit-content;
+    max-width: 90%;
+    height: fit-content;
+    /* Center */
+    margin: auto;
+    /* Add a border */
+    border: 1px solid black;
+    /* Opaque background to block elements behind the dialog */
+    background-color: #FFFFFF;
+    /* Warning should be bigger */
+    font-size: 20px;
+}
+#popup-error-label-wrapper {
+    /* The "Error!" label at the top should be centered and with padding */
+    text-align: center;
+    padding-top: 5px;
+}
+#popup-error-text {
+    /* Long trace lines */
+    white-space: break-spaces;
+}
+#popup-error-close-btn {
+    /* Full width of the popup and some height */
+    width: 100%;
+    height: 30px;
+    /* Doesn't get inherited? */
+    font-size: 20px;
+    /* Overall popup already has a border */
+    border: none;
+    cursor: pointer;
+}
+#popup-error-close-btn:hover {
+    /* Change color on hover - darker but not as dark as the <pre> */
+    background-color: #e9e9e9;
+}

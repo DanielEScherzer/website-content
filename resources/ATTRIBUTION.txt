@@ -1,0 +1,5 @@
+* external-link.svg
+	Licensed under the MIT license
+	Source: https://www.iconfinder.com/icons/7124185/external_link_icon
+		I added some whitespace to make it a bit more readable
+	Author: Steve Schoger

@@ -1,0 +1,6 @@
+# Everything
+*
+# Except this file
+!.gitignore
+# And the htaccess
+!.htaccess

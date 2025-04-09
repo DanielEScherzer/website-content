@@ -1,0 +1,65 @@
+services:
+  site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www/html/:cached
+    # ports:
+    #   - "80:80"
+    environment:
+      DANIEL_WEBSITE_STAGING: "${DANIEL_WEBSITE_STAGING}"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${DEPLOYMENT_HOST_NAME}`)
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=websecure
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt
+      - traefik.http.services.${COMPOSE_PROJECT_NAME}.loadbalancer.server.port=80
+    networks:
+      - my-traefik-net
+
+  matomo-db:
+    image: mysql:8.4
+    restart: unless-stopped
+    profiles:
+      - matomo
+    environment:
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD="${MATOMO_DB_PASS}"
+      - MYSQL_DATABASE=matomo
+    volumes:
+      - ./matomo/db:/var/lib/mysql
+
+  matomo-web:
+    image: matomo:5.3.1
+    restart: unless-stopped
+    profiles:
+      - matomo
+    networks:
+      - default
+      - my-traefik-net
+    depends_on:
+      - matomo-db
+    environment:
+      - MATOMO_DATABASE_HOST=matomo-db
+      - MATOMO_DATABASE_DBNAME=matomo
+      - MATOMO_DATABASE_USERNAME=root
+      - MATOMO_DATABASE_PASSWORD="${MATOMO_DB_PASS}"
+    volumes:
+      - ./matomo/logs:/var/www/html/logs
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-matomo.rule=Host(`${DEPLOYMENT_HOST_NAME}`) && PathPrefix(`/matomo/`)
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-matomo.entrypoints=websecure
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-matomo.tls=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-matomo.tls.certresolver=letsencrypt
+      - traefik.http.middlewares.${COMPOSE_PROJECT_NAME}-matomo-stripprefix.stripprefix.prefixes=/matomo
+      - traefik.http.middlewares.${COMPOSE_PROJECT_NAME}-matomo-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.${COMPOSE_PROJECT_NAME}-matomo-headers.headers.customrequestheaders.X-Forwarded-Uri=/matomo
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-matomo.middlewares=${COMPOSE_PROJECT_NAME}-matomo-stripprefix,${COMPOSE_PROJECT_NAME}-matomo-headers
+
+networks:
+  # Created by the website-traefik deployment
+  my-traefik-net:
+    external: true

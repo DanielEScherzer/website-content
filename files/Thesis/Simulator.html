@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Turing Machine simulator</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./script.js"></script>
+</head>
+<body>
+
+<h1>Turing Machine simulator</h1>
+
+<div id="all-developer-controls">
+<!-- Gets formatted as a table for alignment purposes -->
+<table><tbody>
+
+<!-- Row 1: features, alphabets, and stored programs -->
+<tr>
+    <td id="all-feature-controls">
+        <strong>Features:</strong>
+        <div id="individual-feature-controls"></div>
+    </td>
+    <td id="other-controls">
+        <br>
+        <strong>Alphabets:</strong>
+        <div id="tm-config-input-alphabet-wrapper">
+            <label for="config-input-alphabet">
+                Input alphabet (Characters to allow in the tape input):
+            </label>
+            <textarea id="config-input-alphabet" rows="2" cols="40"></textarea>
+        </div>
+        <div id="config-tape-alphabet-wrapper">
+            <label for="config-tape-alphabet">
+                Extra tape alphabet (do not include input alphabet symbols or the empty symbol):
+            </label>
+            <textarea id="config-tape-alphabet" rows="2" cols="40"></textarea>
+        </div>
+        
+        <br>
+
+        <strong>Stored programs:</strong>
+        <br>
+        <button id="config-load-stored">Load stored program</button>
+        <select id="config-stored-selector">
+            <!-- Options added from the JavaScript -->
+        </select>
+    </td>
+</tr>
+
+<!-- Row 2: TM program itself -->
+<tr><td id="config-callback-cell" colspan="2">
+    <strong>
+        Warning: The JavaScript included below will be executed in your
+        browser without sanitation!
+    </strong>
+    
+    <p>
+        The constants `<code>L</code>` for left movement, `<code>R</code>`
+        for right movement, and `<code>N</code>` for no movement are available.
+        For writing transitions, `<code>WILDCARD</code>` and
+        `<code>EMPTY_CELL</code>` can be used. `<code>STATE_ACCEPT</code>` and
+        `<code>STATE_REJECT</code>` can be used when specifying states. The
+        start state is always `<code>qstart</code>` for single-taped machines.
+    </p>
+    <textarea id="developer-config-code" rows="15" cols="80"></textarea>
+</td></tr>
+
+<!-- Row 3: button to load the program-->
+<tr><td colspan="2">
+    <button id="config-load-program">Load program</button>
+</td></tr>
+
+</tbody></table>
+</div>
+
+<p>
+Input to the program:
+</p>
+<textarea id="machine-input" rows="15" cols="80">
+</textarea>
+<br>
+<button id="machine-load">Load the machine</button>
+<button id="machine-step">Perform the next step</button>
+<button id="machine-run-toggle">Run machine to completion</button>
+<button id="machine-go-back">Go back one step</button>
+
+<hr>
+<p>Current state: <span id="machine-current-state">q0</span>.</p>
+<hr>
+<div id="all-machine-tapes">
+<!-- Tape cells added by the JavaScript -->
+</div>
+
+<hr>
+State machine and transitions:
+<pre id="state-machine-transitions">
+</pre>
+
+</body>
+</html>

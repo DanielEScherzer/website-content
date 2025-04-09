@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.5/phpunit.xsd"
+	backupGlobals="true"
+	colors="false"
+	beStrictAboutOutputDuringTests="true"
+	displayDetailsOnTestsThatTriggerDeprecations="true"
+	displayDetailsOnTestsThatTriggerErrors="true"
+	displayDetailsOnTestsThatTriggerNotices="true"
+	displayDetailsOnTestsThatTriggerWarnings="true"
+	displayDetailsOnPhpunitDeprecations="true"
+	requireCoverageMetadata="true"
+>
+	<testsuites>
+		<testsuite name="website">
+			<directory>./tests</directory>
+		</testsuite>
+	</testsuites>
+	<source>
+		<include>
+			<directory>./src</directory>
+		</include>
+	</source>
+	<coverage includeUncoveredFiles="true">
+		<report>
+			<html outputDirectory="html-coverage" />
+		</report>
+	</coverage>
+	<php>
+		<const name="PHPUNIT_TESTS_RUNNING" value="true" />
+	</php>
+</phpunit>

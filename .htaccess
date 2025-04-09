@@ -1,0 +1,31 @@
+# We are using rewrites
+RewriteEngine On
+
+# No direct git access online
+RedirectMatch 404 /\.git
+
+# No directory indexing
+Options -Indexes
+
+# Redirect / to the main page
+RewriteRule ^/*$ %{DOCUMENT_ROOT}/index.php [L]
+
+# Use short URLs if the requested resource doesn't exist as a file
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
+RewriteRule ^(.*)$ %{DOCUMENT_ROOT}/index.php [L]
+
+# For files that we don't allow access to, just treat as not existing
+
+# Some top-level files that don't need to be accessed
+RewriteRule ^(\.phpcs|phpunit)\.xml$ %{DOCUMENT_ROOT}/index.php [L]
+RewriteRule ^(composer\.(json|lock))$ %{DOCUMENT_ROOT}/index.php [L]
+# Docker setup stuff
+RewriteRule ^(\.env)$ %{DOCUMENT_ROOT}/index.php [L]
+RewriteRule ^(\.env\.example)$ %{DOCUMENT_ROOT}/index.php [L]
+RewriteRule ^(docker-compose\.yml)$ %{DOCUMENT_ROOT}/index.php [L]
+RewriteRule ^(Dockerfile)$ %{DOCUMENT_ROOT}/index.php [L]
+# Matomo
+RewriteRule ^(matomo.*)$ %{DOCUMENT_ROOT}/index.php [L]
+# If I run tests on the server for some reason
+RewriteRule ^(html-coverage.*)$ %{DOCUMENT_ROOT}/index.php [L]
+RewriteRule ^(\.phpunit\.result\.cache)$ %{DOCUMENT_ROOT}/index.php [L]

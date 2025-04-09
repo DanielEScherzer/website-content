@@ -1,0 +1,66 @@
+:root {
+	--footer-height: 40px;
+	--footer-padding: 10px;
+	--footer-elem-height: calc( var(--footer-height) + var(--footer-padding) )
+}
+
+.content-wrapper {
+	margin: auto;
+	width: 80%;
+	margin-bottom: calc( var(--footer-elem-height) + 10px );
+
+	p, li, blockquote {
+		font-size: 18px;
+	}
+}
+
+.des-strong-page-link {
+	cursor: default;
+}
+
+.des-navbar {
+	width: 60%;
+	margin: auto;
+	display: flex;
+	justify-content: space-around;
+	border: 3px solid blue;
+	margin-top: 5px;
+	padding: 2px;
+	font-size: 1.3em;
+
+	a {
+		text-decoration: none;
+	}
+}
+
+li {
+	margin-top: 10px;
+}
+
+a.external-link::after {
+	content: '';
+	background-image: url( external-link.svg );
+	background-position: center right;
+	background-repeat: no-repeat;
+	padding-right: 16px;
+	background-size: 15px;
+}
+
+.subsection-header {
+	margin-top: 35px;
+}
+
+.des-footer {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: var( --footer-height );
+	text-align: center;
+	background-color: white;
+	padding-top: var( --footer-padding );
+}
+
+.des-footer--content {
+	border-top: 1px solid black;
+}
