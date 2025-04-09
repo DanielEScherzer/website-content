@@ -9,6 +9,7 @@ use DanielWebsite\Blog\BlogDisplay;
 use DanielWebsite\Blog\BlogPostStore;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Emphasis;
+use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;
 use League\CommonMark\Node\Inline\Text;
 use League\CommonMark\Node\Query;
 use League\CommonMark\Parser\MarkdownParser;
@@ -68,12 +69,34 @@ class BlogPostPage extends BasePage {
 		$firstHeading->insertAfter( $dateWrapper );
 
 		$renderer = new HtmlRenderer( $env );
+
+		// Extract TOC
+		$toc = ( new Query() )
+			->where( Query::type( TableOfContents::class ) )
+			->findAll( $parsedResult );
+		$tocRender = $renderer->renderNodes( $toc );
+		// Need a new traversable
+		$toc = ( new Query() )
+			->where( Query::type( TableOfContents::class ) )
+			->findAll( $parsedResult );
+		foreach ( $toc as $t ) {
+			$t->detach();
+		}
 		$html = $renderer->renderDocument( $parsedResult )->getContent();
 
 		$this->contentWrapper->append(
-			new RawHTML( $html ),
+			FluentHTML::make(
+				'div',
+				[ 'class' => 'blog-toc' ],
+				new RawHTML( $tocRender )
+			),
+			FluentHTML::make(
+				'div',
+				[ 'class' => 'blog-content' ],
+				new RawHTML( $html )
+			)
 		);
-		$this->contentWrapper->addClass( 'blog-content' );
+		$this->contentWrapper->addClass( 'blog-page' );
 	}
 
 }

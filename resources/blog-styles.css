@@ -21,3 +21,41 @@
 .blog-preview h3 {
 	margin-bottom: 0px;
 }
+
+.blog-page.content-wrapper {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 20% 60% 20%;
+}
+
+.blog-toc {
+	height: fit-content;
+	position: sticky;
+	top: 50px;
+	background-color: #f6f6f6;
+	width: fit-content;
+	padding: 10px;
+	margin-right: 10px;
+
+	.table-of-contents {
+		padding-left: 0px;
+		list-style-position: inside;
+	}
+}
+
+@media (max-width: 900px) {
+	.blog-page.content-wrapper {
+		grid-template-columns: 20% 70% 10%;
+	}
+}
+@media (max-width: 600px) {
+	.blog-page.content-wrapper {
+		width: 80%;
+		display: block;
+	}
+	.blog-toc {
+		position: relative;
+		top: unset;
+		margin-top: 20px;
+	}
+}
