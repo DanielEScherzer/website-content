@@ -15,7 +15,7 @@ package with my configuration will be useful for anyone else, but in case it is,
 you can find the package at package:danielescherzer/common-phpcs on Packagist,
 and the source at gh:DanielEScherzer/common-phpcs on GitHub.
 
-Next, using that package to enforce some style rules, I then creating a utility
+Next, using that package to enforce some style rules, I then created a utility
 package for building up HTML output. I prefer to avoid mixing inline HTML with
 my PHP, and writing raw HTML, while useful and sometimes needed, results in a
 less powerful interface for building up the output than a PHP library would
