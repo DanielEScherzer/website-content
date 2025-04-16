@@ -10,6 +10,7 @@ use DanielWebsite\Pages\Error404Page;
 use DanielWebsite\Pages\Error405Page;
 use DanielWebsite\Pages\LandingPage;
 use DanielWebsite\Pages\OpenSourcePage;
+use DanielWebsite\Pages\RobotsTxtPage;
 use DanielWebsite\Pages\ThesisPage;
 use DanielWebsite\Pages\WorkPage;
 use FastRoute\Dispatcher;
@@ -51,6 +52,7 @@ class Router {
 	 */
 	public static function addRoutesCb( RouteCollector $r ): void {
 		$r->addRoute( 'GET', '', LandingPage::class );
+		$r->addRoute( 'GET', '/robots.txt', RobotsTxtPage::class );
 		$r->addRoute( 'GET', '/Home', LandingPage::class );
 		$r->addRoute( 'GET', '/OpenSource', OpenSourcePage::class );
 		$r->addRoute( 'GET', '/Thesis', ThesisPage::class );

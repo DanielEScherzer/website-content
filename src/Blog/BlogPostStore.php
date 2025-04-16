@@ -8,7 +8,7 @@ class BlogPostStore {
 	public function __construct() {
 	}
 
-	public function listBlogPosts(): array {
+	public function listBlogTitles(): array {
 		$entries = scandir( __DIR__ . '/posts/' );
 		$files = array_filter(
 			$entries,
@@ -19,6 +19,11 @@ class BlogPostStore {
 			$files
 		);
 		rsort( $titles );
+		return $titles;
+	}
+
+	public function listBlogPosts(): array {
+		$titles = $this->listBlogTitles();
 		$posts = array_map(
 			fn ( string $title ) => $this->getBlogPost( $title ),
 			$titles
