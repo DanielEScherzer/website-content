@@ -103,9 +103,9 @@ bug fixes, improvements to the
 END,
 					$reflectionLink,
 					<<<END
- and various cleanup. In March 2025, I requested and was granted access to made
-direct direct changes (and approve others' changes) to PHP. I also became the
-official maintainer of the reflection extension.
+ and various cleanup. In March 2025, I requested and was granted access to make
+direct changes (and approve others' changes) to PHP. I also became the official
+maintainer of the reflection extension.
 END,
 				]
 			),
