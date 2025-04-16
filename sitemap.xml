@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+ <url>
+  <loc>https://scherzer.dev</loc>
+ </url>
+ <url>
+  <loc>https://scherzer.dev/robots.txt</loc>
+ </url>
+ <url>
+  <loc>https://scherzer.dev/Home</loc>
+ </url>
+ <url>
+  <loc>https://scherzer.dev/OpenSource</loc>
+ </url>
+ <url>
+  <loc>https://scherzer.dev/Thesis</loc>
+ </url>
+ <url>
+  <loc>https://scherzer.dev/Work</loc>
+ </url>
+ <url>
+  <loc>https://scherzer.dev/Blog</loc>
+ </url>
+ <url>
+  <loc>https://scherzer.dev/Blog/20250409-website-launch</loc>
+ </url>
+</urlset>
