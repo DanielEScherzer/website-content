@@ -91,6 +91,11 @@ class OpenSourcePage extends BasePage {
 			'https://www.php.net/manual/en/book.reflection.php',
 			'Reflection extension'
 		);
+		$blogLink = FluentHTML::make(
+			'a',
+			[ 'href' => '/Blog/20250417-php85-release-manager' ],
+			'my blog post'
+		);
 		$this->contentWrapper->append(
 			FluentHTML::make( 'h3', [ 'class' => 'subsection-header' ], 'PHP' ),
 			FluentHTML::make(
@@ -107,6 +112,21 @@ END,
 direct changes (and approve others' changes) to PHP. I also became the official
 maintainer of the reflection extension.
 END,
+				]
+			),
+			FluentHTML::make(
+				'p',
+				[],
+				[
+					<<<END
+Also in March 2025, I volunteered to serve as one of the release managers for
+the then-subsequent version of PHP, PHP 8.5. In April, the community voted to
+decide between the volunteers (luckily there were plenty of candidates) and I
+was one of the two "rookie" candidates chosen to help with the release. You can
+read more in 
+END,
+					$blogLink,
+					'.',
 				]
 			),
 			FluentHTML::make(

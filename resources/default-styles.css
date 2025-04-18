@@ -46,6 +46,11 @@ a.external-link::after {
 	background-size: 15px;
 }
 
+/* Images that are links don't need the indicator */
+a.external-link:has(img)::after {
+	content: none;
+}
+
 .subsection-header {
 	margin-top: 35px;
 }
