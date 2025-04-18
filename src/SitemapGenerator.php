@@ -25,6 +25,8 @@ class SitemapGenerator {
 
 		$blogStore = new BlogPostStore();
 		$blogTitles = $blogStore->listBlogTitles();
+		// listBlogTitles() will be in reverse order for the blog index page
+		sort( $blogTitles );
 		foreach ( $blogTitles as $title ) {
 			$sitemap->addItem( self::URL_BASE . '/Blog/' . $title );
 		}
