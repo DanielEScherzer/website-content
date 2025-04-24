@@ -10,6 +10,7 @@ use DanielWebsite\Pages\Error404Page;
 use DanielWebsite\Pages\Error405Page;
 use DanielWebsite\Pages\LandingPage;
 use DanielWebsite\Pages\OpenSourcePage;
+use DanielWebsite\Pages\RedirectPage;
 use DanielWebsite\Pages\RobotsTxtPage;
 use DanielWebsite\Pages\ThesisPage;
 use DanielWebsite\Pages\WorkPage;
@@ -43,7 +44,11 @@ class Router {
 				return new Error405Page( $requestURI, $requestMethod, $routeInfo[1] );
 			case Dispatcher::FOUND:
 				$clazz = $routeInfo[1];
-				return new $clazz( $routeInfo[2] );
+				$matches = $routeInfo[2];
+				if ( $clazz === RedirectPage::class ) {
+					$matches = [ 'title' => $requestURI ];
+				}
+				return new $clazz( $matches );
 		}
 	}
 
@@ -59,5 +64,6 @@ class Router {
 		$r->addRoute( 'GET', '/Work', WorkPage::class );
 		$r->addRoute( 'GET', '/Blog', BlogIndexPage::class );
 		$r->addRoute( 'GET', '/Blog/{title}', BlogPostPage::class );
+		RedirectPage::addRoutes( $r );
 	}
 }
