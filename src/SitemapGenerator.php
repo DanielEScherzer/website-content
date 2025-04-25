@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace DanielWebsite;
 
 use DanielWebsite\Blog\BlogPostStore;
+use DanielWebsite\Pages\ToolPage;
 use FastRoute\DataGenerator\MarkBased;
 use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std;
@@ -16,11 +17,13 @@ class SitemapGenerator {
 	public static function generateSitemap( string $location ): void {
 		$collector = new RouteCollector( new Std(), new MarkBased() );
 		Router::addRoutesCb( $collector );
-		$getPaths = array_keys( $collector->getData()[0]['GET'] );
+		$getPaths = $collector->getData()[0]['GET'];
 
 		$sitemap = new Sitemap( $location );
-		foreach ( $getPaths as $path ) {
-			$sitemap->addItem( self::URL_BASE . $path );
+		foreach ( $getPaths as $path => $class ) {
+			if ( $class !== ToolPage::class ) {
+				$sitemap->addItem( self::URL_BASE . $path );
+			}
 		}
 
 		$blogStore = new BlogPostStore();

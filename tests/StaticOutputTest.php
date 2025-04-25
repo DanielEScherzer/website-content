@@ -16,6 +16,7 @@ use DanielWebsite\Pages\Error405Page;
 use DanielWebsite\Pages\LandingPage;
 use DanielWebsite\Pages\OpenSourcePage;
 use DanielWebsite\Pages\ThesisPage;
+use DanielWebsite\Pages\ToolPage;
 use DanielWebsite\Pages\WorkPage;
 use DanielWebsite\Router;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -31,6 +32,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass( LandingPage::class )]
 #[CoversClass( OpenSourcePage::class )]
 #[CoversClass( ThesisPage::class )]
+#[CoversClass( ToolPage::class ) ]
 #[CoversClass( WorkPage::class )]
 #[CoversClass( Router::class )]
 class StaticOutputTest extends TestCase {
@@ -61,6 +63,9 @@ class StaticOutputTest extends TestCase {
 		yield 'Blog - exists' => [ 'GET', '/Blog/20250409-website-launch', 'blog-launch.html' ];
 		yield 'Blog - missing' => [ 'GET', '/Blog/missing', 'blog-missing.html' ];
 		yield 'Blog - index' => [ 'GET', '/Blog', 'blog-index.html' ];
+		yield 'Tools - index' => [ 'GET', '/Tools', 'tools-index.html' ];
+		yield 'Tools - missing' => [ 'GET', '/Tools/missing', 'tools-missing.html' ];
+		yield 'Tools - dvorak' => [ 'GET', '/Tools/dvorak', 'tools-dvorak.html' ];
 
 		// Error 404
 		yield 'Missing' => [ 'GET', '/Missing', 'Missing.html' ];
