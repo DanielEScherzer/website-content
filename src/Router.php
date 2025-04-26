@@ -13,6 +13,7 @@ use DanielWebsite\Pages\OpenSourcePage;
 use DanielWebsite\Pages\RedirectPage;
 use DanielWebsite\Pages\RobotsTxtPage;
 use DanielWebsite\Pages\ThesisPage;
+use DanielWebsite\Pages\ToolPage;
 use DanielWebsite\Pages\WorkPage;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
@@ -64,6 +65,8 @@ class Router {
 		$r->addRoute( 'GET', '/Work', WorkPage::class );
 		$r->addRoute( 'GET', '/Blog', BlogIndexPage::class );
 		$r->addRoute( 'GET', '/Blog/{title}', BlogPostPage::class );
+		$r->addRoute( 'GET', '/Tools', ToolPage::class );
+		$r->addRoute( 'GET', '/Tools/{tool}', ToolPage::class );
 		RedirectPage::addRoutes( $r );
 	}
 }

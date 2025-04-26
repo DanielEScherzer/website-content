@@ -63,6 +63,13 @@ END
 		);
 	}
 
+	protected function addScript( string $fileName ): void {
+		$this->head->append(
+			FluentHTML::fromTag( 'script' )
+				->setAttribute( 'src', "/resources/{$fileName}" )
+		);
+	}
+
 	abstract protected function build(): void;
 
 	private function getNavBar(): FluentHTML {
