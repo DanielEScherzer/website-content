@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  PHP_VERSION: 8.3
+
+jobs:
+  lint:
+    name: Lint with parallel-lint and PHPCS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          tools: composer
+
+      - name: Install composer dependencies
+        run: composer install
+
+      - name: Run parallel-lint
+        run: vendor/bin/parallel-lint . --exclude vendor
+
+      - name: Run phpcs
+        run: vendor/bin/phpcs -p -s
+
+  test:
+    name: "PHPUnit"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          tools: composer
+
+      - name: Install composer dependencies
+        run: composer install
+
+      - name: Run phpunit
+        run: vendor/bin/phpunit
