@@ -27,3 +27,55 @@
 	display: block;
 	margin: auto;
 }
+
+.blog-content .pygments-highlight pre {
+	background-color: #f8f8f8;
+}
+
+.blog-content code {
+	white-space: nowrap;
+}
+
+.blog-page--has-toc.content-wrapper {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 20% 60% 20%;
+}
+
+.blog-toc {
+	height: fit-content;
+	position: sticky;
+	top: 50px;
+	background-color: #f6f6f6;
+	max-width: fit-content;
+	padding: 10px;
+	margin-right: 10px;
+
+	.table-of-contents {
+		padding-left: 0px;
+		list-style-position: inside;
+
+		/* Nested */
+		ol {
+			padding-inline-start: 1em;
+		}
+	}
+}
+
+@media (max-width: 1200px) {
+	.blog-page--has-toc.content-wrapper {
+		grid-template-columns: 20% 70% 10%;
+	}
+}
+
+@media (max-width: 900px) {
+	.blog-page--has-toc.content-wrapper {
+		width: 80%;
+		display: block;
+	}
+	.blog-toc {
+		position: relative;
+		top: unset;
+		margin-top: 20px;
+	}
+}

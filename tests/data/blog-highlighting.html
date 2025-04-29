@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html><head><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"><link rel="stylesheet" type="text/css" href="/resources/default-styles.css"><title>Blog: 20250429-attributes-on-constants</title><link rel="stylesheet" type="text/css" href="/resources/blog-styles.css"><link rel="stylesheet" type="text/css" href="/resources/blog-pygments.css"></head><body><div class="des-navbar"><a href="/Home">Home</a><a href="/files/Resume.pdf">Résumé</a><a href="/OpenSource">Open Source</a><a href="/Work">Work</a><a href="/Blog">Blog</a></div><div class="content-wrapper blog-page--has-toc blog-page"><div class="blog-toc"><ol class="table-of-contents">
+<strong>Table of contents</strong>
+<li><a href="#">(top)</a></li>
+<li><a href="#content-background">Background</a></li>
+<li><a href="#content-feature">Feature</a>
+<ol>
+<li><a href="#content-compile-time-or-not">Compile time or not</a></li>
+<li><a href="#content-optimization-of-define">Optimization of define()</a></li>
+<li><a href="#content-implementation">Implementation</a></li>
+</ol>
+</li>
+<li><a href="#content-using">Using</a>
+<ol>
+<li><a href="#content-backwards-compatibility">Backwards compatibility</a></li>
+<li><a href="#content-in-php-stubs">In PHP stubs</a></li>
+</ol>
+</li>
+<li><a href="#content-next-steps">Next steps</a></li>
+</ol></div><div class="blog-content"><h1><a id="content-attributes-on-constants" href="#content-attributes-on-constants" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Attributes on constants</h1><em>Tuesday, 29 April 2025</em>
+<p>Earlier today, the <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://wiki.php.net/rfc/attributes-on-constants">attributes-on-constants</a> RFC implementation was finally
+merged. This was a project I worked on for months and a significant reason I
+became more active as a PHP core developer. The initial motivation was to add a
+way for constants to be marked as deprecated, so that MediaWiki could use that
+feature to signal deprecated constants instead of relying solely on
+documentation.</p>
+<h2><a id="content-background" href="#content-background" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Background</h2>
+<p>PHP 8 introduced support for <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://www.php.net/manual/en/language.attributes.overview.php">attributes</a>, which allowed recording
+metadata for classes, functions, methods, class properties, class constants,
+and function parameters. In my presentation at the Fall 2024 edition of the
+<em>MediaWiki Users and Developers Conference</em> in Vienna (<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://www.mediawiki.org/wiki/Special:MyLanguage/MediaWiki_Users_and_Developers_Conference_Fall_2024">details</a>), I
+talked about the then-new <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://www.php.net/manual/en/class.deprecated.php"><code>#[\Deprecated]</code> attribute</a>, which
+was introduced in PHP 8.4. The attribute could be used to emit deprecation
+warnings for</p>
+<ul>
+<li>calling non-class functions</li>
+<li>calling class methods</li>
+<li>accessing class constants</li>
+</ul>
+<p>In the first two cases, MediaWiki was already able to emit deprecation warnings
+by manually sending out error messages, in line with its
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://www.mediawiki.org/wiki/Special:MyLanguage/Stable_interface_policy">&quot;Stable Interface Policy&quot;</a>. However, without engine support (in the form
+of this attribute) MediaWiki was unable to &quot;hard deprecate&quot; class constants by
+emitting deprecation warnings. That on its own meant that the new attribute
+would be very useful once it was applied throughout the MediaWiki code base.</p>
+<p>However, there are some parts of a library's (in this case MediaWiki's) public
+interface that might become deprecated and were not supported by this attribute,
+meaning that warning messages would need to be created manually (if possible).
+Some facets of a library's interface that I discussed in the presentation were</p>
+<ul>
+<li>Global constants</li>
+<li>Class aliases</li>
+</ul>
+<p>I decided to try my hand at implementing support for deprecating global
+constants. But, since global constants were not something that even supported
+attributes, this wasn't merely a question of updating the engine to handle the
+<code>#[\Deprecated]</code> attribute and make it usable on constants. First, PHP needed
+to add support for attributes on constants in general.</p>
+<h2><a id="content-feature" href="#content-feature" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Feature</h2>
+<p>The feature presented in the RFC is to allow using attributes on compile-time
+non-class constants. By &quot;compile-time&quot;, I meant constants that were declared
+like</p>
+<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">const</span> <span class="no">MY_CONST</span> <span class="o">=</span> <span class="s1">&#39;Testing&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>rather than &quot;runtime&quot; constants declared like</p>
+<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="nb">define</span><span class="p">(</span> <span class="s1">&#39;MY_CONST&#39;</span><span class="p">,</span> <span class="s1">&#39;Testing&#39;</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>I started with &quot;compile-time&quot; constants because one of the fundamental features
+of attributes is that they are not evaluated at compile time, but rather when
+the information is retrieved via reflection. Trying to support a parameter to
+<code>define()</code> that would allow passing in attributes but not evaluating them was
+something that I thought would be trickier; in retrospect, it might have been
+easier than adding support for attributes on the <code>const</code>-defined constants.</p>
+<h3><a id="content-compile-time-or-not" href="#content-compile-time-or-not" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Compile time or not</h3>
+<p>The line between compile-time and run-time constants is not as straightforward
+as just the use of <code>const</code> or the use of <code>define()</code>.</p>
+<p>Consider the following PHP file (<code>include_class.php</code>):</p>
+<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">return</span><span class="p">;</span>
+
+<span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span> <span class="s1">&#39;Unreached&#39;</span> <span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">Demo</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p>If this file were to be <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://www.php.net/manual/en/function.include.php">included</a> in a PHP program</p>
+<ul>
+<li>the file would be compiled</li>
+<li>the <code>return;</code> would be executed</li>
+<li>subsequent lines in the file would not be executed (the exception is thrown
+in this demo just to demonstrate that the code after the <code>return;</code> is not
+executed)</li>
+</ul>
+<p>However, if you were to examine whether or not the <code>Demo</code> class exists before
+and after inclusion of the file, you would notice something slightly surprising:
+even though the statements after the <code>return;</code> are not executed, the <code>Demo</code>
+class gets defined when the file is included!</p>
+<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="nb">var_dump</span><span class="p">(</span> <span class="nb">class_exists</span><span class="p">(</span> <span class="nx">Demo</span><span class="o">::</span><span class="na">class</span> <span class="p">)</span> <span class="p">);</span> <span class="c1">// False</span>
+
+<span class="k">require_once</span> <span class="no">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/include_class.php&#39;</span><span class="p">;</span>
+
+<span class="nb">var_dump</span><span class="p">(</span> <span class="nb">class_exists</span><span class="p">(</span> <span class="nx">Demo</span><span class="o">::</span><span class="na">class</span> <span class="p">)</span> <span class="p">);</span> <span class="c1">// True</span>
+</pre></div>
+</div>
+<p>This is because class declarations are processed at <em>compile time</em>, rather than
+<em>runtime</em>. When the file is included, <em>before</em> it gets executed, the class
+declaration is processed. This allows referencing classes before (line-wise)
+they have been defined, such as</p>
+<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="nb">var_dump</span><span class="p">(</span> <span class="nb">class_exists</span><span class="p">(</span> <span class="nx">Later</span><span class="o">::</span><span class="na">class</span> <span class="p">)</span> <span class="p">);</span> <span class="c1">// True</span>
+
+<span class="k">class</span> <span class="nc">Later</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p>However, in the case of &quot;compile-time&quot; constants, the constants do not actually
+get defined until their definition is <em>executed</em>. Try including the following
+PHP file (<code>include_constant.php</code>):</p>
+<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">return</span><span class="p">;</span>
+
+<span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span> <span class="s1">&#39;Unreached&#39;</span> <span class="p">);</span>
+
+<span class="k">const</span> <span class="no">MY_CONSTANT</span> <span class="o">=</span> <span class="s1">&#39;Testing&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You'll find that because of the <code>return;</code>, the constant never gets defined:</p>
+<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="nb">var_dump</span><span class="p">(</span> <span class="nb">defined</span><span class="p">(</span> <span class="s1">&#39;MY_CONSTANT&#39;</span> <span class="p">)</span> <span class="p">);</span> <span class="c1">// False</span>
+
+<span class="k">require_once</span> <span class="no">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/include_constant.php&#39;</span><span class="p">;</span>
+
+<span class="nb">var_dump</span><span class="p">(</span> <span class="nb">defined</span><span class="p">(</span> <span class="s1">&#39;MY_CONSTANT&#39;</span> <span class="p">)</span> <span class="p">);</span> <span class="c1">// False</span>
+</pre></div>
+</div>
+<p>Thus, adding support for attributes on constants means that any attributes that
+are applied to the constant would need to be processed <em>at runtime</em>, something
+that wasn't previously done because all other supported attribute targets were
+compile-time constructs (classes, functions, parameters, etc.).</p>
+<h3><a id="content-optimization-of-define" href="#content-optimization-of-define" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Optimization of <code>define()</code></h3>
+<p>The line gets even blurrier when looking at PHP's built-in optimizer. As part
+of &quot;pass 1&quot; with simple local optimizations (<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/php/php-src/blob/3f03f7ed3d988567b5a59ae542579fd91cdfde42/Zend/Optimizer/pass1.c">pass1.c as of merge</a>),
+for any function call where</p>
+<ul>
+<li>the function name is known to be <code>define()</code>,</li>
+<li>the first parameter (name) is a literal string, and</li>
+<li>the second parameter (value) is a scalar</li>
+</ul>
+<p>the optimizer will replace the op codes for a function call with the opcodes
+that would be generated by using the <code>const</code> compile-time form. In other words,</p>
+<ul>
+<li>regardless of which form is used by the developer, the constant is not
+actually defined at compile time, but only when the declaration gets executed.</li>
+<li>the opcodes for the declaration of a runtime constant can be changed to match
+those of a compile-time constant.</li>
+</ul>
+<h3><a id="content-implementation" href="#content-implementation" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Implementation</h3>
+<p>If you want to take a look at the actual code, the implementing PR is available
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/php/php-src/pull/16952">on GitHub</a>. I'm not going to explain it in depth here, just with
+broad strokes. The first three parts are for general attribute support, the last
+two are to add engine support for deprecations.</p>
+<ol>
+<li>When attributes are found at the start of the declaration of a constant, they
+are processed into the abstract syntax tree (AST) for that constant's
+declaration.</li>
+<li>When the AST is converted into opcodes that will be executed by the PHP
+runtime, constants are normally represented with a <code>ZEND_DECLARE_CONST</code> opcode.
+If the constant has attributes, however, the opcode is changed to
+<code>ZEND_DECLARE_ATTRIBUTED_CONST</code>, the attributes are extracted from the AST and
+compiled, and then those are emited with a <code>ZEND_OP_DATA</code> code to indicate that
+the operation has an extra parameter.</li>
+<li>When a file gets added to the opcache (PHP's cache of opcodes for processed
+files) the attributes get copied into the new location.</li>
+<li>When (at run-time) the <code>ZEND_DECLARE_ATTRIBUTED_CONST</code> opcode is processed,
+the attributes get added to the declared constant; if <code>#[\Deprecated]</code> is among
+the attributes, the <code>CONST_DEPRECATED</code> flag is added to the constant.</li>
+<li>When a constant is used, if marked with <code>CONST_DEPRECATED</code>, a deprecation
+warning will be emitted, including any details included in the <code>#[\Deprecated]</code>
+declaration.</li>
+</ol>
+<h2><a id="content-using" href="#content-using" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Using</h2>
+<p>Now that constants support attributes, developers can apply userland attributes
+to their constants to add various metadata. But, for me, the real power is in
+the attributes that PHP itself provides, since those are able to hook into parts
+of the engine.</p>
+<p>As part of the RFC, the <code>#[\Deprecated]</code> attribute was updated to also support
+being added to userland constants. It is thus now possible for developers to
+deprecate a non-class constant and have the engine emit deprecation warnngs
+when the constant is used. From one of the tests for this new feature:</p>
+<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="p">#[</span><span class="nd">\Deprecated</span><span class="p">(</span><span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;use DEPRECATED_CONST_4&quot;</span><span class="p">,</span> <span class="nx">since</span><span class="o">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">)]</span>
+<span class="k">const</span> <span class="no">DeprecatedConst4</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+<span class="k">echo</span> <span class="nx">DeprecatedConst4</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>a warning will be triggered:</p>
+<blockquote>
+<p>Deprecated: Constant DeprecatedConst4 is deprecated since 1.0, use
+DEPRECATED_CONST_4 in {file} on line {line}</p>
+</blockquote>
+<p>My hope is that MediaWiki and other libraries will apply this attribute to send
+warnings where previously only documentation could be used to indicate
+deprecations.</p>
+<h3><a id="content-backwards-compatibility" href="#content-backwards-compatibility" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Backwards compatibility</h3>
+<p>However, using this attribute in MediaWiki, and more generally, in any tool that
+supports versions of PHP before 8.5 (which isn't even out yet!) presents a
+problem: because using attributes on constants requires syntax that was invalid
+in PHP 8.4 and below, the logic cannot merely be guarded behind a version flag,
+because the code wouldn't be parsable. And, even if the logic could be guarded
+behind a version flag to avoid errors on PHP 8.4, when the 8.5 code was executed
+to define a constant PHP would emit a different error, because PHP does not
+allow constants to be declared (with <code>const</code>) within blocks. For example, the
+following code triggers a parser error, and it doesn't use attributes:</p>
+<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="k">true</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="no">DEMO</span> <span class="o">=</span> <span class="s1">&#39;example&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So, if a library wanted to make a constant as deprecated, it would need to
+either</p>
+<ul>
+<li>Update the miminum version of PHP supported to PHP 8.5, or</li>
+<li>Use some sort of logic to parse different code in PHP 8.5+ versus 8.4 and
+below</li>
+</ul>
+<p>The first is undesirable for a number of reasons, not the least of which is the
+fact that at least for MediaWiki, one of the core principles is that it needs to
+be usable by the Wikimedia Foundation servers (where, e.g., Wikipedia is hosted)
+that are currently in the process of
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://phabricator.wikimedia.org/T319432">migrating from PHP 7.4 to PHP 8.1</a>. It will likely be a while before
+MediaWiki drops support for PHP 8.4 and below.</p>
+<p>The second is possible by either loading specific files based on the version,
+and having the PHP 8.5+ declarations in files that don't even get loaded in PHP
+8.4, or by using <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://www.php.net/manual/en/function.eval.php"><code>eval()</code></a> to process the PHP 8.5+ declarations. Since
+the use of <code>eval()</code> is generally discouraged, we will have to wait and see if
+MediaWiki and other libraries will decide to use it in order to emit deprecation
+warnings for constants.</p>
+<p>I have also started sketching out an idea for a tiny composer library that
+would abstract the <code>eval()</code> usage away - developers would just call a function
+along the lines of <code>define_deprecated( 'NAME', 'MyValue' );</code> and then in PHP 8.5
+that would trigger <code>eval()</code> with the constant, and in PHP 8.4 it would just
+delegate to the <code>define()</code> function. I might spend a few days developing that
+library if I get the urge to write some code.</p>
+<h3><a id="content-in-php-stubs" href="#content-in-php-stubs" class="heading-permalink" aria-hidden="true" title="Permalink"></a>In PHP stubs</h3>
+<p>Now that constants can be deprecated with attributes, the various constants that
+PHP provides can be updated with more informative error messages by adding the
+attribute to those internal constants. This would mirror the addition of the
+<code>#[\Deprecated]</code> attribute to internal functions and class constants back when
+the attribute was originally added, see <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/php/php-src/pull/14750">that PR</a>. For example, since
+PHP 8.4 the code</p>
+<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="nb">error_reporting</span><span class="p">(</span><span class="k">E_ALL</span> <span class="o">|</span> <span class="nx">E_STRICT</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>has emitted a warning as a result of a PHP 8.4 deprecation:</p>
+<blockquote>
+<p>Deprecated: Constant E_STRICT is deprecated in {file} on line {line}</p>
+</blockquote>
+<p>If we used the new support for deprecating constants with messages, the warning
+would become something like</p>
+<blockquote>
+<p>Deprecated: Constant E_STRICT is deprecated in since 8.4, E_STRICT errors are
+no longer emitted in {file} on line {line}</p>
+</blockquote>
+<p>But, before that can be done, the build script that PHP uses, and the
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/nikic/php-parser">nikic/PHP-Parser</a> library that it depends on, need to be
+updated to support attributes on constants. Only once a new version of the
+parser is available that supports the new syntax will it be possible to populate
+more helpful error messages for internal constants.</p>
+<h2><a id="content-next-steps" href="#content-next-steps" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Next steps</h2>
+<p>Now that it is possible to have the engine trigger deprecation notices for
+global constants, I've started looking into the other places where
+<code>#[\Deprecated]</code> support would be useful, either for MediaWiki or for libraries
+generally. Some ideas include support for warnings for</p>
+<ul>
+<li>run-time constants (declared with <code>define()</code>)</li>
+<li>class aliases (declared with <code>class_alias()</code>)</li>
+<li><code>use</code>-ing a trait</li>
+<li>extending a class</li>
+<li>implementing an interface</li>
+<li>overriding a method</li>
+<li>accessing a class property</li>
+</ul>
+<p>MediaWiki provides utilities for deprecating the last two</p>
+<ul>
+<li><a rel="noopener noreferrer" target="_blank" class="external-link" href="https://gerrit.wikimedia.org/g/mediawiki/core/+/refs/tags/1.43.0/includes/debug/MWDebug.php#262"><code>MWDebug::detectDeprecatedOverride()</code></a> emits warnings
+if a method is overridden, but that helper method needs to be manually called
+somewhere</li>
+<li>The <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://gerrit.wikimedia.org/g/mediawiki/core/+/refs/tags/1.43.0/includes/debug/DeprecationHelper.php"><code>DeprecationHelper</code> trait</a> will trigger deprecation
+warnings for public properties by making them private and adding magic <code>__get()</code>
+and <code>__set()</code> handlers, but it is messy and has some limitations</li>
+</ul>
+<p>but these seem like features that would be helpful to implement in the PHP
+engine.</p>
+<p>Thankfully, classes (including interfaces and traits), methods, and properties
+all already support attributes, so for most of these the work would merely be
+a question of emitting deprecation warnings, rather than needing to add an
+entirely new place attributes get compiled. Only the first two would need
+support for a new declaration type if done with attributes. It looks like I have
+my work cut out for me.</p>
+</div></div><div class="des-footer"><div class="des-footer--content">Content is © 2025 Daniel Scherzer</div></div></body></html>
