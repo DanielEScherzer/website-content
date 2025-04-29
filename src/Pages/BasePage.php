@@ -25,6 +25,15 @@ abstract class BasePage {
 				->setAttribute( 'rel', 'icon' )
 				->setAttribute( 'href', 'data:,' )
 		);
+		// Viewport
+		$this->head->append(
+			FluentHTML::fromTag( 'meta' )
+				->setAttribute( 'name', 'viewport' )
+				->setAttribute(
+					'content',
+					'width=device-width, initial-scale=1, minimum-scale=1'
+				)
+		);
 		$this->addStyleSheet( 'default-styles.css' );
 		// Not shown in tests, or in staging
 		if ( !defined( 'PHPUNIT_TESTS_RUNNING' ) &&
