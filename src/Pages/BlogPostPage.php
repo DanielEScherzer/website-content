@@ -7,9 +7,12 @@ use DanielEScherzer\HTMLBuilder\FluentHTML;
 use DanielEScherzer\HTMLBuilder\RawHTML;
 use DanielWebsite\Blog\BlogDisplay;
 use DanielWebsite\Blog\BlogPostStore;
+use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Emphasis;
+use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;
 use League\CommonMark\Node\Inline\Text;
+use League\CommonMark\Node\Node;
 use League\CommonMark\Node\Query;
 use League\CommonMark\Parser\MarkdownParser;
 use League\CommonMark\Renderer\HtmlRenderer;
@@ -52,7 +55,7 @@ class BlogPostPage extends BasePage {
 		$this->addStyleSheet( 'blog-styles.css' );
 		// Use `League\CommonMark` library for parsing, since I write all of
 		// the blog posts no need to escape unsecure stuff
-		$env = BlogDisplay::makeCommonMarkEnv( true );
+		$env = BlogDisplay::makeCommonMarkEnv( $post );
 
 		$parser = new MarkdownParser( $env );
 
@@ -68,12 +71,56 @@ class BlogPostPage extends BasePage {
 		$firstHeading->insertAfter( $dateWrapper );
 
 		$renderer = new HtmlRenderer( $env );
+
+		// Check if we should load the extra styles for highlighting
+		$code = ( new Query() )
+			->where( Query::type( FencedCode::class ) )
+			->where(
+				static function ( Node $node ): bool {
+					$infoWords = $node->getInfoWords();
+					return $infoWords && $infoWords[0] !== '';
+				}
+			)
+			->findAll( $parsedResult );
+		if ( iterator_count( $code ) ) {
+			$this->addStyleSheet( 'blog-pygments.css' );
+		}
+
+		// Extract TOC
+		$toc = ( new Query() )
+			->where( Query::type( TableOfContents::class ) )
+			->findAll( $parsedResult );
+		$tocRender = $renderer->renderNodes( $toc );
+		// Need a new traversable
+		$toc = ( new Query() )
+			->where( Query::type( TableOfContents::class ) )
+			->findAll( $parsedResult );
+		$hadToc = false;
+		foreach ( $toc as $t ) {
+			$hadToc = true;
+			$t->detach();
+		}
 		$html = $renderer->renderDocument( $parsedResult )->getContent();
 
+		if ( $hadToc ) {
+			$this->contentWrapper->append(
+				FluentHTML::make(
+					'div',
+					[ 'class' => 'blog-toc' ],
+					new RawHTML( $tocRender )
+				)
+			);
+			$this->contentWrapper->addClass( 'blog-page--has-toc' );
+		}
+
 		$this->contentWrapper->append(
-			new RawHTML( $html ),
+			FluentHTML::make(
+				'div',
+				[ 'class' => 'blog-content' ],
+				new RawHTML( $html )
+			)
 		);
-		$this->contentWrapper->addClass( 'blog-content' );
+		$this->contentWrapper->addClass( 'blog-page' );
 	}
 
 }

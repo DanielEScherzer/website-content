@@ -66,6 +66,11 @@ class StaticOutputTest extends TestCase {
 		yield 'Tools - index' => [ 'GET', '/Tools', 'tools-index.html' ];
 		yield 'Tools - missing' => [ 'GET', '/Tools/missing', 'tools-missing.html' ];
 		yield 'Tools - dvorak' => [ 'GET', '/Tools/dvorak', 'tools-dvorak.html' ];
+		yield 'Blog - pygments highlight' => [
+			'GET',
+			'/Blog/20250429-attributes-on-constants',
+			'blog-highlighting.html',
+		];
 
 		// Error 404
 		yield 'Missing' => [ 'GET', '/Missing', 'Missing.html' ];
