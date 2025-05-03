@@ -7,12 +7,14 @@ use DanielEScherzer\HTMLBuilder\FluentHTML;
 use DanielEScherzer\HTMLBuilder\RawHTML;
 use DanielWebsite\Blog\BlogDisplay;
 use DanielWebsite\Blog\BlogPostStore;
+use DanielWebsite\SiteMapEntry;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Node\Block\Paragraph;
 use League\CommonMark\Node\Query;
 use League\CommonMark\Parser\MarkdownParser;
 use League\CommonMark\Renderer\HtmlRenderer;
 
+#[SiteMapEntry( 'Blog' )]
 class BlogIndexPage extends BasePage {
 
 	public function __construct() {

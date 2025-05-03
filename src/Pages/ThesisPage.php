@@ -4,7 +4,9 @@ declare( strict_types = 1 );
 namespace DanielWebsite\Pages;
 
 use DanielEScherzer\HTMLBuilder\FluentHTML;
+use DanielWebsite\SiteMapEntry;
 
+#[SiteMapEntry( 'Thesis' )]
 class ThesisPage extends BasePage {
 
 	public function __construct() {

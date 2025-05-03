@@ -4,7 +4,9 @@ declare( strict_types = 1 );
 namespace DanielWebsite\Pages;
 
 use DanielEScherzer\HTMLBuilder\FluentHTML;
+use DanielWebsite\SiteMapEntry;
 
+#[SiteMapEntry( 'Work' )]
 class WorkPage extends BasePage {
 
 	private const WIKITEQ_EXTENSIONS = [

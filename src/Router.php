@@ -33,7 +33,11 @@ class Router {
 			$requestURI = substr( $requestURI, 0, $pos );
 		}
 		$requestURI = rawurldecode( $requestURI );
-		$requestURI = rtrim( $requestURI, '/' );
+		$requestURI = trim( $requestURI, '/' );
+		// Router is case insensitive
+		$requestURI = strtolower( $requestURI );
+		// Prefer uppercase first letter in the strings and error messages
+		$requestURI = ucfirst( $requestURI );
 
 		// phpcs:ignore MediaWiki.WhiteSpace.SpaceyParenthesis
 		$dispatcher = \FastRoute\simpleDispatcher( self::addRoutesCb(...) );
@@ -58,15 +62,15 @@ class Router {
 	 */
 	public static function addRoutesCb( RouteCollector $r ): void {
 		$r->addRoute( 'GET', '', LandingPage::class );
-		$r->addRoute( 'GET', '/robots.txt', RobotsTxtPage::class );
-		$r->addRoute( 'GET', '/Home', LandingPage::class );
-		$r->addRoute( 'GET', '/OpenSource', OpenSourcePage::class );
-		$r->addRoute( 'GET', '/Thesis', ThesisPage::class );
-		$r->addRoute( 'GET', '/Work', WorkPage::class );
-		$r->addRoute( 'GET', '/Blog', BlogIndexPage::class );
-		$r->addRoute( 'GET', '/Blog/{title}', BlogPostPage::class );
-		$r->addRoute( 'GET', '/Tools', ToolPage::class );
-		$r->addRoute( 'GET', '/Tools/{tool}', ToolPage::class );
+		$r->addRoute( 'GET', 'Robots.txt', RobotsTxtPage::class );
+		$r->addRoute( 'GET', 'Home', LandingPage::class );
+		$r->addRoute( 'GET', 'Opensource', OpenSourcePage::class );
+		$r->addRoute( 'GET', 'Thesis', ThesisPage::class );
+		$r->addRoute( 'GET', 'Work', WorkPage::class );
+		$r->addRoute( 'GET', 'Blog', BlogIndexPage::class );
+		$r->addRoute( 'GET', 'Blog/{title}', BlogPostPage::class );
+		$r->addRoute( 'GET', 'Tools', ToolPage::class );
+		$r->addRoute( 'GET', 'Tools/{tool}', ToolPage::class );
 		RedirectPage::addRoutes( $r );
 	}
 }
