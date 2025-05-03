@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 namespace DanielWebsite;
 
 use DanielWebsite\Blog\BlogPostStore;
-use DanielWebsite\Pages\ToolPage;
 use FastRoute\DataGenerator\MarkBased;
 use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std;
+use ReflectionClass;
 use samdark\sitemap\Sitemap;
 
 class SitemapGenerator {
@@ -18,11 +18,15 @@ class SitemapGenerator {
 		$collector = new RouteCollector( new Std(), new MarkBased() );
 		Router::addRoutesCb( $collector );
 		$getPaths = $collector->getData()[0]['GET'];
+		$pages = array_unique( $getPaths );
 
 		$sitemap = new Sitemap( $location );
-		foreach ( $getPaths as $path => $class ) {
-			if ( $class !== ToolPage::class ) {
-				$sitemap->addItem( self::URL_BASE . $path );
+		foreach ( $pages as $class ) {
+			$ref = new ReflectionClass( $class );
+			$attribs = $ref->getAttributes( SiteMapEntry::class );
+			foreach ( $attribs as $attrib ) {
+				$instance = $attrib->newInstance();
+				$sitemap->addItem( self::URL_BASE . $instance->path );
 			}
 		}
 

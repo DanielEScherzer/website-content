@@ -72,6 +72,9 @@ class StaticOutputTest extends TestCase {
 			'blog-highlighting.html',
 		];
 
+		// Router is case insensitive
+		yield 'Case insensitive' => [ 'GET', '/oPEnSouRcE', 'OpenSource.html' ];
+
 		// Error 404
 		yield 'Missing' => [ 'GET', '/Missing', 'Missing.html' ];
 

@@ -3,9 +3,11 @@ declare( strict_types = 1 );
 
 namespace DanielWebsite\Pages;
 
+use DanielWebsite\SiteMapEntry;
 use FastRoute\RouteCollector;
 use LogicException;
 
+#[SiteMapEntry( 'Resume' )]
 class RedirectPage extends BasePage {
 
 	private const KNOWN_REDIRECTS = [
