@@ -11,7 +11,7 @@ use LogicException;
 class RedirectPage extends BasePage {
 
 	private const KNOWN_REDIRECTS = [
-		'/Resume' => '/files/Resume.pdf',
+		'Resume' => '/files/Resume.pdf',
 	];
 
 	private string $title;

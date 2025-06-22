@@ -15,21 +15,21 @@ class OpenSourcePage extends BasePage {
 			'link' => 'https://wiki.php.net/rfc/attributes-on-constants',
 			'date' => 'November 2024',
 			'desc' => 'Adding support for attributes on compile-time constants',
-			'status' => 'Pending implementation',
-		],
-		'Never-parameters' => [
-			'name' => 'Never Parameters (v2)',
-			'link' => 'https://wiki.php.net/rfc/never-parameters-v2',
-			'date' => 'March 2025',
-			'desc' => 'Adding support for never-typed parameters',
-			'status' => 'Under discussion',
+			'status' => 'implemented in PHP 8.5',
 		],
 		'Final-promoted-properties' => [
 			'name' => 'Final Property Promotion',
 			'link' => 'https://wiki.php.net/rfc/final_promotion',
 			'date' => 'March 2025',
 			'desc' => 'Adding support for final modifiers in constructor property promotion',
-			'status' => 'Under discussion',
+			'status' => 'implemented in PHP 8.5',
+		],
+		'#[\DelayedTargetValidation]' => [
+			'name' => '#[\DelayedTargetValidation] attribute',
+			'link' => 'https://wiki.php.net/rfc/delayedtargetvalidation_attribute',
+			'date' => 'June 2025',
+			'desc' => 'Delaying compile-time attribute target validation errors with #[\DelayedTargetValidation]',
+			'status' => 'under discussion',
 		],
 	];
 
@@ -136,12 +136,12 @@ END,
 				[],
 				<<<END
 PHP uses a process of requests for comment when proposing and implementing major
-changes; I have proposed the following RFCs:
+changes; my RFCs include:
 END
 			),
 		);
 		$list = FluentHTML::fromTag( 'ul' );
-		foreach ( self::PHP_RFCS as $details ) {
+		foreach ( array_reverse( self::PHP_RFCS ) as $details ) {
 			$item = FluentHTML::make(
 				'li',
 				[],
@@ -150,6 +150,9 @@ END
 					$makeLink( $details['link'], $details['name'] ),
 					' - ',
 					$details['desc'],
+					' (',
+					$details['status'],
+					')',
 				]
 			);
 			$list->append( $item );

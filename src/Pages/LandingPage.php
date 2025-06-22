@@ -56,7 +56,7 @@ END,
 				[],
 				<<<END
 I am currently pursuing a Master of Science in Computer Science, also through
-Tufts. I will be graduating in May of 2025.
+Tufts. I will be graduating in August of 2025.
 END
 			),
 			FluentHTML::make(
