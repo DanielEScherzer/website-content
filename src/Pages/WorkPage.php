@@ -28,14 +28,14 @@ class WorkPage extends BasePage {
 		[
 			'title' => 'Introduction to Enterprise MediaWiki',
 			'conf' => 'Enterprise MediaWiki Conference, Spring 2023',
-			'loc' => 'Austin, TX',
+			'loc' => 'Austin, Texas',
 			'date' => 'April 2023',
 			'video' => 'https://www.youtube.com/watch?v=nZQZyPfEiUI',
 		],
 		[
 			'title' => 'Orchestration with Puppet',
 			'conf' => 'MediaWiki Users and Developers Conference, Spring 2024',
-			'loc' => 'Portland, OR',
+			'loc' => 'Portland, Oregon',
 			'date' => 'April 2024',
 			'video' => 'https://www.youtube.com/watch?v=8H0AHc7Ou4U',
 		],
@@ -45,6 +45,20 @@ class WorkPage extends BasePage {
 			'loc' => 'Vienna, Austria',
 			'date' => 'November 2024',
 			'video' => 'https://www.youtube.com/watch?v=hGYbXkfbkuU',
+		],
+		[
+			'title' => 'Handling Database Updates',
+			'conf' => 'MediaWiki Users and Developers Workshop, Spring 2025',
+			'loc' => 'Sandusky, Ohio',
+			'date' => 'May 2025',
+			'video' => 'https://www.youtube.com/watch?v=L38kDLc2FwA',
+		],
+		[
+			'title' => 'Fuzzing the MediaWiki REST API',
+			'conf' => 'MediaWiki Users and Developers Workshop, Spring 2025',
+			'loc' => 'Sandusky, Ohio',
+			'date' => 'May 2025',
+			'video' => 'https://www.youtube.com/watch?v=-Dt-5Db1lKY',
 		],
 	];
 
@@ -117,7 +131,7 @@ END
 		);
 
 		$list = FluentHTML::fromTag( 'ul' );
-		foreach ( self::WIKITEQ_PRESENTATIONS as $details ) {
+		foreach ( array_reverse( self::WIKITEQ_PRESENTATIONS ) as $details ) {
 			$item = FluentHTML::make(
 				'li',
 				[],
