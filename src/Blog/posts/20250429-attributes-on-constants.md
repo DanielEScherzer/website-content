@@ -206,7 +206,7 @@ of the engine.
 
 As part of the RFC, the `#[\Deprecated]` attribute was updated to also support
 being added to userland constants. It is thus now possible for developers to
-deprecate a non-class constant and have the engine emit deprecation warnngs
+deprecate a non-class constant and have the engine emit deprecation warnings
 when the constant is used. From one of the tests for this new feature:
 
 ```php
