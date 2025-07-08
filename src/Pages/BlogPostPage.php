@@ -20,7 +20,6 @@ use League\CommonMark\Renderer\HtmlRenderer;
 class BlogPostPage extends BasePage {
 
 	private string $slug;
-	private FluentHTML $titleElem;
 
 	public function __construct( array $params ) {
 		parent::__construct();
