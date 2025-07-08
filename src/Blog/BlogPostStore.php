@@ -8,31 +8,31 @@ class BlogPostStore {
 	public function __construct() {
 	}
 
-	public function listBlogTitles(): array {
+	public function listBlogSlugs(): array {
 		$entries = scandir( __DIR__ . '/posts/' );
 		$files = array_filter(
 			$entries,
 			static fn ( string $path ) => str_ends_with( $path, '.md' )
 		);
-		$titles = array_map(
+		$slugs = array_map(
 			static fn ( string $title ) => substr( $title, 0, -3 ),
 			$files
 		);
-		rsort( $titles );
-		return $titles;
+		rsort( $slugs );
+		return $slugs;
 	}
 
 	public function listBlogPosts(): array {
-		$titles = $this->listBlogTitles();
+		$slugs = $this->listBlogSlugs();
 		$posts = array_map(
-			fn ( string $title ) => $this->getBlogPost( $title ),
-			$titles
+			fn ( string $slug ) => $this->getBlogPost( $slug ),
+			$slugs
 		);
 		return $posts;
 	}
 
-	public function getBlogPost( string $title ): ?BlogPost {
-		$path = __DIR__ . '/posts/' . $title . '.md';
+	public function getBlogPost( string $slug ): ?BlogPost {
+		$path = __DIR__ . '/posts/' . $slug . '.md';
 		if ( !file_exists( $path ) ) {
 			return null;
 		}
@@ -43,7 +43,7 @@ class BlogPostStore {
 			 // @codeCoverageIgnoreEnd
 		}
 		return new BlogPost(
-			$title,
+			$slug,
 			$content
 		);
 	}

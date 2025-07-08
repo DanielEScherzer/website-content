@@ -31,11 +31,11 @@ class SitemapGenerator {
 		}
 
 		$blogStore = new BlogPostStore();
-		$blogTitles = $blogStore->listBlogTitles();
-		// listBlogTitles() will be in reverse order for the blog index page
-		sort( $blogTitles );
-		foreach ( $blogTitles as $title ) {
-			$sitemap->addItem( self::URL_BASE . '/Blog/' . $title );
+		$blogSlugs = $blogStore->listBlogSlugs();
+		// listBlogSlugs() will be in reverse order for the blog index page
+		sort( $blogSlugs );
+		foreach ( $blogSlugs as $slug ) {
+			$sitemap->addItem( self::URL_BASE . '/Blog/' . $slug );
 		}
 
 		$sitemap->write();

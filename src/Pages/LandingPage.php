@@ -158,7 +158,7 @@ END
 							' ',
 							FluentHTML::make(
 								'a',
-								[ 'href' => '/Blog/' . $latestPost->title ],
+								[ 'href' => '/Blog/' . $latestPost->slug ],
 								'Continue reading...'
 							),
 						]

@@ -68,7 +68,7 @@ class Router {
 		$r->addRoute( 'GET', 'Thesis', ThesisPage::class );
 		$r->addRoute( 'GET', 'Work', WorkPage::class );
 		$r->addRoute( 'GET', 'Blog', BlogIndexPage::class );
-		$r->addRoute( 'GET', 'Blog/{title}', BlogPostPage::class );
+		$r->addRoute( 'GET', 'Blog/{slug}', BlogPostPage::class );
 		$r->addRoute( 'GET', 'Tools', ToolPage::class );
 		$r->addRoute( 'GET', 'Tools/{tool}', ToolPage::class );
 		RedirectPage::addRoutes( $r );
