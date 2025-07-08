@@ -87,6 +87,9 @@ class BlogDisplay {
 			if ( $extensions['pygments'] ?? false ) {
 				$env->addExtension( new PygmentsHighlightExtension() );
 			}
+			if ( $cfg['title'] ?? false ) {
+				$post->setTitle( $cfg['title'] );
+			}
 		}
 		return $env;
 	}

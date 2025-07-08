@@ -71,7 +71,7 @@ class BlogIndexPage extends BasePage {
 								' ',
 								FluentHTML::make(
 									'a',
-									[ 'href' => '/Blog/' . $post->title ],
+									[ 'href' => '/Blog/' . $post->slug ],
 									'Continue reading...'
 								),
 							]

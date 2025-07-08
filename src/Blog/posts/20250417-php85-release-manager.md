@@ -1,3 +1,7 @@
+---
+title: PHP 8.5 Release Manager
+---
+
 # PHP 8.5 Release Manager
 
 I'm honored to share that the PHP internals development community has elected

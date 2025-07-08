@@ -19,23 +19,23 @@ use League\CommonMark\Renderer\HtmlRenderer;
 
 class BlogPostPage extends BasePage {
 
-	private string $title;
+	private string $slug;
 
 	public function __construct( array $params ) {
 		parent::__construct();
-		$title = $params['title'];
-		$this->title = $title;
-		$this->head->append(
-			FluentHTML::fromTag( 'title' )->addChild( 'Blog: ' . $title )
-		);
+		$slug = $params['slug'];
+		$this->slug = $slug;
 	}
 
 	protected function build(): void {
 		$store = new BlogPostStore();
-		$post = $store->getBlogPost( $this->title );
+		$post = $store->getBlogPost( $this->slug );
 		if ( $post === null ) {
 			$this->addStyleSheet( 'error-styles.css' );
-			$title = $this->title;
+			$slug = $this->slug;
+			$this->head->append(
+				FluentHTML::fromTag( 'title' )->addChild( 'Blog: ' . $slug )
+			);
 			$this->contentWrapper->append(
 				FluentHTML::make(
 					'div',
@@ -45,7 +45,7 @@ class BlogPostPage extends BasePage {
 						FluentHTML::make(
 							'p',
 							[],
-							"The requested blog post `$title` is not recognized"
+							"The requested blog post `$slug` is not recognized"
 						),
 					]
 				)
@@ -56,6 +56,10 @@ class BlogPostPage extends BasePage {
 		// Use `League\CommonMark` library for parsing, since I write all of
 		// the blog posts no need to escape unsecure stuff
 		$env = BlogDisplay::makeCommonMarkEnv( $post );
+
+		$this->head->append(
+			FluentHTML::fromTag( 'title' )->addChild( 'Blog: ' . $post->getTitle() )
+		);
 
 		$parser = new MarkdownParser( $env );
 

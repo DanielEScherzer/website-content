@@ -2,6 +2,7 @@
 extensions:
   pygments: true
   toc: true
+title: Attributes on Constants
 ---
 
 # Attributes on constants

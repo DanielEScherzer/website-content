@@ -1,3 +1,7 @@
+---
+title: Website Launch
+---
+
 # Website launch
 
 Today, I launched the initial version of my personal website (where you are most
