@@ -1,0 +1,18 @@
+label, input, button, pre {
+	margin: 10px;
+}
+
+/* No arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+#countdown-controls {
+	display: grid;
+	grid-template-columns: max-content max-content;
+}
+#countdown-input--target {
+	width: fit-content;
+}
