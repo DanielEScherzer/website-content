@@ -13,18 +13,20 @@ external libraries, the content and styles are all mine.
 ## Codesniffer and HTML builder
 
 I started by creating a package with configuration for the linting tool
-[squizlabs/php_codesniffer][package:squizlabs]. While this may seem like an odd place to
-start, I wanted my code to have consistent styles. I don't anticipate that the
-package with my configuration will be useful for anyone else, but in case it is,
-you can find the package at [danielescherzer/common-phpcs][package:common-phpcs] on Packagist,
-and the source at [DanielEScherzer/common-phpcs][gh:common-phpcs] on GitHub.
+[squizlabs/php_codesniffer][package:squizlabs]. While this may seem like an odd
+place to start, I wanted my code to have consistent styles. I don't anticipate
+that the package with my configuration will be useful for anyone else, but in
+case it is, you can find the package at
+[danielescherzer/common-phpcs][package:common-phpcs] on Packagist, and the
+source at [DanielEScherzer/common-phpcs][gh:common-phpcs] on GitHub.
 
 Next, using that package to enforce some style rules, I then created a utility
 package for building up HTML output. I prefer to avoid mixing inline HTML with
 my PHP, and writing raw HTML, while useful and sometimes needed, results in a
 less powerful interface for building up the output than a PHP library would
-allow. The package is available as [danielescherzer/html-builder][package:html-builder], and
-the source is at [DanielEScherzer/html-builder][gh:html-builder] on GitHub.
+allow. The package is available as
+[danielescherzer/html-builder][package:html-builder], and the source is at
+[DanielEScherzer/html-builder][gh:html-builder] on GitHub.
 
 ## Coding the site
 
@@ -32,12 +34,12 @@ Finally, I started building up the actual website itself, with the different
 pages and content. I am using the html-builder library that I wrote, as well
 as a few popular libraries from others:
 
-- [nikic/fast-route][package:fast-route] is used for routing requests to the appropriate
-page.
-- [league/commonmark][package:commonmark] is used for converting markdown content into HTML;
-while the different content pages are all written using the HTML builder, for
-the blog posts I am writing them in markdown to simplify things, since they
-don't need much in the way of special handling.
+- [nikic/fast-route][package:fast-route] is used for routing requests to the
+appropriate page.
+- [league/commonmark][package:commonmark] is used for converting markdown
+content into HTML; while the different content pages are all written using the
+HTML builder, for the blog posts I am writing them in markdown to simplify
+things, since they don't need much in the way of special handling.
 
 ## Prepping the site
 
@@ -61,9 +63,11 @@ After purchasing the VPS and the domains, I was finally ready. I published my
 work to GitHub, and deployed it to the VPS. My directory structure on the VPS
 looks as follows:
 * `/home/non-root/website-traefik` is a clone of
-[DanielEScherzer/website-traefik][gh:website-traefik] that manages the infrastructure
+[DanielEScherzer/website-traefik][gh:website-traefik] that manages the
+infrastructure
 * `/home/non-root/production.dev` is a clone of
-[DanielEScherzer/website-content][gh:website-content] with the content, with a `.env` file setting
+[DanielEScherzer/website-content][gh:website-content] with the content, with a
+`.env` file setting
 	- `DEPLOYMENT_HOST_NAME=scherzer.dev`
 	- `MATOMO_DB_PASSWORD=[redacted here]`
 	- `COMPOSE_PROFILES=matomo`
