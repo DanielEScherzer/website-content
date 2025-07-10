@@ -10,6 +10,7 @@ class ToolPage extends BasePage {
 	private ?string $tool;
 
 	private const TOOL_MAPPING = [
+		'countdown' => true,
 		'dvorak' => true,
 	];
 
