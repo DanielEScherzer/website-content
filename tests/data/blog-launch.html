@@ -7,28 +7,30 @@ rather than using a website builder like WordPress. While I do rely on a few
 external libraries, the content and styles are all mine.</p>
 <h2>Codesniffer and HTML builder</h2>
 <p>I started by creating a package with configuration for the linting tool
-<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/squizlabs/php_codesniffer">squizlabs/php_codesniffer</a>. While this may seem like an odd place to
-start, I wanted my code to have consistent styles. I don't anticipate that the
-package with my configuration will be useful for anyone else, but in case it is,
-you can find the package at <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/danielescherzer/common-phpcs">danielescherzer/common-phpcs</a> on Packagist,
-and the source at <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/DanielEScherzer/common-phpcs">DanielEScherzer/common-phpcs</a> on GitHub.</p>
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/squizlabs/php_codesniffer">squizlabs/php_codesniffer</a>. While this may seem like an odd
+place to start, I wanted my code to have consistent styles. I don't anticipate
+that the package with my configuration will be useful for anyone else, but in
+case it is, you can find the package at
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/danielescherzer/common-phpcs">danielescherzer/common-phpcs</a> on Packagist, and the
+source at <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/DanielEScherzer/common-phpcs">DanielEScherzer/common-phpcs</a> on GitHub.</p>
 <p>Next, using that package to enforce some style rules, I then created a utility
 package for building up HTML output. I prefer to avoid mixing inline HTML with
 my PHP, and writing raw HTML, while useful and sometimes needed, results in a
 less powerful interface for building up the output than a PHP library would
-allow. The package is available as <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/danielescherzer/html-builder">danielescherzer/html-builder</a>, and
-the source is at <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/DanielEScherzer/html-builder">DanielEScherzer/html-builder</a> on GitHub.</p>
+allow. The package is available as
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/danielescherzer/html-builder">danielescherzer/html-builder</a>, and the source is at
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/DanielEScherzer/html-builder">DanielEScherzer/html-builder</a> on GitHub.</p>
 <h2>Coding the site</h2>
 <p>Finally, I started building up the actual website itself, with the different
 pages and content. I am using the html-builder library that I wrote, as well
 as a few popular libraries from others:</p>
 <ul>
-<li><a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/nikic/fast-route">nikic/fast-route</a> is used for routing requests to the appropriate
-page.</li>
-<li><a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/league/commonmark">league/commonmark</a> is used for converting markdown content into HTML;
-while the different content pages are all written using the HTML builder, for
-the blog posts I am writing them in markdown to simplify things, since they
-don't need much in the way of special handling.</li>
+<li><a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/nikic/fast-route">nikic/fast-route</a> is used for routing requests to the
+appropriate page.</li>
+<li><a rel="noopener noreferrer" target="_blank" class="external-link" href="https://packagist.org/packages/league/commonmark">league/commonmark</a> is used for converting markdown
+content into HTML; while the different content pages are all written using the
+HTML builder, for the blog posts I am writing them in markdown to simplify
+things, since they don't need much in the way of special handling.</li>
 </ul>
 <h2>Prepping the site</h2>
 <p>Before I launched this site officially, I wanted to create a staging environment
@@ -49,9 +51,11 @@ work to GitHub, and deployed it to the VPS. My directory structure on the VPS
 looks as follows:</p>
 <ul>
 <li><code>/home/non-root/website-traefik</code> is a clone of
-<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/DanielEScherzer/website-traefik">DanielEScherzer/website-traefik</a> that manages the infrastructure</li>
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/DanielEScherzer/website-traefik">DanielEScherzer/website-traefik</a> that manages the
+infrastructure</li>
 <li><code>/home/non-root/production.dev</code> is a clone of
-<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/DanielEScherzer/website-content">DanielEScherzer/website-content</a> with the content, with a <code>.env</code> file setting
+<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/DanielEScherzer/website-content">DanielEScherzer/website-content</a> with the content, with a
+<code>.env</code> file setting
 <ul>
 <li><code>DEPLOYMENT_HOST_NAME=scherzer.dev</code></li>
 <li><code>MATOMO_DB_PASSWORD=[redacted here]</code></li>

@@ -12,7 +12,6 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
-use League\CommonMark\Extension\Mention\MentionExtension;
 use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;
 use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
 use League\CommonMark\Node\Inline\Text;
@@ -26,21 +25,6 @@ class BlogDisplay {
 	 */
 	public static function makeCommonMarkEnv( BlogPost|false $post ): Environment {
 		$config = [
-			'mentions' => [
-				'packagist' => [
-					'prefix' => 'package:',
-					// From the composer spec
-					'pattern' => '[a-z0-9]([_.-]?[a-z0-9]+)*\/[a-z0-9](([_.]|-{1,2})?[a-z0-9]+)*',
-					// 'https://packagist.org/packages/%s'
-					'generator' => new PackageMentionGenerator(),
-				],
-				'gh-repo' => [
-					'prefix' => 'gh:',
-					'pattern' => '[a-z][a-z0-9]*\/[\-a-z0-9]*',
-					// 'https://github.com/%s'
-					'generator' => new GitHubRepoMentionGenerator(),
-				],
-			],
 			'external_link' => [
 				'html_class' => 'external-link',
 				'open_in_new_window' => true,
@@ -53,14 +37,9 @@ class BlogDisplay {
 				'min_heading_level' => 2,
 			],
 		];
-		if ( !$post ) {
-			$config['mentions']['packagist']['generator'] = new DisabledMentionGenerator();
-			$config['mentions']['gh-repo']['generator'] = new DisabledMentionGenerator();
-		}
 
 		$env = new Environment( $config );
 		$env->addExtension( new CommonMarkCoreExtension() );
-		$env->addExtension( new MentionExtension() );
 		$env->addExtension( new ExternalLinkExtension() );
 		// Always gets added to the environment so that the front matter is
 		// understood and not shown
