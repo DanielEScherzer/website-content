@@ -32,9 +32,9 @@ class PygmentsHighlightRenderer implements
 		$this->base = new FencedCodeRenderer();
 	}
 
-	public function setConfiguration(ConfigurationInterface $config): void {
-        $this->config = $config;
-    }
+	public function setConfiguration( ConfigurationInterface $config ): void {
+		$this->config = $config;
+	}
 
 	/**
 	 * Use base renderer unless we can highlight
@@ -91,7 +91,7 @@ class PygmentsHighlightRenderer implements
 							[ 'class' => 'pygments-highlight-failed' ],
 							htmlspecialchars( $errMessage )
 						),
-						$fallback
+						$fallback,
 					]
 				);
 			}

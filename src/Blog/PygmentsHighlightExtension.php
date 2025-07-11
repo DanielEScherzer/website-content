@@ -11,16 +11,16 @@ use Nette\Schema\Expect;
 
 class PygmentsHighlightExtension implements ConfigurableExtensionInterface {
 
-	public function configureSchema(ConfigurationBuilderInterface $builder): void {
-        $builder->addSchema( 'pygments_highlight', Expect::structure( [
+	public function configureSchema( ConfigurationBuilderInterface $builder ): void {
+		$builder->addSchema( 'pygments_highlight', Expect::structure( [
 			'pygments_path' => Expect::anyOf( Expect::string(), Expect::null() )->default( null ),
 			'on_exception' => Expect::anyOf(
 				PygmentsHighlightRenderer::ON_EXCEPTION_IGNORE,
 				PygmentsHighlightRenderer::ON_EXCEPTION_WARN,
 				PygmentsHighlightRenderer::ON_EXCEPTION_THROW
 			)->default( PygmentsHighlightRenderer::ON_EXCEPTION_WARN ),
-        ] ) );
-    }
+		] ) );
+	}
 
 	public function register( EnvironmentBuilderInterface $environment ): void {
 		$environment->addRenderer(
