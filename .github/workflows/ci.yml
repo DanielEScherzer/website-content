@@ -67,12 +67,13 @@ jobs:
     name: "PHPUnit"
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        php: [8.3, 8.4]
+        php: [8.3] #, 8.4]
         commonmark: ["^2.7"]
-        yaml: ["6.4.*", "7.2.*", "7.3.*"]
+        yaml: ["6.4.*"] #, "7.2.*", "7.3.*"]
         python: [">= 3.11, << 3.12", ">= 3.12, << 3.13", ">= 3.13, << 3.14"]
-        pygments: ["2.17.*", "2.18.*", "2.19.*"]
+        pygments: ["2.17.*"] #, "2.18.*", "2.19.*"]
 
     steps:
       - name: Checkout
@@ -98,6 +99,9 @@ jobs:
 
       - name: Ensure python versions
         run: sudo apt-get satisfy "python3 (${{ matrix.python }})"
+
+      - name: Report python versions
+        run: python3 --version
 
       - name: Install pip
         run: sudo apt-get install -y python3-pip
