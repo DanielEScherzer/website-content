@@ -97,7 +97,7 @@ jobs:
         run: sudo apt-get install -y python3
 
       - name: Ensure python versions
-        run: sudo apt-get satisfy "python3 (${{ matrix.python }})
+        run: sudo apt-get satisfy "python3 (${{ matrix.python }})"
 
       - name: Install pip
         run: sudo apt-get install -y python3-pip
