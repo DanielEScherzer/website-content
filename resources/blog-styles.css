@@ -32,6 +32,25 @@
 	background-color: #f8f8f8;
 }
 
+.blog-content .pygments-highlight-failed {
+	color: red;
+}
+
+.blog-content .footnotes {
+	p {
+		font-size: smaller;
+		display: inline;
+	}
+
+	ol {
+		padding-inline-start: 0px;
+	}
+
+	li {
+		list-style-position: inside;
+	}
+}
+
 .blog-content code {
 	white-space: nowrap;
 }
