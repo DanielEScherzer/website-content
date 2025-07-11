@@ -79,6 +79,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: "actions/setup-python@v5"
+        with:
+          python-version: "${{ matrix.python }}"
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -94,13 +99,7 @@ jobs:
       - name: Install composer dependencies
         run: composer install
 
-      - name: Install python
-        run: sudo apt-get install -y python3
-
-      - name: Ensure python versions
-        run: sudo apt-get satisfy "python3 (${{ matrix.python }})"
-
-      - name: Report python versions
+      - name: Report python version
         run: python3 --version
 
       - name: Install pip
