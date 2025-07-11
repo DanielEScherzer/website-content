@@ -68,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [8.2, 8.3, 8.4]
+        php: [8.3, 8.4]
         commonmark: ["^2.7"]
         yaml: ["6.4.*", "7.2.*", "7.3.*"]
         python: [">= 3.11, << 3.12", ">= 3.12, << 3.13"]
