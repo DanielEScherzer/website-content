@@ -28,8 +28,27 @@
 	margin: auto;
 }
 
-.blog-content .pygments-highlight pre {
+.blog-content .pygments-highlighter pre {
 	background-color: #f8f8f8;
+}
+
+.blog-content .pygments-highlighter-failed {
+	color: red;
+}
+
+.blog-content .footnotes {
+	p {
+		font-size: smaller;
+		display: inline;
+	}
+
+	ol {
+		padding-inline-start: 0px;
+	}
+
+	li {
+		list-style-position: inside;
+	}
 }
 
 .blog-content code {

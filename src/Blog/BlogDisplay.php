@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace DanielWebsite\Blog;
 
+use DanielEScherzer\CommonMarkPygmentsHighlighter\PygmentsHighlighterExtension;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
@@ -10,6 +11,7 @@ use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
+use League\CommonMark\Extension\Footnote\FootnoteExtension;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;
@@ -64,7 +66,10 @@ class BlogDisplay {
 				);
 			}
 			if ( $extensions['pygments'] ?? false ) {
-				$env->addExtension( new PygmentsHighlightExtension() );
+				$env->addExtension( new PygmentsHighlighterExtension() );
+			}
+			if ( $extensions['footnotes'] ?? false ) {
+				$env->addExtension( new FootnoteExtension() );
 			}
 			if ( $cfg['title'] ?? false ) {
 				$post->setTitle( $cfg['title'] );
