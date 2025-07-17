@@ -91,12 +91,12 @@ renderer being a version of the default `FencedCodeRenderer`, my class would
 hold a reference to a separate `FencedCodeRenderer` instance and call methods
 on it.
 
-The final issue is that the HTML that Pygments provides doesn't actually have
-highlighting; it has a bunch of classes around different parts of the code, and
-you need to separately apply the CSS to highlight them. Pygments provides a few
-themes that contain the CSS necessary (and `ramsey/pygments` makes it possible
-to access them from PHP) but that CSS still needs to be loaded on the page for
-the highlighting to take effect.
+The final issue is that the HTML that Pygments provides doesn't include visual
+highlighting right away; instead, it has a bunch of classes around different
+elements of the code, and you need to separately apply the CSS to highlight
+them. Pygments provides a few themes that contain the CSS necessary (and
+`ramsey/pygments` makes it possible to access them from PHP) but that CSS still
+needs to be loaded on the page for the highlighting to take effect.
 
 At this point, I was ready to add the highlighting support. To make things
 easier, I added that extension directly in the code base for my website, so I
@@ -181,9 +181,12 @@ echo $converter->convert("```php\n<?php\necho 'testing...';\n```");
 
 The resulting HTML output will have CSS classes applied to different parts to
 support highlighting; CSS to actually do the highlighting still needs to be
-included in the output. More details can be found in the documentation
-[on GitHub][gh-repo]. If you have any issues or feature requests, please report
-them GitHub. Contributions are welcome.
+included in the output. CSS for Pygments themes can be generated using the
+`ramsey/pygments` library, see [that library's documentation][rp-readme].
+
+More details about using this new extension can be found in the
+[README][gh-readme]. If you have any issues or feature requests, please report
+them [on GitHub][gh-repo]. Contributions are welcome.
 
 [^1]: For a quick overview of the Markdown syntax supported by
 CommonMark, see [this cheatsheet][cheatsheet].
@@ -201,6 +204,8 @@ highlighting takes over in the example, so a fake language name is used.
 [orig-impl-commit]: https://github.com/DanielEScherzer/website-content/commit/d161dbf17d90f41be60c4aab9ba83d01f7aa609a
 [gh-issue-1073]: https://github.com/thephpleague/commonmark/issues/1073
 [gh-repo]: https://github.com/DanielEScherzer/commonmark-ext-pygments-highlighter
+[gh-readme]: https://github.com/DanielEScherzer/commonmark-ext-pygments-highlighter/blob/main/README.md
+[rp-readme]: https://github.com/ramsey/pygments/blob/main/README.md
 [composer-package]: https://packagist.org/packages/danielescherzer/commonmark-ext-pygments-highlighter
 [commonmark]: https://commonmark.org/
 [cheatsheet]: https://commonmark.org/help/
