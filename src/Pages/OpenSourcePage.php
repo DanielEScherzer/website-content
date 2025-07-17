@@ -29,6 +29,20 @@ class OpenSourcePage extends BasePage {
 			'link' => 'https://wiki.php.net/rfc/delayedtargetvalidation_attribute',
 			'date' => 'June 2025',
 			'desc' => 'Delaying compile-time attribute target validation errors with #[\DelayedTargetValidation]',
+			'status' => 'in voting',
+		],
+		'FILTER_THROW_ON_FAILURE' => [
+			'name' => 'FILTER_THROW_ON_FAILURE',
+			'link' => 'https://wiki.php.net/rfc/filter_throw_on_failure',
+			'date' => 'July 2025',
+			'desc' => 'Add FILTER_THROW_ON_FAILURE flag to the filter extension',
+			'status' => 'under discussion',
+		],
+		'#[\Deprecated] for traits' => [
+			'name' => '#[\Deprecated] for traits',
+			'link' => 'https://wiki.php.net/rfc/deprecated_traits',
+			'date' => 'July 2025',
+			'desc' => 'Support the #[\Deprecated] attribute on traits',
 			'status' => 'under discussion',
 		],
 	];
@@ -38,6 +52,11 @@ class OpenSourcePage extends BasePage {
 			'name' => 'danielescherzer/common-phpcs',
 			'link' => 'https://packagist.org/packages/danielescherzer/common-phpcs',
 			'desc' => 'Collection of common codesniffer standards for my projects',
+		],
+		'commonmark-ext-pygments-highlighter' => [
+			'name' => 'danielescherzer/commonmark-ext-pygments-highlighter',
+			'link' => 'https://packagist.org/packages/danielescherzer/commonmark-ext-pygments-highlighter',
+			'desc' => 'CommonMark extension for code highlighting with Pygments',
 		],
 		'html-builder' => [
 			'name' => 'danielescherzer/html-builder',
