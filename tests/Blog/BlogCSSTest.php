@@ -19,7 +19,7 @@ class BlogCSSTest extends TestCase {
 			static fn ( string $r ): string => "\t$r",
 			explode( "\n", $style )
 		);
-		$scopedRules = ".blog-content .pygments-highlight {\n";
+		$scopedRules = ".blog-content .pygments-highlighter {\n";
 		$scopedRules .= rtrim( implode( "\n", $indentedRules ) );
 		$scopedRules .= "\n}";
 		$comment = "/* Generated styles from Pygments (default) */\n";

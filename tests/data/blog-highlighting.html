@@ -60,13 +60,13 @@ to add support for attributes on constants in general.</p>
 <p>The feature presented in the RFC is to allow using attributes on compile-time
 non-class constants. By &quot;compile-time&quot;, I meant constants that were declared
 like</p>
-<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="pygments-highlighter"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">const</span> <span class="no">MY_CONST</span> <span class="o">=</span> <span class="s1">&#39;Testing&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>rather than &quot;runtime&quot; constants declared like</p>
-<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="pygments-highlighter"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nb">define</span><span class="p">(</span> <span class="s1">&#39;MY_CONST&#39;</span><span class="p">,</span> <span class="s1">&#39;Testing&#39;</span> <span class="p">);</span>
 </pre></div>
@@ -81,7 +81,7 @@ easier than adding support for attributes on the <code>const</code>-defined cons
 <p>The line between compile-time and run-time constants is not as straightforward
 as just the use of <code>const</code> or the use of <code>define()</code>.</p>
 <p>Consider the following PHP file (<code>include_class.php</code>):</p>
-<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="pygments-highlighter"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">return</span><span class="p">;</span>
 
@@ -102,7 +102,7 @@ executed)</li>
 and after inclusion of the file, you would notice something slightly surprising:
 even though the statements after the <code>return;</code> are not executed, the <code>Demo</code>
 class gets defined when the file is included!</p>
-<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="pygments-highlighter"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nb">var_dump</span><span class="p">(</span> <span class="nb">class_exists</span><span class="p">(</span> <span class="nx">Demo</span><span class="o">::</span><span class="na">class</span> <span class="p">)</span> <span class="p">);</span> <span class="c1">// False</span>
 
@@ -115,7 +115,7 @@ class gets defined when the file is included!</p>
 <em>runtime</em>. When the file is included, <em>before</em> it gets executed, the class
 declaration is processed. This allows referencing classes before (line-wise)
 they have been defined, such as</p>
-<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="pygments-highlighter"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nb">var_dump</span><span class="p">(</span> <span class="nb">class_exists</span><span class="p">(</span> <span class="nx">Later</span><span class="o">::</span><span class="na">class</span> <span class="p">)</span> <span class="p">);</span> <span class="c1">// True</span>
 
@@ -125,7 +125,7 @@ they have been defined, such as</p>
 <p>However, in the case of &quot;compile-time&quot; constants, the constants do not actually
 get defined until their definition is <em>executed</em>. Try including the following
 PHP file (<code>include_constant.php</code>):</p>
-<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="pygments-highlighter"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">return</span><span class="p">;</span>
 
@@ -135,7 +135,7 @@ PHP file (<code>include_constant.php</code>):</p>
 </pre></div>
 </div>
 <p>You'll find that because of the <code>return;</code>, the constant never gets defined:</p>
-<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="pygments-highlighter"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nb">var_dump</span><span class="p">(</span> <span class="nb">defined</span><span class="p">(</span> <span class="s1">&#39;MY_CONSTANT&#39;</span> <span class="p">)</span> <span class="p">);</span> <span class="c1">// False</span>
 
@@ -198,7 +198,7 @@ of the engine.</p>
 being added to userland constants. It is thus now possible for developers to
 deprecate a non-class constant and have the engine emit deprecation warnings
 when the constant is used. From one of the tests for this new feature:</p>
-<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="pygments-highlighter"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="p">#[</span><span class="nd">\Deprecated</span><span class="p">(</span><span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;use DEPRECATED_CONST_4&quot;</span><span class="p">,</span> <span class="nx">since</span><span class="o">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">)]</span>
 <span class="k">const</span> <span class="no">DeprecatedConst4</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
@@ -224,7 +224,7 @@ behind a version flag to avoid errors on PHP 8.4, when the 8.5 code was executed
 to define a constant PHP would emit a different error, because PHP does not
 allow constants to be declared (with <code>const</code>) within blocks. For example, the
 following code triggers a parser error, and it doesn't use attributes:</p>
-<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="pygments-highlighter"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">if</span> <span class="p">(</span> <span class="k">true</span> <span class="p">)</span> <span class="p">{</span>
     <span class="k">const</span> <span class="no">DEMO</span> <span class="o">=</span> <span class="s1">&#39;example&#39;</span><span class="p">;</span>
@@ -263,7 +263,7 @@ attribute to those internal constants. This would mirror the addition of the
 <code>#[\Deprecated]</code> attribute to internal functions and class constants back when
 the attribute was originally added, see <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/php/php-src/pull/14750">that PR</a>. For example, since
 PHP 8.4 the code</p>
-<div class="pygments-highlight"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="pygments-highlighter"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nb">error_reporting</span><span class="p">(</span><span class="k">E_ALL</span> <span class="o">|</span> <span class="nx">E_STRICT</span><span class="p">);</span>
 </pre></div>
