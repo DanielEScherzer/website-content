@@ -54,13 +54,13 @@ class BlogPostPage extends BasePage {
 		}
 		$this->head->append(
 			FluentHTML::fromTag( 'meta' )
-				->setAttribute( 'property', 'author' )
-				->setAttribute( 'content', 'Daniel Scherzer' )
+				->setAttribute( 'property', 'og:type' )
+				->setAttribute( 'content', 'article' )
 		);
 		$this->head->append(
 			FluentHTML::fromTag( 'meta' )
-				->setAttribute( 'property', 'og:type' )
-				->setAttribute( 'content', 'article' )
+				->setAttribute( 'property', 'article:author' )
+				->setAttribute( 'content', 'Daniel Scherzer' )
 		);
 		$this->head->append(
 			FluentHTML::fromTag( 'meta' )
