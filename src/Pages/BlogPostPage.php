@@ -52,6 +52,21 @@ class BlogPostPage extends BasePage {
 			);
 			return;
 		}
+		$this->head->append(
+			FluentHTML::fromTag( 'meta' )
+				->setAttribute( 'property', 'author' )
+				->setAttribute( 'content', 'Daniel Scherzer' )
+		);
+		$this->head->append(
+			FluentHTML::fromTag( 'meta' )
+				->setAttribute( 'property', 'og:type' )
+				->setAttribute( 'content', 'article' )
+		);
+		$this->head->append(
+			FluentHTML::fromTag( 'meta' )
+				->setAttribute( 'property', 'article:published_time' )
+				->setAttribute( 'content', $post->date->format( 'Y-m-d' ) )
+		);
 		$this->addStyleSheet( 'blog-styles.css' );
 		// Use `League\CommonMark` library for parsing, since I write all of
 		// the blog posts no need to escape unsecure stuff
