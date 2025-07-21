@@ -74,7 +74,7 @@ class SolutionStep {
 class Solver {
 
 	static #shortestSolutionDistance = 11;
-	static #shortestSolutionSteps;
+	static #shortestSolutionSteps = false;
 
 	#target;
 	#asSteps;
@@ -278,9 +278,12 @@ const onLoad = () => {
 			solver.trySolve();
 			const result = Solver.getSolution();
 
-			outputElem.innerText = '';
-			outputElem.innerText = 'Found: ' + result.getValue();
-			outputElem.innerText += '\n= ' + result.getHistory();
+			if ( result === false ) {
+				outputElem.innerText = 'NO SOLUTIONS WITHIN 10 OF ANSWER!';
+			} else {
+				outputElem.innerText = 'Found: ' + result.getValue();
+				outputElem.innerText += '\n= ' + result.getHistory();
+			}
 		}
 	);
 };
