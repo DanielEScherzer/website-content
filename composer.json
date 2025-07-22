@@ -18,6 +18,11 @@
 			"DanielWebsite\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"DanielWebsite\\Tests\\": "tests/"
+		}
+	},
 	"scripts": {
 		"post-update-cmd": "echo 'Deny from all' > vendor/.htaccess",
 		"parallel-lint": "parallel-lint . --exclude vendor",

@@ -6,11 +6,13 @@ namespace DanielWebsite\Tests;
 /**
  * Tests that the sitemap is up to date
  */
+use DanielWebsite\SiteMapEntry;
 use DanielWebsite\SitemapGenerator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass( SitemapGenerator::class )]
+#[CoversClass( SiteMapEntry::class )]
 class SitemapGeneratorTest extends TestCase {
 
 	private const TEST_FILE_LOCATION = __DIR__ . '/sitemap.xml';
