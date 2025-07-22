@@ -15,6 +15,7 @@ use DanielWebsite\Pages\Error404Page;
 use DanielWebsite\Pages\Error405Page;
 use DanielWebsite\Pages\LandingPage;
 use DanielWebsite\Pages\OpenSourcePage;
+use DanielWebsite\Pages\RedirectPage;
 use DanielWebsite\Pages\ThesisPage;
 use DanielWebsite\Pages\ToolPage;
 use DanielWebsite\Pages\WorkPage;
@@ -31,6 +32,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass( Error405Page::class )]
 #[CoversClass( LandingPage::class )]
 #[CoversClass( OpenSourcePage::class )]
+#[CoversClass( RedirectPage::class )]
 #[CoversClass( ThesisPage::class )]
 #[CoversClass( ToolPage::class ) ]
 #[CoversClass( WorkPage::class )]
@@ -80,6 +82,11 @@ class StaticOutputTest extends TestCase {
 
 		// Error 405
 		yield 'POST work page' => [ 'POST', '/Work', 'NoPost.html' ];
+	}
+
+	public function testRedirect() {
+		$page = Router::pageForRequest( 'GET', '/Resume' );
+		$this->assertInstanceOf( RedirectPage::class, $page );
 	}
 
 }
