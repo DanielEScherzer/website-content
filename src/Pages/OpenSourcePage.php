@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 namespace DanielWebsite\Pages;
 
 use DanielEScherzer\HTMLBuilder\FluentHTML;
-use DanielWebsite\SiteMapEntry;
+use DanielWebsite\SitemapEntry;
 
-#[SiteMapEntry( 'OpenSource' )]
+#[SitemapEntry( 'OpenSource' )]
 class OpenSourcePage extends BasePage {
 
 	private const PHP_RFCS = [

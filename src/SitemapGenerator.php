@@ -23,7 +23,7 @@ class SitemapGenerator {
 		$sitemap = new Sitemap( $location );
 		foreach ( $pages as $class ) {
 			$ref = new ReflectionClass( $class );
-			$attribs = $ref->getAttributes( SiteMapEntry::class );
+			$attribs = $ref->getAttributes( SitemapEntry::class );
 			foreach ( $attribs as $attrib ) {
 				$instance = $attrib->newInstance();
 				$sitemap->addItem( self::URL_BASE . $instance->path );
