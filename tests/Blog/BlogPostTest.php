@@ -29,7 +29,7 @@ class BlogPostTest extends TestCase {
 			'extensions' => [
 				'toc' => true,
 			],
-			'extra-classes' => [ 'foo' ]
+			'extra-classes' => [ 'foo' ],
 		] );
 		$this->assertSame( 'Example', $p->getTitle() );
 		$this->assertSame(
