@@ -22,14 +22,26 @@ class BlogPostTest extends TestCase {
 		$this->assertSame( 'random-content', $p->markdown );
 
 		$this->assertSame( '20251201-testing', $p->getTitle() );
-		$p->setTitle( 'Example' );
+		$this->assertSame( [], $p->getExtraClasses() );
+
+		$p->setConfig( [
+			'title' => 'Example',
+			'extensions' => [
+				'toc' => true,
+			],
+			'extra-classes' => [ 'foo' ]
+		] );
 		$this->assertSame( 'Example', $p->getTitle() );
+		$this->assertSame(
+			[ 'foo', 'blog-page--has-toc' ],
+			$p->getExtraClasses()
+		);
 
 		$this->expectException( RuntimeException::class );
 		$this->expectExceptionMessage(
-			'Title already set to `Example`, cannot set as `Changed`'
+			"Configuration cannot be set as `array (\n)`, already set to"
 		);
-		$p->setTitle( 'Changed' );
+		$p->setConfig( [] );
 	}
 
 }

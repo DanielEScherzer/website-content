@@ -28,6 +28,15 @@
 	margin: auto;
 }
 
+.blog-page--sidebar-image p:has(img) {
+	width: 40%;
+	float: right;
+}
+
+.blog-page--sidebar-image img {
+	width: fit-content;
+}
+
 .blog-content .pygments-highlighter pre {
 	background-color: #f8f8f8;
 }
@@ -96,5 +105,13 @@
 		position: relative;
 		top: unset;
 		margin-top: 20px;
+	}
+	.blog-page--sidebar-image p:has(img) {
+		float: unset;
+		margin: auto;
+		max-width: 100%;
+	}
+	.blog-page--sidebar-image img {
+		max-width: 100%;
 	}
 }

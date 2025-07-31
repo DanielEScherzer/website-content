@@ -71,9 +71,7 @@ class BlogDisplay {
 			if ( $extensions['footnotes'] ?? false ) {
 				$env->addExtension( new FootnoteExtension() );
 			}
-			if ( $cfg['title'] ?? false ) {
-				$post->setTitle( $cfg['title'] );
-			}
+			$post->setConfig( $cfg ?? [] );
 		}
 		return $env;
 	}

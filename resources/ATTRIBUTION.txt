@@ -8,3 +8,6 @@
 	Source: https://fosstodon.org/@php/114354104670541431
 		From https://github.com/derickr/toot-together/pull/37
 	Created with snipping tool
+
+* missing-3-confusion.svg
+	Created by hand using https://www.svgviewer.dev/
