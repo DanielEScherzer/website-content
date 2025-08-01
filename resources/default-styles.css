@@ -69,3 +69,15 @@ a.external-link:has(img)::after {
 .des-footer--content {
 	border-top: 1px solid black;
 }
+
+@media (max-width: 900px) {
+	.des-navbar {
+		width: 80%;
+	}
+}
+
+@media (max-width: 600px) {
+	.des-navbar {
+		width: 100%;
+	}
+}
