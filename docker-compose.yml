@@ -9,6 +9,7 @@ services:
     #   - "80:80"
     environment:
       DANIEL_WEBSITE_STAGING: "${DANIEL_WEBSITE_STAGING}"
+      DEPLOYMENT_HOST_NAME: "${DEPLOYMENT_HOST_NAME}"
     labels:
       - traefik.enable=true
       - traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${DEPLOYMENT_HOST_NAME}`)

@@ -10,6 +10,7 @@ use DanielWebsite\Blog\BlogPostStore;
 use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Emphasis;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
 use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;
 use League\CommonMark\Node\Inline\Text;
 use League\CommonMark\Node\Node;
@@ -122,6 +123,28 @@ class BlogPostPage extends BasePage {
 			$hadToc = true;
 			$t->detach();
 		}
+
+		// Identify an image
+		$image = ( new Query() )
+			->where( Query::type( Image::class ) )
+			->findOne( $parsedResult );
+		if ( $image !== null ) {
+			$url = $image->getUrl();
+			if ( str_starts_with( $url, '/' ) ) {
+				// Relative, convert to absolute
+				$host = getenv( 'DEPLOYMENT_HOST_NAME' );
+				if ( $host === null || defined( 'PHPUNIT_TESTS_RUNNING' ) ) {
+					$host = 'scherzer.dev';
+				}
+				$url = 'https://' . $host . $url;
+			}
+			$this->head->append(
+				FluentHTML::fromTag( 'meta' )
+					->setAttribute( 'property', 'og:image' )
+					->setAttribute( 'content', $url )
+			);
+		}
+
 		$html = $renderer->renderDocument( $parsedResult )->getContent();
 
 		if ( $hadToc ) {
