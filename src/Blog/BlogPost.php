@@ -12,7 +12,7 @@ class BlogPost {
 	public readonly DateTimeImmutable $date;
 	public readonly string $markdown;
 
-	private ?string $title = null;
+	private ?array $config = null;
 
 	public function __construct( string $slug, string $markdown ) {
 		$this->slug = $slug;
@@ -26,17 +26,29 @@ class BlogPost {
 	}
 
 	public function getTitle(): string {
-		return $this->title ?? $this->slug;
+		return $this->config['title'] ?? $this->slug;
 	}
 
-	public function setTitle( string $title ): void {
-		if ( $this->title !== null ) {
-			$current = $this->title;
+	public function getExtraClasses(): array {
+		if ( $this->config !== null ) {
+			$extraClasses = $this->config['extra-classes'] ?? [];
+			if ( $this->config['extensions']['toc'] ?? false ) {
+				$extraClasses[] = 'blog-page--has-toc';
+			}
+			return $extraClasses;
+		}
+		return [];
+	}
+
+	public function setConfig( array $config ): void {
+		if ( $this->config !== null ) {
+			$current = var_export( $this->config, true );
+			$new = var_export( $config, true );
 			throw new RuntimeException(
-				"Title already set to `$current`, cannot set as `$title`"
+				"Configuration cannot be set as `$new`, already set to `$current`"
 			);
 		}
-		$this->title = $title;
+		$this->config = $config;
 	}
 
 }

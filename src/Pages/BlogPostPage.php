@@ -75,6 +75,9 @@ class BlogPostPage extends BasePage {
 		$this->head->append(
 			FluentHTML::fromTag( 'title' )->addChild( 'Blog: ' . $post->getTitle() )
 		);
+		foreach ( $post->getExtraClasses() as $class ) {
+			$this->contentWrapper->addClass( $class );
+		}
 
 		$parser = new MarkdownParser( $env );
 
@@ -129,7 +132,6 @@ class BlogPostPage extends BasePage {
 					new RawHTML( $tocRender )
 				)
 			);
-			$this->contentWrapper->addClass( 'blog-page--has-toc' );
 		}
 
 		$this->contentWrapper->append(
