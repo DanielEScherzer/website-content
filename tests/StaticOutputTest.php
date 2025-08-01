@@ -73,6 +73,11 @@ class StaticOutputTest extends TestCase {
 			'/Blog/20250429-attributes-on-constants',
 			'blog-highlighting.html',
 		];
+		yield 'Blog - og:image set' => [
+			'GET',
+			'/Blog/20250801-no-alpha-3',
+			'blog-image.html',
+		];
 
 		// Router is case insensitive
 		yield 'Case insensitive' => [ 'GET', '/oPEnSouRcE', 'OpenSource.html' ];
