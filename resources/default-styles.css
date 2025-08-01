@@ -24,6 +24,7 @@
 	display: flex;
 	justify-content: space-around;
 	border: 3px solid blue;
+	box-sizing: border-box;
 	margin-top: 5px;
 	padding: 2px;
 	font-size: 1.3em;
