@@ -23,6 +23,16 @@ class LandingPage extends BasePage {
 		$this->head->append(
 			FluentHTML::fromTag( 'title' )->addChild( 'Home' )
 		);
+		// Not on staging where it wouldn't make sense, but yes in tests
+		if ( !getenv( 'DANIEL_WEBSITE_STAGING' )
+			|| defined( 'PHPUNIT_TESTS_RUNNING' )
+		) {
+			$this->head->append(
+				FluentHTML::fromTag( 'link' )
+					->setAttribute( 'rel', 'canonical' )
+					->setAttribute( 'href', 'https://scherzer.dev/' )
+			);
+		}
 	}
 
 	protected function build(): void {
