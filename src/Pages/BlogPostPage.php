@@ -133,7 +133,7 @@ class BlogPostPage extends BasePage {
 			if ( str_starts_with( $url, '/' ) ) {
 				// Relative, convert to absolute
 				$host = getenv( 'DEPLOYMENT_HOST_NAME' );
-				if ( $host === null || defined( 'PHPUNIT_TESTS_RUNNING' ) ) {
+				if ( $host === false || defined( 'PHPUNIT_TESTS_RUNNING' ) ) {
 					$host = 'scherzer.dev';
 				}
 				$url = 'https://' . $host . $url;
