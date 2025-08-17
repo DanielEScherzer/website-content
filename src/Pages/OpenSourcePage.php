@@ -29,7 +29,7 @@ class OpenSourcePage extends BasePage {
 			'link' => 'https://wiki.php.net/rfc/delayedtargetvalidation_attribute',
 			'date' => 'June 2025',
 			'desc' => 'Delaying compile-time attribute target validation errors with #[\DelayedTargetValidation]',
-			'status' => 'pending implementation',
+			'status' => 'implemented in PHP 8.5',
 		],
 		'FILTER_THROW_ON_FAILURE' => [
 			'name' => 'FILTER_THROW_ON_FAILURE',
