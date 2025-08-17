@@ -40,7 +40,7 @@ class SolutionStep {
 	doSubtraction ( other ) {
 		// Validation of positive values is done in the constructor
 		return new SolutionStep(
-			this.#value + other.#value,
+			this.#value - other.#value,
 			// access history directly to avoid extra parentheses
 			this.#history + ' - ' + other.#history,
 			// needs parentheses to be correct in order of operations
