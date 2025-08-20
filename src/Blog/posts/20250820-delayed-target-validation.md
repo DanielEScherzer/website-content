@@ -2,8 +2,6 @@
 title: "#[\\DelayedTargetValidation] Attribute Explained"
 extensions:
   pygments: true
-extra-classes:
-  - blog-page--sidebar-image
 ---
 
 # #[\DelayedTargetValidation] Attribute Explained
