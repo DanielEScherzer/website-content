@@ -36,7 +36,7 @@ class OpenSourcePage extends BasePage {
 			'link' => 'https://wiki.php.net/rfc/filter_throw_on_failure',
 			'date' => 'July 2025',
 			'desc' => 'Add FILTER_THROW_ON_FAILURE flag to the filter extension',
-			'status' => 'pending implementation',
+			'status' => 'implemented in PHP 8.5',
 		],
 		'#[\Deprecated] for traits' => [
 			'name' => '#[\Deprecated] for traits',
