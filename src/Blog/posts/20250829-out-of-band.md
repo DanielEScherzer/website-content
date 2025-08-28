@@ -4,36 +4,36 @@ title: "Out-of-Band Signaling"
 
 # Out-of-Band Signaling
 
-Sometimes, code needs to be able to signal an error has occured. Perhaps some
+Sometimes, code needs to be able to signal an error has occurred. Perhaps some
 invariant was violated. Perhaps an invalid parameter was used. Regardless of the
-reason, there are two ways to signal an issue - "in-band signaling", and
+reason, there are two ways to signal an issue: "in-band signaling", and
 "out-of-band signaling".
 
 Under "in-band signaling", the error message is indicated (signaled) using the
 same mechanism as the normal return of the function or procedure. For example,
 a function could be documented to return `false` or `null` on failure, or an
 object holding the applicable errors. MediaWiki uses this pattern frequently
-with its [`StatusValue`][mw-statusvalue] class, which can hold a value as well
-as information on if the status is "good" or "okay" and various warning or
-error messages. A function returns a `StatusValue`, and that object holds either
-the successful result or details of the failure.
+with its [`StatusValue`][mw-statusvalue] class. Each `StatusValue` holds a
+value, information regarding whether the status is "good" or "okay", and
+optionally warning or error messages. A function returns a `StatusValue`, and
+that object holds either the successful result or details of the failure.
 
 On the other hand, with "out-of-band" signaling, error messages are reported
-through an entirely different mechanism than how the result is returned. This
-covers logging a warning in addition to returning the value (where the issue is
+through an entirely different mechanism than the function return. This covers
+logging a warning in addition to returning the value (where the issue is
 not enough to entirely prevent the code in question from running) or throwing
 an exception, in which case no value is returned from the function or procedure.
 
-One danger with in-band signaling is that a value used to signal failure might
+One danger with in-band signaling is that a value used to signal failure may
 also be a valid value on success. While this isn't the case for MediaWiki's use
 of an object to hold errors, this is the case with some built-in PHP functions.
 For example, when calling [`ReflectionClass::getConstant()`][ref-get-constant],
 the return value is either the value of the constant, or `false` for a missing
 constant. But, `false` is also a valid constant value! Due to the use of
-in-band signaling, it is unclear if `false` means that the constant does not
-exist, or exists and has the value `false` - further investigation (e.g. calling
-`ReflectionClass::hasConstant()`) is necessary to understand the result. On the
-other hand, with out-of-band signaling, this confusion does not exist.
+in-band signaling, it is unclear whether `false` means that the constant does
+not exist, or exists and has the value `false` - further investigation (e.g.,
+calling `ReflectionClass::hasConstant()`) is necessary to understand the result.
+On the other hand, with out-of-band signaling, this confusion does not exist.
 
 Among the many changes coming in PHP 8.5, I worked to add three out-of-band
 signals through PHP's RFC process:
