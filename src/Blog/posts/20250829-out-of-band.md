@@ -18,7 +18,7 @@ value, information regarding whether the status is "good" or "okay", and
 optionally warning or error messages. A function returns a `StatusValue`, and
 that object holds either the successful result or details of the failure.
 
-On the other hand, with "out-of-band" signaling, error messages are reported
+On the other hand, with "out-of-band signaling", error messages are reported
 through an entirely different mechanism than the function return. This covers
 logging a warning in addition to returning the value (where the issue is
 not enough to entirely prevent the code in question from running) or throwing
