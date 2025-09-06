@@ -1,6 +1,6 @@
 {
 	"require": {
-		"danielescherzer/commonmark-ext-pygments-highlighter": "0.1.0",
+		"danielescherzer/commonmark-ext-pygments-highlighter": "0.2.0",
 		"danielescherzer/html-builder": "0.0.2",
 		"nikic/fast-route": "1.3.0",
 		"league/commonmark": "2.7.0",
@@ -28,7 +28,7 @@
 		"parallel-lint": "parallel-lint . --exclude vendor",
 		"phpcs": "phpcs -p -s",
 		"phpunit": "php -d extension=pcov.so -d pcov.enabled=1 -d pcov.directory=. vendor/bin/phpunit",
-		"phpunit:update-expected": "TESTS_UPDATE_EXPECTED=1 php vendor/bin/phpunit",
+		"phpunit:update-expected": "TESTS_UPDATE_EXPECTED=1 php vendor/bin/phpunit --no-coverage",
 		"lint": [
 			"@parallel-lint",
 			"@phpcs"
