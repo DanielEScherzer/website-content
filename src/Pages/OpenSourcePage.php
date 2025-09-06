@@ -43,7 +43,7 @@ class OpenSourcePage extends BasePage {
 			'link' => 'https://wiki.php.net/rfc/deprecated_traits',
 			'date' => 'July 2025',
 			'desc' => 'Support the #[\Deprecated] attribute on traits',
-			'status' => 'pending implementation',
+			'status' => 'implemented in PHP 8.5',
 		],
 	];
 
