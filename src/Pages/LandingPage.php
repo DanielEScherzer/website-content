@@ -41,33 +41,34 @@ class LandingPage extends BasePage {
 			FluentHTML::make(
 				'p',
 				[],
+				<<<END
+Welcome to Daniel Scherzer's personal website. I am a software engineer with
+experience working in PHP, JavaScript, Python, C, and other languages.
+END
+			),
+			FluentHTML::make(
+				'p',
+				[],
 				[
 					<<<END
-I am a software engineer with experience working in PHP, JavaScript, Python, C,
-and other languages. I completed my undergraduate education at Tufts University,
-double majoring in Computer Science and Political Science and graduating 
+I completed my undergraduate education at Tufts University, double majoring in
+Computer Science and Political Science and graduating 
 END,
 					FluentHTML::make( 'em', [], 'magna cum laude' ),
 					<<<END
- in 2024 with a Bachelor of Science degree. As part of my
-work in Computer Science, I chose to write an honors thesis in my senior year,
-see 
+ in 2024 with a Bachelor of Science degree. As part of my work in Computer
+Science, I chose to write an honors thesis in my senior year, see 
 END,
 					FluentHTML::make(
 						'a',
 						[ 'href' => './Thesis' ],
 						'here'
 					),
-					' for details.',
+					<<<END
+ for details. I continued at Tufts for graduate school, graduating in 2025 with
+a Master of Science in Computer Science degree.
+END,
 				]
-			),
-			FluentHTML::make(
-				'p',
-				[],
-				<<<END
-I am currently pursuing a Master of Science in Computer Science, also through
-Tufts. I will be graduating in August of 2025.
-END
 			),
 			FluentHTML::make(
 				'p',
