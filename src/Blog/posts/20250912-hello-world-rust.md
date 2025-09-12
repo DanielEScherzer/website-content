@@ -36,4 +36,4 @@ Now that I know that my environment is capable of compiling and running Rust
 programs without issue, I can be relatively confident moving forward that if
 there are issues, they come from my code being broken.
 
-I guess I need to start writing more complicated programs now.
+I guess I need to start writing more significant programs now.
