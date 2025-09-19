@@ -9,9 +9,9 @@ title: Project Euler in Rust
 
 # Project Euler in Rust
 
-Having done the obligatory hello world, I set out to actually code something
-useful in Rust. When I learn a new programming language, my go-to source of
-coding problems to try and solve in the new language is
+After writing the obligatory "Hello, World!", I wanted to work on something
+more substantial in Rust. When I learn a new programming language, my go-to
+source of coding problems to try and solve in the new language is
 [Project Euler][proj-euler], which features hundreds of coding challenges of
 various difficulty levels.
 
@@ -24,8 +24,8 @@ how to solve the problem.
 
 I kicked things off with [Problem #1][proj-euler-prob-1], which asks for the
 sum of all natural numbers below 1000 that are multiples of 3 or 5 (or both).
-That problem is simple enough that I didn't need to refer back to any previous
-code of mine - my program[^1] was as simple as:
+That problem is simple enough that I didn't refer back to any of my previous
+solutions - my program[^1] was as simple as:
 
 ```rust
 fn main() {
@@ -77,12 +77,12 @@ For more information about this error, try `rustc --explain E0384`.
 ```
 </details>
 
-Not only is there an explanation of what went wrong (assigning twice to an
-immutable variable) but there is also
+Not only does the compiler explain what went wrong (assigning twice to an
+immutable variable), it also:
 
-* identification of exactly where the assignments are made
-* a suggestion of how to fix things
-* a built-in help tool for information about the error code
+* highlights were the assignments occur,
+* suggests how to fix them,
+* and offers a built-in tool for exploring the error code further
 
 That built-in tool explains that by default, variables in Rust are immutable.
 Compared to the compiler errors that I am used to from C and C++, Rust is a
@@ -93,9 +93,8 @@ refreshing change of pace.
 I'm used to the conditions for `if` statements needing to be surrounded with
 `()`, i.e. `if ((iii % 3 == 0) || (iii % 5 == 0)) {`, but with Rust, those are
 unnecessary. Not only that, but the compiler will warn that they are unused, and
-suggest removing them. I appreciate the compiler letting me know these are
-unneeded, but I'm not sure how I feel about the compiler having a style
-preference for removing unneeded parentheses.
+suggest removing them. I appreciate the compiler pointing this out, though I'm
+not sure how I feel about the compiler having style preferences.
 
 [Problem #2][proj-euler-prob-2], which asks for the sum of all even terms in
 the Fibonacci sequence that are less than four million, was also pretty simple.
@@ -113,12 +112,12 @@ entails reading in 50 different sudoku grids, solving them, and then for each
 grid, consider the first three digits of the top row as a three digit number,
 and sum those three digit numbers across the 50 sudoku grids.
 
-So that I could focus on learning Rust rather than figuring out how to solve
-the problem, I started off by basically copying my C++ implementation of the
-problem and then working to adapt it to Rust. I'm not going to discuss every
-difference between the languages, but there were a few places where Rust was
-remarkably different from other languages that I have used in the past that I
-think are worth mentioning for anyone considering taking up Rust.
+To focus on learning Rust rather than re-solving the problem, I started off by
+basically copying my C++ implementation of the problem and then working to adapt
+it to Rust. I'm not going to discuss every difference between the languages, but
+there were a few places where Rust was remarkably different from other
+languages that I have used in the past that I think are worth mentioning for
+anyone considering taking up Rust.
 
 The first major difference was a big pain point in my conversion of the C++
 code to Rust that required re-engineering my approach:
@@ -141,9 +140,9 @@ refactored the way `DigitCollection` worked: instead of holding a reference to
 the various `Digit` instances, they would hold the details of the *locations*
 (row and column) of each `Digit` in the collection. Then, any time that the
 `DigitCollection` wanted to do anything, it would fetch a reference to the
-needed `Digit`. That reference would only remain around while it was in use,
-and so there would not be multiple references to the same `Digit` at once as
-long as only one `DigitCollection` was doing work at a time.
+needed `Digit`. Those references were short-lived and scoped to their usage, so
+there would not be multiple references to the same `Digit` at once as long as
+only one `DigitCollection` was doing work at a time.
 
 At that point, I realized that the setup of the `DigitCollection` struct meant
 that it was no longer tied to a specific grid. The `DigitCollection` only held
@@ -188,21 +187,21 @@ values, or a value might not be an option in any `Digit` in a collection. At
 that point, the C++ code would throw an exception; when converting to Rust, I
 started by replacing those exceptions with Rust's [`panic!` macro][rust-panic].
 
-However, sometimes the exceptions needed to be caught. Specifically, after
-implementing a few basic solution stategies (e.g. checking if a `Digit` could
-only hold a single value, or if a value could only go in one `Digit` in a
-`DigitCollection`) my approach was rather inelegant: bifurcation. I would
-pick one `Digit` with multiple options, set it to be one of those options, and
-then try to solve the new grid. If solving succeeded, then the "guess" was
-correct and the solution from the new grid was used. If solving failed, then
-the "guess" was incorrect and that option could be removed from the `Digit` in
-question.
+However, some exceptions in the C++ version were meant to be caught and handled,
+rather than terminating the entire program. Specifically, after implementing a
+few basic solution stategies (e.g. checking if a `Digit` could only hold a
+single value, or if a value could only go in one `Digit` in a `DigitCollection`)
+my approach was rather inelegant: bifurcation. I would pick one `Digit` with
+multiple options, set it to be one of those options, and then try to solve the
+new grid. If solving succeeded, then the "guess" was correct and the solution
+from the new grid was used. If solving failed, then the "guess" was incorrect
+and that option could be removed from the `Digit` in question.
 
 To handle the "if solving failed" case, the C++ code would just catch an
-exception; in Rust, I needed to convert this to use the [`Result`][rust-result]
-type, which holds either a success value, or an error message. Once I replaced
-some of the `panic!()` calls with `Result`s, the program was able to compile,
-run, and produce the right answer!
+exception; in Rust, the `panic!` macro aborts the entire program. I needed to
+convert some of the `panic!` calls to instead use the [`Result`][rust-result]
+type, which holds either a success value, or an error message. After that
+migration, the program was able to compile, run, and produce the right answer!
 
 While I've spent a while on ways that Rust's differences were frustrating or
 unexpected, there was also one Rust feature that the other languages I use most
@@ -234,6 +233,12 @@ contribute [more patches to mago][blog-mago]. While Rust will take some
 adjusting to, especially the limits on mutable references, I look forward to
 adding a new language to my repertoire.
 
+I also need to get familiar with Rust's package system for installing libraries,
+[crates][rust-crates]. These seem to be a built-in part of the core language,
+unlike [PHP's Composer packages][php-composer] or
+[JavaScript's NPM packages][js-npm], where the package management tools are
+provided by third parties.
+
 [^1]: Normally, publishing solutions to the Project Euler problems is
 discouraged, but for the first 100 problems sharing solutions is allowed.
 
@@ -260,3 +265,6 @@ discussed, accepted, and implemented, if it ever does.
 [php-pattern-rfc]: https://wiki.php.net/rfc/pattern-matching
 [ml-lang]: https://en.wikipedia.org/wiki/ML_(programming_language)
 [blog-mago]: ./20250906-mago-rust
+[rust-crates]: https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html
+[php-composer]: https://getcomposer.org/doc/00-intro.md
+[js-npm]: https://docs.npmjs.com/about-npm
