@@ -9,7 +9,7 @@
 	width: 80%;
 	margin-bottom: calc( var(--footer-elem-height) + 10px );
 
-	p, li, blockquote {
+	p, li, blockquote, summary {
 		font-size: 18px;
 	}
 }
