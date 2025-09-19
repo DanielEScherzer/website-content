@@ -64,6 +64,15 @@
 	white-space: nowrap;
 }
 
+.blog-page--unhighlighted-block pre:not(.pygments-highlighter pre) {
+	/* Multi-line blocks */
+	background-color: #f8f8f8;
+
+	code {
+		white-space: pre;
+	}
+}
+
 .blog-page--has-toc.content-wrapper {
 	width: 100%;
 	display: grid;
