@@ -1,0 +1,7 @@
+services:
+  site:
+    ports:
+      - "80:80"
+    networks: !reset []
+
+networks: !reset []
