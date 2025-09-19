@@ -133,9 +133,9 @@ could hold the value `1`, for example, then that `Digit` would be updated to be
 a `1`. Then, the other two collections that the `Digit` was in would propagate
 the change and remove the `1` option from the other `Digit`s.
 
-In Rust, such an approach was not going to work. I tried various work-arounds
+In Rust, such an approach was not going to work. I tried various workarounds
 using Rust's standard library, like the [`std::cell::RefCell`][rust-refcell]
-struct, but wasn't able to get anything to work. As a result, I instead
+struct, but I wasn't able to get anything to work. As a result, I instead
 refactored the way `DigitCollection` worked: instead of holding a reference to
 the various `Digit` instances, they would hold the details of the *locations*
 (row and column) of each `Digit` in the collection. Then, any time that the
@@ -227,11 +227,11 @@ just returns false.
 
 ## Final Thoughts
 
-Rust is definitely a language I want to keep using. I plan to continuing
-playing around with Rust for Project Euler problems, and I might try to
-contribute [more patches to mago][blog-mago]. While Rust will take some
-adjusting to, especially the limits on mutable references, I look forward to
-adding a new language to my repertoire.
+Rust is definitely a language I want to keep using. I plan to continue playing
+around with Rust for Project Euler problems, and I might try to contribute
+[more patches to mago][blog-mago]. While Rust will take some adjusting to,
+especially the limits on mutable references, I look forward to adding a new
+language to my repertoire.
 
 I also need to get familiar with Rust's package system for installing libraries,
 [crates][rust-crates]. These seem to be a built-in part of the core language,
