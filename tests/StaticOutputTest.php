@@ -43,15 +43,19 @@ class StaticOutputTest extends TestCase {
 	public function testPageOutput(
 		string $method,
 		string $request,
-		string $fileName
+		string $fileName,
+		int $responseCode = 200
 	) {
 		$page = Router::pageForRequest( $method, $request );
 		$filePath = __DIR__ . '/data/' . $fileName;
-		$output = $page->getPageOutput();
+		$response = $page->getResponse();
+		$output = $response->content;
 		if ( getenv( 'TESTS_UPDATE_EXPECTED' ) === '1' ) {
 			file_put_contents( $filePath, $output );
 		}
 		$this->assertStringEqualsFile( $filePath, $output );
+		$this->assertSame( [], $response->headers );
+		$this->assertSame( $responseCode, $response->responseCode );
 	}
 
 	public static function providePages() {
@@ -63,10 +67,10 @@ class StaticOutputTest extends TestCase {
 		yield 'Thesis' => [ 'GET', '/Thesis', 'Thesis.html' ];
 		yield 'Work' => [ 'GET', '/Work', 'Work.html' ];
 		yield 'Blog - exists' => [ 'GET', '/Blog/20250409-website-launch', 'blog-launch.html' ];
-		yield 'Blog - missing' => [ 'GET', '/Blog/missing', 'blog-missing.html' ];
+		yield 'Blog - missing' => [ 'GET', '/Blog/missing', 'blog-missing.html', 404 ];
 		yield 'Blog - index' => [ 'GET', '/Blog', 'blog-index.html' ];
 		yield 'Tools - index' => [ 'GET', '/Tools', 'tools-index.html' ];
-		yield 'Tools - missing' => [ 'GET', '/Tools/missing', 'tools-missing.html' ];
+		yield 'Tools - missing' => [ 'GET', '/Tools/missing', 'tools-missing.html', 404 ];
 		yield 'Tools - dvorak' => [ 'GET', '/Tools/dvorak', 'tools-dvorak.html' ];
 		yield 'Blog - pygments highlight' => [
 			'GET',
@@ -83,10 +87,10 @@ class StaticOutputTest extends TestCase {
 		yield 'Case insensitive' => [ 'GET', '/oPEnSouRcE', 'OpenSource.html' ];
 
 		// Error 404
-		yield 'Missing' => [ 'GET', '/Missing', 'Missing.html' ];
+		yield 'Missing' => [ 'GET', '/Missing', 'Missing.html', 404 ];
 
 		// Error 405
-		yield 'POST work page' => [ 'POST', '/Work', 'NoPost.html' ];
+		yield 'POST work page' => [ 'POST', '/Work', 'NoPost.html', 405 ];
 	}
 
 	public function testRedirect() {

@@ -45,6 +45,7 @@ class ToolPage extends BasePage {
 				)
 			);
 			$this->addIndex();
+			$this->setResponseCode( 404 );
 			return;
 		}
 		$this->contentWrapper->append(

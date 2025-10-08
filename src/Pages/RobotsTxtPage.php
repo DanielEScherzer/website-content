@@ -3,19 +3,22 @@ declare( strict_types = 1 );
 
 namespace DanielWebsite\Pages;
 
-use LogicException;
+use DanielWebsite\WebResponse;
 
 /**
  * Virtual page for serving robots.txt
  */
-class RobotsTxtPage extends BasePage {
+class RobotsTxtPage extends AbstractPage {
 
-	protected function build(): never {
-		throw new LogicException( "Should not be called" );
+	public function getResponse(): WebResponse {
+		return new WebResponse(
+			$this->getContent(),
+			[ 'Content-Type: text/plain' ],
+			200
+		);
 	}
 
-	public function getPageOutput(): string {
-		header( 'Content-Type: text/plain' );
+	private function getContent(): string {
 		if ( getenv( 'DANIEL_WEBSITE_STAGING' ) ) {
 			return "User-agent: *\nDisallow: /\n";
 		}

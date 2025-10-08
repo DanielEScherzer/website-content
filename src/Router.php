@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace DanielWebsite;
 
-use DanielWebsite\Pages\BasePage;
+use DanielWebsite\Pages\AbstractPage;
 use DanielWebsite\Pages\BlogIndexPage;
 use DanielWebsite\Pages\BlogPostPage;
 use DanielWebsite\Pages\Error404Page;
@@ -26,7 +26,7 @@ class Router {
 	public static function pageForRequest(
 		string $requestMethod,
 		string $requestURI
-	): BasePage {
+	): AbstractPage {
 		// Remove any query parameters
 		if ( str_contains( $requestURI, '?' ) ) {
 			$pos = strpos( $requestURI, '?' );

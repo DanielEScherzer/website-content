@@ -51,6 +51,7 @@ class BlogPostPage extends BasePage {
 					]
 				)
 			);
+			$this->setResponseCode( 404 );
 			return;
 		}
 		$this->head->append(

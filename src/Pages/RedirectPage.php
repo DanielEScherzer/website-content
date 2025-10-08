@@ -4,11 +4,11 @@ declare( strict_types = 1 );
 namespace DanielWebsite\Pages;
 
 use DanielWebsite\SitemapEntry;
+use DanielWebsite\WebResponse;
 use FastRoute\RouteCollector;
-use LogicException;
 
 #[SitemapEntry( 'Resume' )]
-class RedirectPage extends BasePage {
+class RedirectPage extends AbstractPage {
 
 	private const KNOWN_REDIRECTS = [
 		'Resume' => '/files/Resume.pdf',
@@ -17,7 +17,6 @@ class RedirectPage extends BasePage {
 	private string $title;
 
 	public function __construct( array $params ) {
-		parent::__construct();
 		$title = $params['title'];
 		$this->title = $title;
 	}
@@ -28,14 +27,13 @@ class RedirectPage extends BasePage {
 		}
 	}
 
-	protected function build(): never {
-		throw new LogicException( "Should not be called" );
-	}
-
-	public function getPageOutput(): string {
+	public function getResponse(): WebResponse {
 		$target = self::KNOWN_REDIRECTS[ $this->title ];
-		header( 'Location: //' . $_SERVER['HTTP_HOST'] . $target );
-		return '';
+		return new WebResponse(
+			'',
+			[ 'Location: //' . $_SERVER['HTTP_HOST'] . $target ],
+			302
+		);
 	}
 
 }
