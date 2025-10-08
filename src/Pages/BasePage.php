@@ -9,11 +9,14 @@ namespace DanielWebsite\Pages;
 
 use DanielEScherzer\HTMLBuilder\FluentHTML;
 use DanielEScherzer\HTMLBuilder\RawHTML;
+use DanielWebsite\WebResponse;
 
-abstract class BasePage {
+abstract class BasePage extends AbstractPage {
 
 	protected FluentHTML $head;
 	protected FluentHTML $contentWrapper;
+
+	private int $responseCode = 200;
 
 	public function __construct() {
 		$this->head = FluentHTML::fromTag( 'head' );
@@ -79,6 +82,10 @@ END
 		);
 	}
 
+	protected function setResponseCode( int $code ): void {
+		$this->responseCode = $code;
+	}
+
 	abstract protected function build(): void;
 
 	private function getNavBar(): FluentHTML {
@@ -124,6 +131,14 @@ END
 				[ 'class' => 'des-footer--content' ],
 				[ 'Content is © 2025 Daniel Scherzer' ]
 			)
+		);
+	}
+
+	public function getResponse(): WebResponse {
+		return new WebResponse(
+			$this->getPageOutput(),
+			[],
+			$this->responseCode
 		);
 	}
 

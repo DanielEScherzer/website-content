@@ -23,6 +23,7 @@ class Error405Page extends BasePage {
 		$this->requestedPage = $requestedPage;
 		$this->requestedMethod = $requestedMethod;
 		$this->allowedMethods = $allowedMethods;
+		$this->setResponseCode( 405 );
 	}
 
 	protected function build(): void {

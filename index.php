@@ -10,4 +10,4 @@ $page = Router::pageForRequest(
 	$_SERVER['REQUEST_URI']
 );
 
-echo $page->getPageOutput();
+$page->getResponse()->applyResponse();

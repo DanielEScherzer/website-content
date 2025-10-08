@@ -15,6 +15,7 @@ class Error404Page extends BasePage {
 			FluentHTML::fromTag( 'title' )->addChild( 'Error' )
 		);
 		$this->requestedPage = $requestedPage;
+		$this->setResponseCode( 404 );
 	}
 
 	protected function build(): void {
