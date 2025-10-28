@@ -42,7 +42,8 @@
 }
 
 .blog-content .pygments-highlighter-failed {
-	color: red;
+	/* Accessibility: `red` does not provide enough contrast */
+	color: #ef0000;
 }
 
 .blog-content .footnotes {
