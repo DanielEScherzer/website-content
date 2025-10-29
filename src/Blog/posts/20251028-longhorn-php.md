@@ -22,10 +22,10 @@ from. For the first session, I chose to attend
 a PHP extension in Rust to add profiling, and then using the data from the
 profiling to analyze the compilation time for included files.
 
-While the profiling part was interesting, the reason I attended was because of
-the focus on building the extension in Rust. Most PHP extensions are written
-in C, though I know of at least one (intl) that is written in C++. Having
-recently started to teach myself Rust, I figured that this talk would be a nice
+While the profiling part was interesting, the reason I attended was the focus
+on building the extension in Rust. Most PHP extensions are written in C,
+though I know of at least one (intl) that is written in C++. Having recently
+started to teach myself Rust, I figured that this talk would be a nice
 intersection of coding in Rust and interacting with the C-ABI for PHP, and it
 was.
 
@@ -40,7 +40,7 @@ It was fascinating to see how the guidelines for accessibility are actually
 presented, and to learn about common pitfalls for inaccessible websites. One of
 the tools (contrast) for checking accessibility was a Chrome plugin, and I
 decided to install the plugin and check the pages on my site. I found two pages
-with accessibility issues
+with accessibility issues:
 
 * the JavaScript demo from my undergrad thesis ([see here][thesis-interface])
 * my blog post about the syntax highlighting plugin for CommonMark
@@ -99,14 +99,14 @@ when using microservices - network calls can fail, increased indirection can
 make things confusing, etc.
 
 I then walked next door for [Local development made easy with DDEV][talk-ddev].
-The talk was fascinating, but I am already very used to using docker for my
+The talk was fascinating, but I am already very used to using Docker for my
 local development, and it is also what I use at work (and for my website) for
 deployments. While it is probably possible to use DDEV for deployments, I am
-comfortable with docker for the moment.
+comfortable with Docker for the moment.
 
 Before the next round of talks, there was a short "open spaces" period, where
 various groups discussed topics that had been voted on earlier. When topics
-where solicited during lunch, I had put forward an offer: as a PHP core
+were solicited during lunch, I had put forward an offer: as a PHP core
 developer very familiar with attributes, and as the maintainer of the PHP
 reflection extension, I was open to hearing about feature requests for things
 to work on. That topic received enough interest that it was selected, and I
@@ -137,13 +137,13 @@ userland library for ideas of things to have built-in to PHP.
 
 ## Saturday
 
-Thursday kicked off with another keynote,
+Saturday kicked off with another keynote,
 [Turtles all the way down][talk-turtles]. When I first saw the name of the talk,
 I was reminded of [a Reddit post][reddit-turtles] about having excessive levels
 of inheritance. But, it didn't seem like that was going to be the focus of the
 talk until the third part, when the origin of the "Turtles all the way down"
 saying was discussed. While the history was fascinating, and the talk was great
-overall, I found the creating of an HTTP request handler directly in C to be
+overall, I found the creation of an HTTP request handler directly in C to be
 the most interesting part, and plan to try and experiment with something like
 that myself.
 
