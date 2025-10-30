@@ -179,6 +179,7 @@ END
 		}
 		// @codeCoverageIgnoreEnd
 		$html = FluentHTML::fromTag( 'html' )
+			->setAttribute( 'lang', 'en' )
 			->append( $this->head )
 			->append( FluentHTML::make( 'body', [], $contents ) )
 			->getHTML();
