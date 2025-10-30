@@ -38,13 +38,14 @@ After lunch, for the second round of workshops I attended
 [How to Run an Accessibility WCAG Audit: Step-by-Step for Beginners][tutorial-wcag].
 It was fascinating to see how the guidelines for accessibility are actually
 presented, and to learn about common pitfalls for inaccessible websites. One of
-the tools (contrast) for checking accessibility was a Chrome plugin, and I
-decided to install the plugin and check the pages on my site. I found two pages
-with accessibility issues:
+the tools for checking accessibility was a Chrome plugin, and I decided to
+install the plugin and check the pages on my site. I found two pages with
+accessibility issues:
 
-* the JavaScript demo from my undergrad thesis ([see here][thesis-interface])
+* the JavaScript demo from my undergrad thesis
+([see the demo][thesis-interface])
 * my blog post about the syntax highlighting plugin for CommonMark
-([see here][blog-syntax-highlight])
+([read that blog post][blog-syntax-highlight])
 
 Given that the thesis interface page is meant to represent the version of the
 interface that I submitted as part of my thesis, I am not planning to change
@@ -60,7 +61,7 @@ ensure that I don't accidentally slip up.
 
 Also during the tutorial day, I had a chance to meet Scott Keck-Warren, who
 interviewed me a few weeks back for the PHP Architect's Community Corner
-podcast; see that podcast episode [here][podcast-episode].
+podcast; [that podcast episode is available online][podcast-episode].
 
 ## Friday
 
@@ -161,7 +162,7 @@ documentation (and even contributed a few typo fixes) and have been meaning to
 add support for PIE to my [CustomCast extension][ext-customcast]. Perhaps
 once PHP 8.5 is fully released I'll have a chance to resume work on CustomCast.
 
-After lunch was a second keynote of the day,
+After lunch was the second keynote of the day,
 [Work Smarter: Code Like a Musician][talk-musician]. It was fascinating to hear
 how Cori applied lessons from a music career to writing code. Unfortunately,
 I wasn't able to fully focus on this talk, because my own talk was going to be
@@ -190,7 +191,7 @@ expected to be the most engaging.
 
 The final keynote, [Saving Open Source][talk-saving], was engaging throughout,
 at different points funny, somber, optimistic, and relatable. I found the
-discussion of lice fatigue especially entertaining - when it comes to posting
+discussion of license fatigue especially entertaining - when it comes to posting
 code in GitHub without bothering to include a license, I have done that myself
 (e.g. for the repository with the code for my website). The discussion of the
 [DBAD license][license-dbad] and the [ABRMS license][license-abrms] was
@@ -215,8 +216,8 @@ of the new features, I was already running through the slides much faster than
 I would have liked, and for the last few slides, when I was going to discuss the
 biggest new features (expanded constant syntax, the new uri extension, clone()
 with, and the pipe operator) I only had enough time for a few sentences on each
-of those topics. You can see a copy of the slides for my talk [here][slides],
-I had 52 slides to try and get through!
+of those topics. You can see a copy of the slides for my talk
+[on my site][slides], I had 52 slides to try and get through!
 
 As I noted earlier, two of my talks were accepted for the ConFoo conference in
 February; one of them was this talk about PHP 8.5. For ConFoo my understanding
