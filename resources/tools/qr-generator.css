@@ -1,0 +1,19 @@
+#qr-generator-controls {
+	width: fit-content;
+}
+
+#qr-generator--btn {
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+}
+
+#qr-generator--target {
+	margin-left: 20px;
+	width: 500px;
+	padding: 5px;
+}
+
+#qr-generator-output {
+	margin-top: 20px;
+}
