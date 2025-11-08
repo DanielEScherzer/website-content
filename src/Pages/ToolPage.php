@@ -12,6 +12,7 @@ class ToolPage extends BasePage {
 	private const TOOL_MAPPING = [
 		'countdown' => true,
 		'dvorak' => true,
+		'qr-generator' => true,
 	];
 
 	public function __construct( array $params ) {
