@@ -107,11 +107,6 @@ a description of the process. The main difference was that, since there was
 already a patch-level branch created for the 8.5.0 GA release, the RC5 tag was
 created from that branch, rather than the main `PHP 8.5` branch.
 
-My thanks to the team that creates the Linux packages and Windows downloads for
-the PHP releases - there was no release originally planned for this week, but
-they were able to perform all of the needed steps to allow everyone to use this
-new release candidate.
-
 ## Looking Ahead
 Fingers crossed, RC5 should be the last release candidate needed, and we will
 be able to announce the general availability of PHP 8.5 next week as scheduled.
