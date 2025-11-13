@@ -9,7 +9,7 @@ extra-classes:
 PHP 8.5.0 Release Candidate 4, [announced][rc4-announce] last week, was expected
 to be the last release candidate (RC) of the PHP 8.5.0 development cycle, before
 the general availability release next week. But, earlier today I
-[announced the release of PHP 8.5.0RC5][rc5-announce]. So, why was an extra
+[announced the release of PHP 8.5.0 RC5][rc5-announce]. So, why was an extra
 release candidate needed?
 
 ![Extra RC5 confusion](/resources/extra-5-confusion.svg)
