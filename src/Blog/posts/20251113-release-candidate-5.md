@@ -25,13 +25,19 @@ only really tested with GitHub's continuous integration. Such a situation should
 be avoided.
 
 ## Bugs
-To be clear, neither PHP 8.5.0RC5 nor the eventual GA release are expected to
-be entirely free of bugs; there are hundreds of reports in the GitHub issue
-tracker of bugs in various versions of PHP. New bugfix releases of supported
-versions of PHP (currently PHP 8.3 and PHP 8.4, soon to include PHP 8.5) are
-announced every four weeks as bugs are continuously addressed.
+Our goal, as always, is to ship with no known bugs. But, at some point, we have
+to draw a line and delay further fixes until the next patch release, PHP 8.5.1.
+New bugfix releases of supported versions of PHP (currently PHP 8.3 and PHP 8.4,
+soon to include PHP 8.5) are announced every four weeks as bugs are continuously
+addressed. Neither PHP 8.5.0RC5 nor the eventual GA release are expected to be
+entirely free from bugs, but they should be free from issues that would prevent
+upgrading from earlier versions of PHP.
 
-Among the many other changes coming in PHP 8.5, three specific changes led to
+The great thing about people testing the release candidates before the GA
+release is packaged is that we can change things when issues are found. Which
+is exactly what we are doing here, thanks to user reports.
+
+Among the many changes coming in PHP 8.5, three specific changes led to
 bugs that we thought warranted addressing before the GA release. These were
 
 * the creation of the new ext/uri extension
