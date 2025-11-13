@@ -25,13 +25,13 @@ only really tested with GitHub's continuous integration. Such a situation should
 be avoided.
 
 ## Bugs
-Our goal, as always, is to ship with no known bugs. But, at some point, we have
-to draw a line and delay further fixes until the next patch release, PHP 8.5.1.
-New bugfix releases of supported versions of PHP (currently PHP 8.3 and PHP 8.4,
-soon to include PHP 8.5) are announced every four weeks as bugs are continuously
-addressed. Neither PHP 8.5.0 RC5 nor the eventual GA release are expected to be
-entirely free from bugs, but they should be free from issues that would prevent
-upgrading from earlier versions of PHP.
+Our goal, as always, is to ship releases with no known bugs. But, at some point,
+we have to draw a line and delay further fixes until the next patch release,
+in this case PHP 8.5.1. New bugfix releases of supported versions of PHP
+(currently PHP 8.3 and PHP 8.4, soon to include PHP 8.5) are announced every
+four weeks as bugs are continuously addressed. Neither PHP 8.5.0 RC5 nor the
+eventual GA release are expected to be entirely free from bugs, but they should
+be free from issues that would prevent upgrading from earlier versions of PHP.
 
 The great thing about people testing the release candidates before the GA
 release is packaged is that we can change things when issues are found. Which
