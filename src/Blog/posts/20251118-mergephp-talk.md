@@ -13,7 +13,7 @@ I ran into a few technical issues, but they were not problems that I could have
 easily foreseen, and I'm happy with how I handled them. The content was based
 on the slides for Longhorn, but I addressed the topics in a much better order
 than [last time][blog-longhorn-talk], where I focused on the deprecations and
-didn't make it to the actual new features.
+didn't have enough time to discuss the new features in depth.
 
 ## Longhorn Updates
 I started working on the slides for my presentation the week before the talk.
@@ -117,8 +117,9 @@ This first round of cuts brought me from 50 slides to 38 - I'll still need to
 cut some of what I have planned, but I've made significant progress in trimming
 down the talk.
 
-If you are curious about the content of these slides, or any of the others, the
-slides from my MergePHP talk are [here on my site][slides].
+If you are curious about the content of the removed slides, or any of the
+others, a copy of my MergePHP presentation is [here on my site][slides]. After
+I give this talk at ConFoo the slides I use for that will also be available.
 
 ## Looking Ahead
 
