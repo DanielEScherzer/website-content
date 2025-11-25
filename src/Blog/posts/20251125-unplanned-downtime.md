@@ -55,8 +55,8 @@ I'll try to find a free tool for monitoring my website status, but if that
 doesn't work I guess I can just leave it unmonitored. This is a personal site,
 not a client site, and uptime is best-effort.
 
-[^1]: The server is hosted in Nevada. All times in this blog post are in
-Mountain Time.
+[^1]: All times in this blog post are in Mountain Time; the hosting company is
+based in New Mexico.
 
 [traefik]: https://traefik.io/
 [traefik-restart]: https://github.com/DanielEScherzer/website-traefik/blob/ea50b0520edc6d0aa8ab33442945ab8e2d88b408/docker-compose.yml#L4
