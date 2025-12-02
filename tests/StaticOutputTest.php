@@ -105,6 +105,12 @@ class StaticOutputTest extends TestCase {
 		ob_start();
 		InternalErrorPage::handleException( new Exception( 'testing' ) );
 		$output = ob_get_clean();
+		// Different include paths in docker and on GitHub
+		$output = preg_replace(
+			"/(\/vendor\/bin\/phpunit\(122\):) include\([^\)]+\)/",
+			"$1 include({path})",
+			$output
+		);
 		$filePath = __DIR__ . '/data/errors-nice.html';
 		if ( getenv( 'TESTS_UPDATE_EXPECTED' ) === '1' ) {
 			file_put_contents( $filePath, $output );
@@ -119,6 +125,12 @@ class StaticOutputTest extends TestCase {
 			new Exception( 'second' )
 		);
 		$output = ob_get_clean();
+		// Different include paths in docker and on GitHub
+		$output = preg_replace(
+			"/(\/vendor\/bin\/phpunit\(122\):) include\([^\)]+\)/",
+			"$1 include({path})",
+			$output
+		);
 		$filePath = __DIR__ . '/data/errors-manual.html';
 		if ( getenv( 'TESTS_UPDATE_EXPECTED' ) === '1' ) {
 			file_put_contents( $filePath, $output );

@@ -8,7 +8,7 @@
 <div class='content-wrapper'>
 <h1>Internal Error</h1>
 <p>[Exception] first</p>
-<p>From: <code>.../tests/StaticOutputTest.php</code> line 118</p>
+<p>From: <code>.../tests/StaticOutputTest.php</code> line 124</p>
 <p>Backtrace:</p>
 <pre>#0 .../vendor/phpunit/phpunit/src/Framework/TestCase.php(1317): DanielWebsite\Tests\StaticOutputTest->testErrorManual()
 #1 .../vendor/phpunit/phpunit/src/Framework/TestCase.php(517): PHPUnit\Framework\TestCase->runTest()
@@ -20,11 +20,11 @@
 #7 .../vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
 #8 .../vendor/phpunit/phpunit/src/TextUI/Application.php(229): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
 #9 .../vendor/phpunit/phpunit/phpunit(104): PHPUnit\TextUI\Application->run(Array)
-#10 .../vendor/bin/phpunit(122): include('/var/www/html/v...')
+#10 .../vendor/bin/phpunit(122): include({path})
 #11 {main}</pre>
 <p><b>While trying to handle that error, the handler also had an error:</b></p>
 <p>[Exception] second</p>
-<p>From: <code>.../tests/StaticOutputTest.php</code> line 119</p>
+<p>From: <code>.../tests/StaticOutputTest.php</code> line 125</p>
 <p>Backtrace:</p>
 <pre>#0 .../vendor/phpunit/phpunit/src/Framework/TestCase.php(1317): DanielWebsite\Tests\StaticOutputTest->testErrorManual()
 #1 .../vendor/phpunit/phpunit/src/Framework/TestCase.php(517): PHPUnit\Framework\TestCase->runTest()
@@ -36,6 +36,6 @@
 #7 .../vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
 #8 .../vendor/phpunit/phpunit/src/TextUI/Application.php(229): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
 #9 .../vendor/phpunit/phpunit/phpunit(104): PHPUnit\TextUI\Application->run(Array)
-#10 .../vendor/bin/phpunit(122): include('/var/www/html/v...')
+#10 .../vendor/bin/phpunit(122): include({path})
 #11 {main}</pre>
 </div></body></html>
