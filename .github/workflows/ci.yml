@@ -43,7 +43,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ env.PHP_VERSION }}
-          ini-values: zend.exception_ignore_args=Off
+          ini-values: zend.exception_ignore_args=Off,zend.exception_string_param_max_len=15
           tools: composer
 
       - name: Install composer dependencies
