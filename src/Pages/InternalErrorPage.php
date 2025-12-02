@@ -32,10 +32,7 @@ class InternalErrorPage extends BasePage {
 			)
 		);
 		$error = $this->error;
-		$file = $error->getFile();
-		if ( str_starts_with( $file, '/var/www/html/' ) ) {
-			$file = '.../' . substr( $file, strlen( '/var/www/html/' ) );
-		}
+		$file = self::formatFile( $error->getFile() );
 		$this->contentWrapper->append(
 			FluentHTML::make(
 				'div',
@@ -89,20 +86,14 @@ class InternalErrorPage extends BasePage {
 
 		echo "<h1>Internal Error</h1>\n";
 		echo '<p>[' . get_class( $error1 ) . '] ' . $error1->getMessage() . "</p>\n";
-		$file = $error1->getFile();
-		if ( str_starts_with( $file, '/var/www/html/' ) ) {
-			$file = '.../' . substr( $file, strlen( '/var/www/html/' ) );
-		}
+		$file = self::formatFile( $error1->getFile() );
 		echo "<p>From: <code>$file</code> line " . $error1->getLine() . "</p>\n";
 		echo "<p>Backtrace:</p>\n";
 		echo "<pre>" . self::formatTrace( $error1 ) . "</pre>\n";
 
 		echo "<p><b>While trying to handle that error, the handler also had an error:</b></p>\n";
 		echo '<p>[' . get_class( $error2 ) . '] ' . $error2->getMessage() . "</p>\n";
-		$file = $error2->getFile();
-		if ( str_starts_with( $file, '/var/www/html/' ) ) {
-			$file = '.../' . substr( $file, strlen( '/var/www/html/' ) );
-		}
+		$file = self::formatFile( $error2->getFile() );
 		echo "<p>From: <code>$file</code> line " . $error2->getLine() . "</p>\n";
 		echo "<p>Backtrace:</p>\n";
 		echo "<pre>" . self::formatTrace( $error2 ) . "</pre>\n";
@@ -120,14 +111,33 @@ class InternalErrorPage extends BasePage {
 		$trace = $error->getTraceAsString();
 		$lines = explode( "\n", $trace );
 		$betterLines = array_map(
-			static fn ( $line ) => preg_replace(
-				"/^(#\d+) \/var\/www\/html\/([^\(]+\(\d+\): .*$)/",
-				"$1 .../$2",
+			static fn ( $line ) => preg_replace_callback(
+				"/^(#\d+) ([^\(]+)(\(\d+\): .*$)/",
+				static fn ( array $matches ): string => $matches[1]
+					. ' '
+					. self::formatFile( $matches[2] )
+					. $matches[3],
 				$line
 			),
 			$lines
 		);
 		return implode( "\n", $betterLines );
+	}
+
+	/**
+	 * Nicely format file names, removing common leading prefixes
+	 */
+	private static function formatFile( string $file ): string {
+		// Within docker container
+		if ( str_starts_with( $file, '/var/www/html/' ) ) {
+			return '.../' . substr( $file, strlen( '/var/www/html/' ) );
+		}
+		// Within GitHub actions
+		$ghPrefix = '/home/runner/work/website-content/website-content/';
+		if ( str_starts_with( $file, $ghPrefix ) ) {
+			return '.../' . substr( $file, strlen( $ghPrefix ) );
+		}
+		return $file;
 	}
 
 }
