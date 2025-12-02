@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Internal Error</title>
+<style> .content-wrapper { margin: auto; width: 80%; } </style>
+</head>
+<body>
+<div class='content-wrapper'>
+<h1>Internal Error</h1>
+<p>[Exception] first</p>
+<p>From: <code>.../tests/StaticOutputTest.php</code> line 118</p>
+<p>Backtrace:</p>
+<pre>#0 .../vendor/phpunit/phpunit/src/Framework/TestCase.php(1317): DanielWebsite\Tests\StaticOutputTest->testErrorManual()
+#1 .../vendor/phpunit/phpunit/src/Framework/TestCase.php(517): PHPUnit\Framework\TestCase->runTest()
+#2 .../vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(99): PHPUnit\Framework\TestCase->runBare()
+#3 .../vendor/phpunit/phpunit/src/Framework/TestCase.php(357): PHPUnit\Framework\TestRunner->run(Object(DanielWebsite\Tests\StaticOutputTest))
+#4 .../vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestCase->run()
+#5 .../vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#6 .../vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#7 .../vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#8 .../vendor/phpunit/phpunit/src/TextUI/Application.php(229): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#9 .../vendor/phpunit/phpunit/phpunit(104): PHPUnit\TextUI\Application->run(Array)
+#10 .../vendor/bin/phpunit(122): include('/var/www/html/v...')
+#11 {main}</pre>
+<p><b>While trying to handle that error, the handler also had an error:</b></p>
+<p>[Exception] second</p>
+<p>From: <code>.../tests/StaticOutputTest.php</code> line 119</p>
+<p>Backtrace:</p>
+<pre>#0 .../vendor/phpunit/phpunit/src/Framework/TestCase.php(1317): DanielWebsite\Tests\StaticOutputTest->testErrorManual()
+#1 .../vendor/phpunit/phpunit/src/Framework/TestCase.php(517): PHPUnit\Framework\TestCase->runTest()
+#2 .../vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(99): PHPUnit\Framework\TestCase->runBare()
+#3 .../vendor/phpunit/phpunit/src/Framework/TestCase.php(357): PHPUnit\Framework\TestRunner->run(Object(DanielWebsite\Tests\StaticOutputTest))
+#4 .../vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestCase->run()
+#5 .../vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#6 .../vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#7 .../vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#8 .../vendor/phpunit/phpunit/src/TextUI/Application.php(229): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#9 .../vendor/phpunit/phpunit/phpunit(104): PHPUnit\TextUI\Application->run(Array)
+#10 .../vendor/bin/phpunit(122): include('/var/www/html/v...')
+#11 {main}</pre>
+</div></body></html>
