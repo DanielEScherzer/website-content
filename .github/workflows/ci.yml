@@ -21,6 +21,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ env.PHP_VERSION }}
+          ini-values: zend.exception_ignore_args=Off
           tools: composer
 
       - name: Install composer dependencies
