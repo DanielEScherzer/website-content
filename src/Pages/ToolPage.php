@@ -13,6 +13,7 @@ class ToolPage extends BasePage {
 		'countdown' => true,
 		'dvorak' => true,
 		'qr-generator' => true,
+		'table-builder' => true,
 	];
 
 	public function __construct( array $params ) {

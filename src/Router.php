@@ -11,6 +11,7 @@ use DanielWebsite\Pages\Error405Page;
 use DanielWebsite\Pages\LandingPage;
 use DanielWebsite\Pages\OpenSourcePage;
 use DanielWebsite\Pages\RedirectPage;
+use DanielWebsite\Pages\ReferencePage;
 use DanielWebsite\Pages\RobotsTxtPage;
 use DanielWebsite\Pages\ThesisPage;
 use DanielWebsite\Pages\ToolPage;
@@ -69,6 +70,8 @@ class Router {
 		$r->addRoute( 'GET', 'Work', WorkPage::class );
 		$r->addRoute( 'GET', 'Blog', BlogIndexPage::class );
 		$r->addRoute( 'GET', 'Blog/{slug}', BlogPostPage::class );
+		$r->addRoute( 'GET', 'References', ReferencePage::class );
+		$r->addRoute( 'GET', 'References/{reference}', ReferencePage::class );
 		$r->addRoute( 'GET', 'Tools', ToolPage::class );
 		$r->addRoute( 'GET', 'Tools/{tool}', ToolPage::class );
 		RedirectPage::addRoutes( $r );

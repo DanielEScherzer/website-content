@@ -1,0 +1,164 @@
+{
+	"_columns": [
+		"Label",
+		"C",
+		"C++",
+		"PHP",
+		"Python",
+		"JavaScript",
+		"Rust",
+		"Java"
+	],
+	"rows": [
+		{
+			"Label": "Translation",
+			"C": "Compiled",
+			"C++": "Compiled",
+			"PHP": "Interpreted (runtime compilation to opcodes)",
+			"Python": "Interpreted",
+			"JavaScript": "Interpreted",
+			"Rust": "Compiled",
+			"Java": "Compiled to bytecode"
+		},
+		{
+			"Label": "Type checking",
+			"C": "Compiler",
+			"C++": "Compiler",
+			"PHP": "Analysis (phpstan, phan)",
+			"Python": "Analysis (Mypy)",
+			"JavaScript": "?",
+			"Rust": "Compiler",
+			"Java": "-"
+		},
+		{
+			"Label": "Typed variables",
+			"C": "Yes",
+			"C++": "Yes",
+			"PHP": "No",
+			"Python": "No",
+			"JavaScript": "No",
+			"Rust": "Yes",
+			"Java": "-"
+		},
+		{
+			"Label": "Typed properties",
+			"C": "Yes",
+			"C++": "Yes",
+			"PHP": "Yes",
+			"Python": "No",
+			"JavaScript": "No",
+			"Rust": "Yes",
+			"Java": "-"
+		},
+		{
+			"Label": "Mutable variables",
+			"C": "Default",
+			"C++": "Default",
+			"PHP": "Always",
+			"Python": "Always",
+			"JavaScript": "`let`, `var`",
+			"Rust": "`mut let`",
+			"Java": "-"
+		},
+		{
+			"Label": "Constant variables",
+			"C": "`const`",
+			"C++": "`const`",
+			"PHP": "Never",
+			"Python": "Never",
+			"JavaScript": "`const`",
+			"Rust": "`let`",
+			"Java": "-"
+		},
+		{
+			"Label": "Macros",
+			"C": "Raw text",
+			"C++": "Raw text",
+			"PHP": "No",
+			"Python": "No",
+			"JavaScript": "No",
+			"Rust": "AST",
+			"Java": "-"
+		},
+		{
+			"Label": "Custom objects",
+			"C": "Structs (data, no methods)",
+			"C++": "Structs and classes (both data and methods)",
+			"PHP": "Classes (data and methods)",
+			"Python": "Classes (data and methods)",
+			"JavaScript": "Classes (data and methods)",
+			"Rust": "?",
+			"Java": "-"
+		},
+		{
+			"Label": "Inheritance",
+			"C": "No",
+			"C++": "Multiple",
+			"PHP": "Single (classes), multiple (interfaces)",
+			"Python": "Multiple",
+			"JavaScript": "Single",
+			"Rust": "No",
+			"Java": "-"
+		},
+		{
+			"Label": "Object property visibility",
+			"C": "Always public",
+			"C++": "Public / protected / private",
+			"PHP": "Public / protected / private",
+			"Python": "Always public",
+			"JavaScript": "Public / private",
+			"Rust": "?",
+			"Java": "-"
+		},
+		{
+			"Label": "Generics/templates",
+			"C": "No",
+			"C++": "Yes",
+			"PHP": "No",
+			"Python": "No",
+			"JavaScript": "No",
+			"Rust": "Yes",
+			"Java": "-"
+		},
+		{
+			"Label": "Memory management",
+			"C": "Manual",
+			"C++": "Manual",
+			"PHP": "Automatic",
+			"Python": "Automatic",
+			"JavaScript": "Automatic",
+			"Rust": "~",
+			"Java": "-"
+		},
+		{
+			"Label": "Pattern matching",
+			"C": "No",
+			"C++": "No",
+			"PHP": "No",
+			"Python": "No",
+			"JavaScript": "No",
+			"Rust": "Yes",
+			"Java": "-"
+		},
+		{
+			"Label": "Enums",
+			"C": "Integer (or castable) only, create global constants",
+			"C++": "Integer (or castable) only; `enum` creates global constants, `enum class` and `enum struct` are scoped",
+			"PHP": "Integer, string, or unbacked",
+			"Python": "Extend Enum, IntEnum, StrEnum, Flag, or IntFlag",
+			"JavaScript": "No",
+			"Rust": "Tagged enums",
+			"Java": "-"
+		},
+		{
+			"Label": "Unions",
+			"C": "Yes",
+			"C++": "Yes",
+			"PHP": "No",
+			"Python": "No",
+			"JavaScript": "No",
+			"Rust": "Yes",
+			"Java": "-"
+		}
+	]
+}
