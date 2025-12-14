@@ -3,9 +3,11 @@ declare( strict_types = 1 );
 
 namespace DanielWebsite\Pages;
 
+use DanielEScherzer\CommonMarkPygmentsHighlighter\PygmentsHighlighterExtension;
 use DanielEScherzer\HTMLBuilder\FluentHTML;
 use DanielEScherzer\HTMLBuilder\RawHTML;
 use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\InlinesOnly\InlinesOnlyExtension;
 use League\CommonMark\MarkdownConverter;
 
@@ -85,16 +87,44 @@ class ReferencePage extends BasePage {
 		};
 
 		$body = FluentHTML::fromTag( 'tbody' );
+		$popovers = [];
+		$codeEnv = new Environment( [] );
+		$codeEnv->addExtension( new CommonMarkCoreExtension() );
+		$codeEnv->addExtension( new PygmentsHighlighterExtension() );
+		$codeConverter = new MarkdownConverter( $codeEnv );
 		foreach ( $data['rows'] as $rowData ) {
 			// var_dump( $row );
 			$row = FluentHTML::fromTag( 'tr' );
-			foreach ( $rowData as $val ) {
-				$row->append( FluentHTML::make( 'td', [], $makeCell( $val ) ) );
+			$rowData = array_values( $rowData );
+			$label = $rowData[0];
+			foreach ( $rowData as $idx => $val ) {
+				if ( str_starts_with( $val, '```' ) ) {
+					$id = "example-$label-" . $data['_columns'][$idx];
+					$id = strtr( $id, ' ', '_' );
+					$row->append(
+						FluentHTML::make(
+							'td',
+							[],
+							FluentHTML::make(
+								'button',
+								[ 'popovertarget' => $id ],
+								'Show'
+							)
+						)
+					);
+					$popovers[] = FluentHTML::make(
+						'div',
+						[ 'id' => $id, 'popover' => 'auto' ],
+						new RawHTML( $codeConverter->convert( $val )->getContent() )
+					);
+				} else {
+					$row->append( FluentHTML::make( 'td', [], $makeCell( $val ) ) );
+				}
 			}
 			$body->append( $row );
 		}
 
-		$table = FluentHtml::make(
+		$table = FluentHTML::make(
 			'table',
 			[],
 			[
@@ -103,6 +133,11 @@ class ReferencePage extends BasePage {
 			]
 		);
 		$this->contentWrapper->append( $table );
+		if ( $popovers ) {
+			$this->contentWrapper->append(
+				FluentHTML::make( 'div', [ 'id' => 'reference-popovers' ], $popovers )
+			);
+		}
 	}
 
 	private function addIndex(): void {

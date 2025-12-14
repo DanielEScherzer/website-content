@@ -41,6 +41,16 @@
 			"Java": "-"
 		},
 		{
+			"Label": "Typed variables ",
+			"C": "```c\nbool condition = true;\nint count = 5;\nmy_class *instance_ptr = NULL;\n```",
+			"C++": "```c\nbool condition = true;\nint count = 5;\nMyClass instance; // stack allocated with default constructor\n```",
+			"PHP": "-",
+			"Python": "--",
+			"JavaScript": "-",
+			"Rust": "```rust\nlet condition: bool = true;\nlet count: u8 = 5;\nlet instance: MyClass = MyClass::new();\n```\n",
+			"Java": "-"
+		},
+		{
 			"Label": "Typed properties",
 			"C": "Yes",
 			"C++": "Yes",
@@ -57,7 +67,17 @@
 			"PHP": "Always",
 			"Python": "Always",
 			"JavaScript": "`let`, `var`",
-			"Rust": "`mut let`",
+			"Rust": "`let mut`",
+			"Java": "-"
+		},
+		{
+			"Label": "Mutable example",
+			"C": "```c\nbool first = true;\n// Some logic\nfirst = false;\n```",
+			"C++": "```c++\nbool first = true;\n// Some logic\nfirst = false;\n```",
+			"PHP": "```php\n<?php\n\n$first = true;\n// Some logic\n$first = false;\n```",
+			"Python": "```python\nfirst = True;\n// Some logic\nfirst = False;\n```",
+			"JavaScript": "```javascript\nlet first = true;\n// Some logic\nfirst = false;\n```",
+			"Rust": "```rust\nlet mut first = true;\n// Some logic\nfirst = false;\n```",
 			"Java": "-"
 		},
 		{
