@@ -129,7 +129,7 @@ END
 			FluentHTML::make(
 				'div',
 				[ 'class' => 'des-footer--content' ],
-				[ 'Content is © 2025 Daniel Scherzer' ]
+				[ 'Content is © 2026 Daniel Scherzer' ]
 			)
 		);
 	}
