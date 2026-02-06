@@ -13,6 +13,7 @@ use DanielWebsite\Pages\BlogIndexPage;
 use DanielWebsite\Pages\BlogPostPage;
 use DanielWebsite\Pages\Error404Page;
 use DanielWebsite\Pages\Error405Page;
+use DanielWebsite\Pages\InternalErrorPage;
 use DanielWebsite\Pages\LandingPage;
 use DanielWebsite\Pages\OpenSourcePage;
 use DanielWebsite\Pages\RedirectPage;
@@ -20,6 +21,7 @@ use DanielWebsite\Pages\ThesisPage;
 use DanielWebsite\Pages\ToolPage;
 use DanielWebsite\Pages\WorkPage;
 use DanielWebsite\Router;
+use Exception;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -30,6 +32,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass( BlogPostPage::class )]
 #[CoversClass( Error404Page::class )]
 #[CoversClass( Error405Page::class )]
+#[CoversClass( InternalErrorPage::class )]
 #[CoversClass( LandingPage::class )]
 #[CoversClass( OpenSourcePage::class )]
 #[CoversClass( RedirectPage::class )]
@@ -96,6 +99,43 @@ class StaticOutputTest extends TestCase {
 	public function testRedirect() {
 		$page = Router::pageForRequest( 'GET', '/Resume' );
 		$this->assertInstanceOf( RedirectPage::class, $page );
+	}
+
+	public function testErrorNice() {
+		ob_start();
+		InternalErrorPage::handleException( new Exception( 'testing' ) );
+		$output = ob_get_clean();
+		// Different include paths in docker and on GitHub
+		$output = preg_replace(
+			"/(\/vendor\/bin\/phpunit\(122\):) include\([^\)]+\)/",
+			"$1 include({path})",
+			$output
+		);
+		$filePath = __DIR__ . '/data/errors-nice.html';
+		if ( getenv( 'TESTS_UPDATE_EXPECTED' ) === '1' ) {
+			file_put_contents( $filePath, $output );
+		}
+		$this->assertStringEqualsFile( $filePath, $output );
+	}
+
+	public function testErrorManual() {
+		ob_start();
+		InternalErrorPage::handleManually(
+			new Exception( 'first' ),
+			new Exception( 'second' )
+		);
+		$output = ob_get_clean();
+		// Different include paths in docker and on GitHub
+		$output = preg_replace(
+			"/(\/vendor\/bin\/phpunit\(122\):) include\([^\)]+\)/",
+			"$1 include({path})",
+			$output
+		);
+		$filePath = __DIR__ . '/data/errors-manual.html';
+		if ( getenv( 'TESTS_UPDATE_EXPECTED' ) === '1' ) {
+			file_put_contents( $filePath, $output );
+		}
+		$this->assertStringEqualsFile( $filePath, $output );
 	}
 
 }
