@@ -30,11 +30,12 @@ time is spent on waiting for the build and test commands to finish executing,
 so I don't necessarily need to be actively doing anything, but packaging a
 release is not something that can be done in just a few minutes. I'm told that
 for others the process is significantly faster, so this may be a quirk of my
-setp - after you go through the process the first time you should have a sense
-of how long it will take. Of cours, if things go wrong, or tests fail and you
+setup - after you go through the process the first time you should have a sense
+of how long it will take. Of course, if things go wrong, or tests fail and you
 need to debug them, the packaging process can take longer than usual. I
 generally set aside three hours for packaging a release. This work is generally
-done on Tuesdays, and a new release (or release candidate) is built every two weeks. 
+done on Tuesdays, and a new release (or release candidate) is built every two
+weeks. 
 
 Packaging is done on Tuesdays, but announcements are delayed until Thursday.
 The announcement process does not take as long, but the announcement emails
@@ -46,8 +47,8 @@ that I am announcing a release.
 The "every two weeks" cadence applies from the start of the release cycle with
 the first alpha release, until the end of bugfix support roughly two-and-a-half
 years later. Afterwards, security releases are done as needed. Security releases
-also don't use release candidates, so the time commitment is typically lower (I
-haven't done this yet, ask me again in two years to confirm).
+also don't use release candidates, so the time commitment is typically lower. (I
+haven't done this yet, ask me again in two years to confirm.)
 
 ## Review commitment
 
@@ -88,7 +89,7 @@ ability to create new branches or tags.
 
 I had commit access before becoming a release manager, and so was already used
 to being extra careful about what repository I was pushing to. For new release
-managers that may not be used to having direct commit access, it is extra
+managers who may not be used to having direct commit access, it is extra
 important to make sure that you are only pushing the branches and tags that you
 mean to, and are pushing to the correct repository. If you accidentally push
 a commit to the wrong remote, you won't be able to force-push away your mistake;
