@@ -28,11 +28,13 @@ At least in my setup (I use a Windows machine and do development in a docker
 container) running the tests generally takes at least an hour. Most of that
 time is spent on waiting for the build and test commands to finish executing,
 so I don't necessarily need to be actively doing anything, but packaging a
-release is not something that can be done in just a few minutes. And, if things
-go wrong, or tests fail and you need to debug them, the packaging process can
-take even longer. This work is generally done on Tuesdays, and a new release
-(or release candidate) is built every two weeks. I generally set aside three
-hours for packaging a release.
+release is not something that can be done in just a few minutes. I'm told that
+for others the process is significantly faster, so this may be a quirk of my
+setp - after you go through the process the first time you should have a sense
+of how long it will take. Of cours, if things go wrong, or tests fail and you
+need to debug them, the packaging process can take longer than usual. I
+generally set aside three hours for packaging a release. This work is generally
+done on Tuesdays, and a new release (or release candidate) is built every two weeks. 
 
 Packaging is done on Tuesdays, but announcements are delayed until Thursday.
 The announcement process does not take as long, but the announcement emails
