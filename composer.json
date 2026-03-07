@@ -3,7 +3,7 @@
 		"danielescherzer/commonmark-ext-pygments-highlighter": "0.2.0",
 		"danielescherzer/html-builder": "0.0.2",
 		"nikic/fast-route": "1.3.0",
-		"league/commonmark": "2.7.0",
+		"league/commonmark": "2.8.1",
 		"ramsey/pygments": "3.0.0",
 		"symfony/yaml": "7.2.5"
 	},
