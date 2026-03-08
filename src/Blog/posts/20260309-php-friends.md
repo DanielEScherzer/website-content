@@ -61,14 +61,15 @@ a factory) and are not part of the stable interface.
 
 [Dave Liddament][Dave] and I met first the first time back at Longhorn PHP in
 October, and had discussed his [`php-language-extensions`][gh-lang-exts]
-library, which adds a few attributes (like `#[\Friend]`) that are processed by
-static analysis. Instead of being enforced at a language level, his version of
-the `#[\Friend]` attribute is applied to *public* class members, and the use of
-those class members is validated by [a PHPStan extension][gh-phpstan-lang-exts],
-which verifies that public members tagged with `#[\Friend]` are only accessed
-from outside of the class by code that is marked as a friend. At Longhorn, we
-had a brief discussion about potentially adding support for that attribute on
-a language level - we fleshed out a potential design while at ConFoo.
+library, which adds a few attributes (like `#[Friend]`[^1]) that are
+processed by static analysis. Instead of being enforced at a language level, his
+version of the friendship attribute is applied to *public* class members, and
+the use of those class members is validated by
+[a PHPStan extension][gh-phpstan-lang-exts], which verifies that public members
+tagged with `#[Friend]` are only accessed from outside of the class by code that
+is marked as a friend. At Longhorn, we had a brief discussion about potentially
+adding support for that attribute on a language level - we fleshed out a
+potential design while at ConFoo.
 
 ## Attribute approach
 
@@ -80,22 +81,23 @@ to how Dave's library does it.
 Of course, there would by necessity be some big differences between how PHP
 implements the attribute and how it was done in userland. In userland, the
 underlying methods and properties were made public so that they could be
-accessed, and the `#[\Friend]` attribute added some restrictions via static
+accessed, and the `#[Friend]` attribute added some restrictions via static
 analysis. If the methods or properties were not public, they would be
 inaccessible!
 
 On the other hand, if the attribute is built in, it can change the visibility
 semantics and allow using protected or private class members. It does not make
 much sense to use friendship for public members, since those can already be
-accessed without restriction.
+accessed without restriction. Thus, a built-in attribute would likely be
+restricted to use on protected or private class members.
 
 ## Attributes as optional
 
 After we had mostly fleshed out a design, however, [Derick Rethans][Derick] walked
 by, and we discussed our ideas. Derick made a great point - currently (as of
 PHP 8.5), any code with attributes applied will run the same with those
-attributes removed. Sure, some new warnings might be shown,[^1] and some old
-warnings might no longer be triggered,[^2] but the actual functionality would be
+attributes removed. Sure, some new warnings might be shown,[^2] and some old
+warnings might no longer be triggered,[^3] but the actual functionality would be
 essentially unchanged. With the proposed `#[\Friend]` attribute, however,
 removing the attribute would lead to runtime errors when attempting to access
 protected or private class members.
@@ -114,11 +116,17 @@ the internals mailing list and gauge community response before working on an
 RFC and implementation. Ideally, this would all be accepted, implemented, and
 merged in time for PHP 8.6, but no promises.
 
-[^1]: e.g. the warnings about dynamic properties previously suppressed with
+[^1]: Dave's attribute is in the `\DaveLiddament\PhpLanguageExtensions`
+namespace, and is written here as `#[Friend]` on the assumption that the
+relevant `use` statement is present. If added directly to the PHP language, the
+attribute would presumably be in the global namespace, indicated by the leading
+backslash in `#[\Friend]`.
+
+[^2]: e.g. the warnings about dynamic properties previously suppressed with
 [`#[\AllowDynamicProperties]`][attrib-adp], or warnings about return type
 compatibility that were suppressed by [`#[\ReturnTypeWillChange]`][attrib-rtwc].
 
-[^2]: e.g. those previously caused by using functions, constants, or other
+[^3]: e.g. those previously caused by using functions, constants, or other
 items marked as [`#[\Deprecated]`][attrib-dep], or the warnings from not using
 the result of a function marked as by [`#[\NoDiscard]`][attrib-nd].
 
