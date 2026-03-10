@@ -9,6 +9,7 @@ use DanielWebsite\Blog\BlogDisplay;
 use DanielWebsite\Blog\BlogPostStore;
 use DanielWebsite\SitemapEntry;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 use League\CommonMark\Node\Block\Paragraph;
 use League\CommonMark\Node\Query;
 use League\CommonMark\Parser\MarkdownParser;
@@ -41,6 +42,18 @@ class BlogIndexPage extends BasePage {
 
 		foreach ( $posts as $post ) {
 			$parsedResult = $parser->parse( $post->markdown );
+
+			// For any links in the first paragraph of a blog post that are
+			// relative to the blog post, adjust the paths
+			$links = ( new Query() )
+				->where( Query::type( Link::class ) )
+				->findAll( $parsedResult );
+			foreach ( $links as $link ) {
+				$url = $link->getUrl();
+				if ( str_starts_with( $url, './' ) ) {
+					$link->setUrl( './Blog/' . substr( $url, 2 ) );
+				}
+			}
 
 			$firstHeading = ( new Query() )
 				->where( Query::type( Heading::class ) )
