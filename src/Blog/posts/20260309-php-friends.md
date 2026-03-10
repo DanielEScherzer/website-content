@@ -9,7 +9,7 @@ title: Friends in PHP
 
 As I mentioned in [my last blog post][blog-confoo], while at ConFoo I and a few
 other developers worked on some ideas for adding friendship support to PHP. To
-be clear, this is just an idea at this point, but I figured it was worth
+be clear, these are just ideas at the moment, but I figured they were worth
 sharing.
 
 ## Inspiration
@@ -59,7 +59,7 @@ and documentation is used to indicate that, though public, the relevant methods
 and properties are only intended to be publicly used by specific classes (like
 a factory) and are not part of the stable interface.
 
-[Dave Liddament][Dave] and I met first the first time back at Longhorn PHP in
+[Dave Liddament][Dave] and I met for the first time back at Longhorn PHP in
 October, and had discussed his [`php-language-extensions`][gh-lang-exts]
 library, which adds a few attributes (like `#[Friend]`[^1]) that are
 processed by static analysis. Instead of being enforced at a language level, his
@@ -74,9 +74,9 @@ potential design while at ConFoo.
 ## Attribute approach
 
 I am a big fan of PHP's attribute system, and wrote a few RFCs to expand
-attributes in PHP 8.5. I also wrote code for a future RFC for attributes in 8.6.
-Thus, my first thought was to add friendship as a built-in attribute, similar
-to how Dave's library does it.
+attributes in PHP 8.5. I have also already written the code for a few future
+RFC ideas related to attributes. Thus, my first thought was to add friendship
+as a built-in attribute, similar to how Dave's library does it.
 
 Of course, there would by necessity be some big differences between how PHP
 implements the attribute and how it was done in userland. In userland, the
@@ -128,7 +128,7 @@ compatibility that were suppressed by [`#[\ReturnTypeWillChange]`][attrib-rtwc].
 
 [^3]: e.g. those previously caused by using functions, constants, or other
 items marked as [`#[\Deprecated]`][attrib-dep], or the warnings from not using
-the result of a function marked as by [`#[\NoDiscard]`][attrib-nd].
+the result of a function marked with [`#[\NoDiscard]`][attrib-nd].
 
 [Dave]: https://www.daveliddament.co.uk/
 [Derick]: https://derickrethans.nl/
