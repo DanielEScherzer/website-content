@@ -9,6 +9,69 @@ use DanielWebsite\SitemapEntry;
 #[SitemapEntry( 'OpenSource' )]
 class OpenSourcePage extends BasePage {
 
+	private const OPEN_SOURCE_PRESENTATIONS = [
+		'PHP-8.5' => [
+			'title' => 'PHP 8.5: New Features from the Source',
+			'iterations' => [
+				[
+					'conf' => 'Longhorn PHP Conference',
+					'loc' => 'Austin, Texas',
+					'date' => 'October 2025',
+					'slides' => '20251025 Longhorn PHP presentation.pdf',
+					'blog' => '20251029-longhorn-php#content-my-talk',
+				],
+				[
+					'conf' => 'MergePHP',
+					'loc' => 'Remote',
+					'date' => 'November 2025',
+					'slides' => '20251117 MergePHP presentation.pdf',
+					'blog' => '20251118-mergephp-talk',
+				],
+				[
+					'conf' => 'ConFoo Montreal 2026',
+					'loc' => 'Montreal, Canada',
+					'date' => 'February 2026',
+					'slides' => '20260226 ConFoo PHP presentation.pdf',
+					'blog' => '20260302-confoo#content-php-85',
+				],
+			],
+		],
+		'Intro-Rust-Experience-Devs' => [
+			'title' => 'Introduction to Rust for Experienced Software Developers',
+			'iterations' => [
+				[
+					'conf' => 'ConFoo Montreal 2026',
+					'loc' => 'Montreal, Canada',
+					'date' => 'February 2026',
+					'slides' => '20260225 ConFoo Rust presentation.pdf',
+					'blog' => '20260302-confoo#content-intro-to-rust',
+				],
+			],
+		],
+		'PHP-8.6' => [
+			'title' => 'PHP 8.6: The Inside Scoop',
+			'iterations' => [
+				[
+					'conf' => 'PHP Tek 2026',
+					'loc' => 'Chicago, Illinois',
+					'date' => 'May 2026',
+					'upcoming' => true,
+				],
+			],
+		],
+		'PHP-SemVer' => [
+			'title' => 'Semantic Versioning and the PHP Ecosystem: A Reality Check',
+			'iterations' => [
+				[
+					'conf' => 'PHP Tek 2026',
+					'loc' => 'Chicago, Illinois',
+					'date' => 'May 2026',
+					'upcoming' => true,
+				],
+			],
+		],
+	];
+
 	private const PHP_RFCS = [
 		'Attributes-on-constants' => [
 			'name' => 'Attributes on Constants',
@@ -45,6 +108,20 @@ class OpenSourcePage extends BasePage {
 			'desc' => 'Support the #[\Deprecated] attribute on traits',
 			'status' => 'implemented in PHP 8.5',
 		],
+		'Debugable Enums' => [
+			'name' => 'Debugable Enums',
+			'link' => 'https://wiki.php.net/rfc/debugable-enums',
+			'date' => 'March 2026',
+			'desc' => 'Allow __debugInfo() on enums',
+			'status' => 'under discussion',
+		],
+		'#[\Override] for class constants' => [
+			'name' => '#[\Override] for class constants',
+			'link' => 'https://wiki.php.net/rfc/override_constants',
+			'date' => 'March 2026',
+			'desc' => 'Extend #[\Override] to target class constants',
+			'status' => 'in draft',
+		],
 	];
 
 	private const PHP_PACKAGES = [
@@ -79,7 +156,7 @@ class OpenSourcePage extends BasePage {
 				'p',
 				[],
 				[
-					'I contribute to open-source libraries on GitHub as ',
+					'I contribute to open-source projects on GitHub as ',
 					FluentHTML::make(
 						'a',
 						[
@@ -93,9 +170,82 @@ class OpenSourcePage extends BasePage {
 				]
 			)
 		);
+		$this->addTalksSection();
 		$this->addPHPSection();
 		$this->addPackagesSection();
 		$this->addWebsiteSection();
+	}
+
+	private function addTalksSection(): void {
+		$this->contentWrapper->append(
+			FluentHTML::make( 'h3', [ 'class' => 'subsection-header' ], 'Conference Presentations' ),
+			FluentHTML::make(
+				'p',
+				[],
+				[
+					<<<END
+I have given a few presentation at various open-source-related conferences. The
+slides and my post-conference write-ups in my blog are listed below. Note that
+even when a presentation is given multiple times, the content changes.
+END,
+				]
+			)
+		);
+		$makeDetails = static fn ( $details ) => [
+			FluentHTML::make( 'em', [], $details['conf'] ),
+			'. ',
+			$details['loc'],
+			', ',
+			$details['date'],
+			...(
+				( $details['upcoming'] ?? false ) ? [ '. Upcoming.' ] :
+				[
+					'. (',
+					FluentHTML::make(
+						'a',
+						[ 'href' => './files/' . $details['slides'] ],
+						'Slides'
+					),
+					', ',
+					FluentHTML::make(
+						'a',
+						[ 'href' => './blog/' . $details['blog'] ],
+						'Blog write up'
+					),
+					')',
+				]
+			),
+		];
+		$list = FluentHTML::fromTag( 'ul' );
+		foreach ( array_reverse( self::OPEN_SOURCE_PRESENTATIONS ) as $details ) {
+			if ( count( $details['iterations'] ) === 1 ) {
+				$once = $details['iterations'][0];
+				$item = FluentHTML::make(
+					'li',
+					[],
+					[
+						'"' . $details['title'] . '," ',
+						...( $makeDetails( $details['iterations'][0] ) ),
+					]
+				);
+				$list->append( $item );
+				continue;
+			}
+			$iterations = array_map(
+				static fn ( $iter ) => FluentHTML::make( 'li', [], $makeDetails( $iter ) ),
+				array_reverse( $details['iterations'] )
+			);
+			$item = FluentHTML::make(
+				'li',
+				[],
+				[
+					'"' . $details['title'] . '"',
+					FluentHTML::make( 'ul', [], $iterations ),
+				]
+			);
+			$list->append( $item );
+		}
+		$this->contentWrapper->append( $list );
 	}
 
 	private function addPHPSection(): void {
@@ -188,10 +338,6 @@ END
 				'class' => 'external-link',
 			],
 			$text
-		);
-		$reflectionLink = $makeLink(
-			'https://www.php.net/manual/en/book.reflection.php',
-			'Reflection extension'
 		);
 		$this->contentWrapper->append(
 			FluentHTML::make( 'h3', [ 'class' => 'subsection-header' ], 'Packages' ),

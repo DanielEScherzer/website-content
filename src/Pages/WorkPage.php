@@ -10,17 +10,25 @@ use DanielWebsite\SitemapEntry;
 class WorkPage extends BasePage {
 
 	private const WIKITEQ_EXTENSIONS = [
+		'MixedVisibilityFiles' => [
+			'https://github.com/WikiTeq/mediawiki-extension-MixedVisibilityFiles',
+			'Support making some on-wiki files public and others private',
+		],
+		'ZoteroConnector' => [
+			'https://github.com/WikiTeq/mediawiki-extension-ZoteroConnector',
+			'Import references and attachments from Zotero into a wiki',
+		],
+		'MarkdownPages' => [
+			'https://github.com/WikiTeq/mediawiki-extension-MarkdownPages',
+			'Add support for markdown as a page content model',
+		],
 		'HoneyPot' => [
 			'https://gerrit.wikimedia.org/g/mediawiki/extensions/HoneyPot',
-			'Implementation of a honey pot during account creation [created]',
+			'Implementation of a honey pot during account creation',
 		],
 		'MinimalExample' => [
 			'https://github.com/WikiTeq/mediawiki-extension-MinimalExample',
-			'Demonstration of the process of building an extension [created]',
-		],
-		'PagePort' => [
-			'https://gerrit.wikimedia.org/g/mediawiki/extensions/PagePort/',
-			'Extension for exporting and importing groups of wiki pages [significant improvements]',
+			'Demonstration of the process of building an extension',
 		],
 	];
 
@@ -95,13 +103,14 @@ class WorkPage extends BasePage {
 					<<<END
 I first joined WikiTeq in January 2023 as a Technical Project Manager, working
 with a team of developers around the world to support clients that use
-MediaWiki. As part of my work at WikiTeq, I have worked with multiple MediaWiki
-extensions, though most of them are private. My contributions made as part of
-my work at WikiTeq are all available under the account 
+MediaWiki, including major corporations and government agencies. As part of my
+work at WikiTeq, I have developed multiple MediaWiki extensions, though most of
+them are private. My contributions made as part of my work at WikiTeq are all
+available under the account 
 END,
 					$makeLink( 'https://github.com/DanielWTQ', '@DanielWTQ' ),
 					<<<END
- on GitHub. Some public extension contributions include:
+ on GitHub. Public extensions that I created include:
 END,
 				]
 			),
@@ -147,6 +156,18 @@ END
 			$list->append( $item );
 		}
 		$this->contentWrapper->append( $list );
+		$this->contentWrapper->append(
+			FluentHTML::make(
+				'p',
+				[],
+				[
+					'For talks that I have given at open-source conferences in '
+						. 'my personal capacity, see ',
+					FluentHTMl::make( 'a', [ 'href' => './OpenSource' ], 'the page about open source' ),
+					'.',
+				]
+			)
+		);
 	}
 
 }
