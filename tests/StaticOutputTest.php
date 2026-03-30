@@ -111,6 +111,12 @@ class StaticOutputTest extends TestCase {
 			"$1 include({path})",
 			$output
 		);
+		// Don't bind to exact line numbers
+		$output = preg_replace(
+			"/(vendor\/phpunit\/[^(]+)\(\d+\): /",
+			"$1({line}): ",
+			$output
+		);
 		$filePath = __DIR__ . '/data/errors-nice.html';
 		if ( getenv( 'TESTS_UPDATE_EXPECTED' ) === '1' ) {
 			file_put_contents( $filePath, $output );
@@ -129,6 +135,12 @@ class StaticOutputTest extends TestCase {
 		$output = preg_replace(
 			"/(\/vendor\/bin\/phpunit\(122\):) include\([^\)]+\)/",
 			"$1 include({path})",
+			$output
+		);
+		// Don't bind to exact line numbers
+		$output = preg_replace(
+			"/(vendor\/phpunit\/[^(]+)\(\d+\): /",
+			"$1({line}): ",
 			$output
 		);
 		$filePath = __DIR__ . '/data/errors-manual.html';
