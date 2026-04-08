@@ -73,14 +73,14 @@ class WorkPage extends BasePage {
 			'conf' => 'MediaWiki Users and Developers Conference, Spring 2026',
 			'loc' => 'Salt Lake City, Utah',
 			'date' => 'March 2026',
-			'video' => 'https://www.youtube.com/live/_KSXOK_8yT0?si=FYool9h4f6w854Go&t=18679',
+			'video' => 'https://www.youtube.com/watch?v=eqSPedqP1JY',
 		],
 		[
 			'title' => 'Introducing MixedVisibilityFiles',
 			'conf' => 'MediaWiki Users and Developers Conference, Spring 2026',
 			'loc' => 'Salt Lake City, Utah',
 			'date' => 'March 2026',
-			'video' => 'https://www.youtube.com/live/_KSXOK_8yT0?si=fF4kTu88hct8vcJc&t=22918',
+			'video' => 'https://www.youtube.com/watch?v=v__u7xjDB4I',
 		],
 	];
 
