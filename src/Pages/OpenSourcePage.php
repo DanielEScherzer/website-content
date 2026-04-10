@@ -135,6 +135,11 @@ class OpenSourcePage extends BasePage {
 			'link' => 'https://packagist.org/packages/danielescherzer/commonmark-ext-pygments-highlighter',
 			'desc' => 'CommonMark extension for code highlighting with Pygments',
 		],
+		'define-deprecated' => [
+			'name' => 'danielescherzer/define-deprecated',
+			'link' => 'https://packagist.org/packages/danielescherzer/define-deprecated',
+			'desc' => 'Allow defining deprecated global constants at runtime without dropping PHP <8.5 support',
+		],
 		'html-builder' => [
 			'name' => 'danielescherzer/html-builder',
 			'link' => 'https://packagist.org/packages/danielescherzer/html-builder',
@@ -345,7 +350,7 @@ END
 				'p',
 				[],
 				<<<END
-I also wrote multiple open-source PHP packages - though they are currently
+I also wrote multiple open-source PHP packages - though some are currently
 primarily used by me, I am a firm supporter of open-source code and figured that
 they might be useful to others. The packages that I have created so far are:
 END,
