@@ -9,6 +9,11 @@
 		From https://github.com/derickr/toot-together/pull/37
 	Created with snipping tool
 
+* 2026.04.16-@php@fosstodon.org-116414332815427472.jpg
+	Source: https://fosstodon.org/@php/116414332815427472
+		From https://github.com/derickr/toot-together/pull/80
+	Created with snipping tool
+
 * missing-3-confusion.svg
 	Created by hand using https://www.svgviewer.dev/
 
