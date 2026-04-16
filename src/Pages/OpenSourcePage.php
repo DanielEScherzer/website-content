@@ -267,10 +267,15 @@ END,
 			'https://www.php.net/manual/en/book.reflection.php',
 			'Reflection extension'
 		);
-		$blogLink = FluentHTML::make(
+		$blogLink85 = FluentHTML::make(
 			'a',
 			[ 'href' => '/Blog/20250417-php85-release-manager' ],
 			'my blog post'
+		);
+		$blogLink86 = FluentHTML::make(
+			'a',
+			[ 'href' => '/Blog/20260416-php86-release-manager' ],
+			'blog post'
 		);
 		$this->contentWrapper->append(
 			FluentHTML::make( 'h3', [ 'class' => 'subsection-header' ], 'PHP' ),
@@ -301,8 +306,14 @@ decide between the volunteers (luckily there were plenty of candidates) and I
 was one of the two "rookie" candidates chosen to help with the release. You can
 read more in 
 END,
-					$blogLink,
+					$blogLink85,
 					'.',
+					<<<END
+ I subsequently volunteered to serve as the "veteran" release manager for the PHP
+8.6 release cycle (
+END,
+					$blogLink86,
+					').',
 				]
 			),
 			FluentHTML::make(
