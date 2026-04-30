@@ -20,3 +20,8 @@
 * extra-5-confusion.svg
 	Created by hand using https://www.svgviewer.dev/
 	Based on my previous work on missing-3-confusion.svg
+
+* php-8.5.6RC3-confusion.svg
+	Created by hand using https://www.svgviewer.dev/
+	Based on my previous work on missing-3-confusion.svg and
+	extra-5-confusion.svg
