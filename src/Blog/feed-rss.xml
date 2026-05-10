@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Daniel Scherzer's Blog</title>
+    <description>Entries from Daniel Scherzer' personal blog</description>
+    <pubDate>Sun, 10 May 2026 00:00:00 +0000</pubDate>
+    <generator>https://github.com/DanielEScherzer/website-content</generator>
+    <link>https://scherzer.dev/Blog</link>
+    <item>
+      <title>Notes for PHP Release Managers, Part 2</title>
+      <pubDate>Sun, 10 May 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260510-release-manager-notes-2</link>
+    </item>
+    <item>
+      <title>The Story of PHP 8.5.6 Release Candidate 3</title>
+      <pubDate>Thu, 30 Apr 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260430-php856-rc-3</link>
+    </item>
+    <item>
+      <title>PHP 8.6 Release Manager</title>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260416-php86-release-manager</link>
+    </item>
+    <item>
+      <title>Introducing define_deprecated() for PHP</title>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260410-define-deprecated</link>
+    </item>
+    <item>
+      <title>Friends in PHP</title>
+      <pubDate>Mon, 09 Mar 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260309-php-friends</link>
+    </item>
+    <item>
+      <title>ConFoo 2026</title>
+      <pubDate>Mon, 02 Mar 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260302-confoo</link>
+    </item>
+    <item>
+      <title>Notes for PHP Release Managers</title>
+      <pubDate>Wed, 18 Feb 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260218-release-manager-notes</link>
+    </item>
+    <item>
+      <title>This Year in PHP (2025)</title>
+      <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260120-php-2025</link>
+    </item>
+    <item>
+      <title>Project Euler in Rust, Part 2</title>
+      <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20251201-rust-euler-2</link>
+    </item>
+    <item>
+      <title>Unplanned Downtime, November 2025</title>
+      <pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20251125-unplanned-downtime</link>
+    </item>
+    <item>
+      <title>MergePHP, November 2025</title>
+      <pubDate>Tue, 18 Nov 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20251118-mergephp-talk</link>
+    </item>
+    <item>
+      <title>The Story of PHP 8.5.0 Release Candidate 5</title>
+      <pubDate>Thu, 13 Nov 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20251113-release-candidate-5</link>
+    </item>
+    <item>
+      <title>Longhorn PHP 2025</title>
+      <pubDate>Wed, 29 Oct 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20251029-longhorn-php</link>
+    </item>
+    <item>
+      <title>Project Euler in Rust</title>
+      <pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250919-rust-euler</link>
+    </item>
+    <item>
+      <title>"Hello, World!" in Rust</title>
+      <pubDate>Fri, 12 Sep 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250912-hello-world-rust</link>
+    </item>
+    <item>
+      <title>First Rust Patch</title>
+      <pubDate>Sat, 06 Sep 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250906-mago-rust</link>
+    </item>
+    <item>
+      <title>Out-of-Band Signaling</title>
+      <pubDate>Fri, 29 Aug 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250829-out-of-band</link>
+    </item>
+    <item>
+      <title>#[\DelayedTargetValidation] Attribute Explained</title>
+      <pubDate>Wed, 20 Aug 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250820-delayed-target-validation</link>
+    </item>
+    <item>
+      <title>No PHP 8.5.0alpha3</title>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250801-no-alpha-3</link>
+    </item>
+    <item>
+      <title>Pygments Syntax Highlighting for Markdown</title>
+      <pubDate>Fri, 18 Jul 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250718-pygments-highlighting</link>
+    </item>
+    <item>
+      <title>A Tale of Two RFCs</title>
+      <pubDate>Sun, 22 Jun 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250622-two-rfcs</link>
+    </item>
+    <item>
+      <title>Attributes on Constants</title>
+      <pubDate>Tue, 29 Apr 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250429-attributes-on-constants</link>
+    </item>
+    <item>
+      <title>PHP 8.5 Release Manager</title>
+      <pubDate>Thu, 17 Apr 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250417-php85-release-manager</link>
+    </item>
+    <item>
+      <title>Website Launch</title>
+      <pubDate>Wed, 09 Apr 2025 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20250409-website-launch</link>
+    </item>
+  </channel>
+</rss>

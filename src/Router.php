@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace DanielWebsite;
 
 use DanielWebsite\Pages\AbstractPage;
+use DanielWebsite\Pages\BlogFeedRSSPage;
 use DanielWebsite\Pages\BlogIndexPage;
 use DanielWebsite\Pages\BlogPostPage;
 use DanielWebsite\Pages\Error404Page;
@@ -68,6 +69,7 @@ class Router {
 		$r->addRoute( 'GET', 'Thesis', ThesisPage::class );
 		$r->addRoute( 'GET', 'Work', WorkPage::class );
 		$r->addRoute( 'GET', 'Blog', BlogIndexPage::class );
+		$r->addRoute( 'GET', 'Blog/feed/rss.xml', BlogFeedRSSPage::class );
 		$r->addRoute( 'GET', 'Blog/{slug}', BlogPostPage::class );
 		$r->addRoute( 'GET', 'Tools', ToolPage::class );
 		$r->addRoute( 'GET', 'Tools/{tool}', ToolPage::class );
