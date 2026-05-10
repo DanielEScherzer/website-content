@@ -127,14 +127,14 @@ class OpenSourcePage extends BasePage {
 			'link' => 'https://wiki.php.net/rfc/reflectionattribute-getcurrent',
 			'date' => 'April 2026',
 			'desc' => 'Add ReflectionAttribute::getCurrent() to connect attributes and targets',
-			'status' => 'under discussion'
+			'status' => 'under discussion',
 		],
 		'friends' => [
 			'name' => 'Friends',
 			'link' => 'https://wiki.php.net/rfc/friends',
 			'date' => 'May 2026',
 			'desc' => 'Add friendship which bypasses visibility restrictions',
-			'status' => 'under discussion'
+			'status' => 'under discussion',
 		],
 		'#[\Deprecated] for interfaces' => [
 			'name' => '#[\Deprecated] for interfaces',
