@@ -44,7 +44,7 @@ class LandingPage extends BasePage {
 				[],
 				<<<END
 Welcome to Daniel Scherzer's personal website. I am a software engineer with
-experience working in PHP, JavaScript, Python, C, and other languages.
+experience working in PHP, JavaScript, Python, C, Rust, and other languages.
 END
 			),
 			FluentHTML::make(
@@ -57,8 +57,8 @@ Computer Science and Political Science and graduating
 END,
 					FluentHTML::make( 'em', [], 'magna cum laude' ),
 					<<<END
- in 2024 with a Bachelor of Science degree. As part of my work in Computer
-Science, I chose to write an honors thesis in my senior year, see 
+ with a Bachelor of Science degree. As part of my work in Computer Science, I
+chose to write an honors thesis in my senior year, see 
 END,
 					FluentHTML::make(
 						'a',
@@ -66,8 +66,20 @@ END,
 						'here'
 					),
 					<<<END
- for details. I continued at Tufts for graduate school, graduating in 2025 with
-a Master of Science in Computer Science degree.
+ for details. I continued at Tufts for graduate school, graduating with a Master
+of Science in Computer Science degree.
+END,
+				]
+			),
+			FluentHTML::make(
+				'p',
+				[],
+				[
+					<<<END
+In my free time, I contribute to various open-source projects, most notably as
+a release manager for PHP 8.5 (where I am one of two "rookie" release managers)
+and for PHP 8.6 (where I am the "veteran" release manager). I also contribute to
+PHP as a developer, and as the maintainer of the built-in Reflection extension.
 END,
 				]
 			),
