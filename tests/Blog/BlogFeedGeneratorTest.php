@@ -59,12 +59,11 @@ class BlogFeedGeneratorTest extends TestCase {
 
 	public function testRSSFeed() {
 		// There doesn't seem to be an easy way to disable the Slash extension
-		Writer::reset();
 		$old = Writer::getExtensionManager();
 		$manager = new class( $old ) extends ExtensionManager {
 			public function has( $entryName ) {
 				if ( $entryName === 'Slash\Renderer\Entry' ) {
-					// Needs to return true for the check of if the extension
+					// Needs to return true when checking if the extension
 					// exists, otherwise Laminas throws an exception
 					$bt = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 2 );
 					if (

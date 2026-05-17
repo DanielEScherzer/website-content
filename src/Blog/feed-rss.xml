@@ -3,9 +3,14 @@
   <channel>
     <title>Daniel Scherzer's Blog</title>
     <description>Entries from Daniel Scherzer' personal blog</description>
-    <pubDate>Sun, 10 May 2026 00:00:00 +0000</pubDate>
+    <pubDate>Sun, 17 May 2026 00:00:00 +0000</pubDate>
     <generator>https://github.com/DanielEScherzer/website-content</generator>
     <link>https://scherzer.dev/Blog</link>
+    <item>
+      <title>Blog RSS Feed</title>
+      <pubDate>Sun, 17 May 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260517-blog-rss</link>
+    </item>
     <item>
       <title>Notes for PHP Release Managers, Part 2</title>
       <pubDate>Sun, 10 May 2026 00:00:00 +0000</pubDate>
