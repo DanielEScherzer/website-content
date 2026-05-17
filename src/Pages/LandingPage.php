@@ -96,7 +96,7 @@ END
 		$linkedinLink = FluentHTML::make(
 			'a',
 			[
-				'href' => 'https://www.linkedin.com/in/daniel-scherzer-520539263/',
+				'href' => 'https://www.linkedin.com/in/daniel-e-scherzer/',
 				'target' => '_blank',
 				'class' => 'external-link',
 			],

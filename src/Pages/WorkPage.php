@@ -122,7 +122,7 @@ work at WikiTeq, I have developed multiple MediaWiki extensions, though most of
 them are private. My contributions made as part of my work at WikiTeq are all
 available under the account 
 END,
-					$makeLink( 'https://github.com/DanielWTQ', '@DanielWTQ' ),
+					$makeLink( 'https://github.com/DanielButAtWork', '@DanielButAtWork' ),
 					<<<END
  on GitHub. Public extensions that I created include:
 END,
