@@ -29,6 +29,9 @@ class RedirectPage extends AbstractPage {
 
 	public function getResponse(): WebResponse {
 		$target = self::KNOWN_REDIRECTS[ $this->title ];
+		if ( str_starts_with( $target, 'https://' ) ) {
+			return new WebResponse( '', [ 'Location: ' . $target ], 302 );
+		}
 		return new WebResponse(
 			'',
 			[ 'Location: //' . $_SERVER['HTTP_HOST'] . $target ],
