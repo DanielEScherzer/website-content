@@ -11,11 +11,21 @@ services:
       DEPLOYMENT_HOST_NAME: "${DEPLOYMENT_HOST_NAME}"
     labels:
       - traefik.enable=true
+      # For primary domain name
       - traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${DEPLOYMENT_HOST_NAME}`)
       - traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=websecure
       - traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls=true
       - traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt
       - traefik.http.services.${COMPOSE_PROJECT_NAME}.loadbalancer.server.port=80
+      # Redirect from www
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-www.rule=Host(`www.${DEPLOYMENT_HOST_NAME}`)
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-www.entrypoints=websecure
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-www.tls=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-www.tls.certresolver=letsencrypt
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-www.middlewares=www_redirect_${COMPOSE_PROJECT_NAME}
+      - traefik.http.middlewares.www_redirect_${COMPOSE_PROJECT_NAME}.redirectregex.regex=^https?://www\.(.*)
+      - traefik.http.middlewares.www_redirect_${COMPOSE_PROJECT_NAME}.redirectregex.replacement=https://$${1}
+      - traefik.http.middlewares.www_redirect_${COMPOSE_PROJECT_NAME}.redirectregex.permanent=true
     networks:
       - my-traefik-net
 
