@@ -24,7 +24,8 @@ services:
       - traefik.http.routers.${COMPOSE_PROJECT_NAME}-www.tls.certresolver=letsencrypt
       - traefik.http.routers.${COMPOSE_PROJECT_NAME}-www.middlewares=www_redirect_${COMPOSE_PROJECT_NAME}
       - traefik.http.middlewares.www_redirect_${COMPOSE_PROJECT_NAME}.redirectregex.regex=^https?://www\.(.*)
-      - traefik.http.middlewares.www_redirect_${COMPOSE_PROJECT_NAME}.redirectregex.replacement=^https://$${1}
+      - traefik.http.middlewares.www_redirect_${COMPOSE_PROJECT_NAME}.redirectregex.replacement=https://$${1}
+      - traefik.http.middlewares.www_redirect_${COMPOSE_PROJECT_NAME}.redirectregex.permanent=true
     networks:
       - my-traefik-net
 
