@@ -72,6 +72,17 @@ class OpenSourcePage extends BasePage {
 				],
 			],
 		],
+		'PR-to-RM' => [
+			'title' => 'From First PR to Release Manager: A Path into Open Source',
+			'iterations' => [
+				[
+					'conf' => 'FOSSY 2026',
+					'loc' => 'Vancouver, Canada',
+					'date' => 'August 2026',
+					'upcoming' => true,
+				],
+			],
+		],
 	];
 
 	private const PHP_RFCS = [
@@ -122,7 +133,7 @@ class OpenSourcePage extends BasePage {
 			'link' => 'https://wiki.php.net/rfc/override_constants',
 			'date' => 'March 2026',
 			'desc' => 'Extend #[\Override] to target class constants',
-			'status' => 'pending implementation / landing',
+			'status' => 'implemented in PHP 8.6',
 		],
 		'ReflectionAttribute::getCurrent()' => [
 			'name' => 'Add ReflectionAttribute::getCurrent()',
