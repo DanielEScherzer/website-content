@@ -39,6 +39,7 @@
 
 .blog-content .pygments-highlighter pre {
 	background-color: #f8f8f8;
+	overflow-x: auto;
 }
 
 .blog-content .pygments-highlighter-failed {
