@@ -115,12 +115,12 @@ class WorkPage extends BasePage {
 				[],
 				[
 					<<<END
-I first joined WikiTeq in January 2023 as a Technical Project Manager, working
-with a team of developers around the world to support clients that use
-MediaWiki, including major corporations and government agencies. As part of my
-work at WikiTeq, I have developed multiple MediaWiki extensions, though most of
-them are private. My contributions made as part of my work at WikiTeq are all
-available under the account 
+I joined WikiTeq in January 2023 as a Technical Project Manager, working with a
+team of developers around the world to support clients that use MediaWiki,
+including major corporations and government agencies. As part of my work at
+WikiTeq, I developed multiple MediaWiki extensions, though most of them are
+private. My contributions made as part of my work at WikiTeq are all available
+under the account 
 END,
 					$makeLink( 'https://github.com/DanielButAtWork', '@DanielButAtWork' ),
 					<<<END
