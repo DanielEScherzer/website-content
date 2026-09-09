@@ -3,9 +3,14 @@
   <channel>
     <title>Daniel Scherzer's Blog</title>
     <description>Entries from Daniel Scherzer' personal blog</description>
-    <pubDate>Mon, 10 Aug 2026 00:00:00 +0000</pubDate>
+    <pubDate>Wed, 09 Sep 2026 00:00:00 +0000</pubDate>
     <generator>https://github.com/DanielEScherzer/website-content</generator>
     <link>https://scherzer.dev/Blog</link>
+    <item>
+      <title>Joining the PHP Ecosystem Security Team</title>
+      <pubDate>Wed, 09 Sep 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260909-ecosystem-security</link>
+    </item>
     <item>
       <title>FOSSY 2026</title>
       <pubDate>Mon, 10 Aug 2026 00:00:00 +0000</pubDate>
