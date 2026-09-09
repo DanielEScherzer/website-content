@@ -58,6 +58,12 @@ class OpenSourcePage extends BasePage {
 					'slides' => '20260520 PHPTek PHP 8.6 presentation.pdf',
 					'blog' => '20260525-phptek-2026',
 				],
+				[
+					'conf' => 'Longhorn PHP Conference',
+					'loc' => 'Austin, Texas',
+					'date' => 'October 2026',
+					'upcoming' => true,
+				],
 			],
 		],
 		'PHP-SemVer' => [
@@ -81,6 +87,18 @@ class OpenSourcePage extends BasePage {
 					'date' => 'August 2026',
 					'slides' => '20260806 FOSSY presentation.pdf',
 					'blog' => '20260810-fossy-2026',
+				],
+			],
+		],
+		'Workshop-PHP-extensions-Rust' => [
+			'title' => 'Creating new PHP extensions in Rust',
+			'workshop' => true,
+			'iterations' => [
+				[
+					'conf' => 'Longhorn PHP Conference',
+					'loc' => 'Austin, Texas',
+					'date' => 'October 2026',
+					'upcoming' => true,
 				],
 			],
 		],
@@ -258,12 +276,14 @@ END,
 		];
 		$list = FluentHTML::fromTag( 'ul' );
 		foreach ( array_reverse( self::OPEN_SOURCE_PRESENTATIONS ) as $details ) {
+			$workshop = ( $details['workshop'] ?? false ) ? '[workshop] ' : '';
 			if ( count( $details['iterations'] ) === 1 ) {
 				$once = $details['iterations'][0];
 				$item = FluentHTML::make(
 					'li',
 					[],
 					[
+						$workshop,
 						'"' . $details['title'] . '," ',
 						...( $makeDetails( $details['iterations'][0] ) ),
 					]
@@ -279,6 +299,7 @@ END,
 				'li',
 				[],
 				[
+					$workshop,
 					'"' . $details['title'] . '"',
 					FluentHTML::make( 'ul', [], $iterations ),
 				]

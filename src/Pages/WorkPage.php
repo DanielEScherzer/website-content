@@ -95,7 +95,31 @@ class WorkPage extends BasePage {
 		$this->contentWrapper->append(
 			FluentHTML::make( 'h1', [], 'Work experience' ),
 		);
+		$this->addPHPSecuritySection();
 		$this->addWikiTeqSection();
+	}
+
+	private function addPHPSecuritySection(): void {
+		$this->contentWrapper->append(
+			FluentHTML::make( 'h3', [ 'class' => 'subsection-header' ], 'PHP Ecosystem Security' ),
+			FluentHTML::make(
+				'p',
+				[],
+				[
+					<<<END
+In September 2026, I joined the PHP Foundation's Ecosystem Security Team to work
+on hardening the PHP codebase and addressing non-security issues that are
+reported to the security team. See 
+END,
+					FluentHTMl::make(
+						'a',
+						[ 'href' => './Blog/20260909-ecosystem-security' ],
+						'my blog post'
+					),
+					' for more details.',
+				]
+			),
+		);
 	}
 
 	private function addWikiTeqSection(): void {
@@ -115,12 +139,12 @@ class WorkPage extends BasePage {
 				[],
 				[
 					<<<END
-I joined WikiTeq in January 2023 as a Technical Project Manager, working with a
-team of developers around the world to support clients that use MediaWiki,
-including major corporations and government agencies. As part of my work at
-WikiTeq, I developed multiple MediaWiki extensions, though most of them are
-private. My contributions made as part of my work at WikiTeq are all available
-under the account 
+I worked at WikiTeq from January 2023 until May 2026 as a Technical Project
+Manager, working with a team of developers around the world to support clients
+that use MediaWiki, including major corporations and government agencies. As
+part of my work at WikiTeq, I developed multiple MediaWiki extensions, though
+most of them are private. My contributions made as part of my work at WikiTeq
+are all available under the account 
 END,
 					$makeLink( 'https://github.com/DanielButAtWork', '@DanielButAtWork' ),
 					<<<END
