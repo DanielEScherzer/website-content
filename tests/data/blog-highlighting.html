@@ -17,14 +17,14 @@
 </ol>
 </li>
 <li><a href="#content-next-steps">Next steps</a></li>
-</ol></div><div class="blog-content"><h1><a id="content-attributes-on-constants" href="#content-attributes-on-constants" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Attributes on constants</h1><em>Tuesday, 29 April 2025</em>
+</ol></div><div class="blog-content"><h1><a id="content-attributes-on-constants" href="#content-attributes-on-constants" class="heading-permalink" aria-hidden="true" tabindex="-1" title="Permalink"></a>Attributes on constants</h1><em>Tuesday, 29 April 2025</em>
 <p>Earlier today, the <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://wiki.php.net/rfc/attributes-on-constants">attributes-on-constants</a> RFC implementation was finally
 merged. This was a project I worked on for months and a significant reason I
 became more active as a PHP core developer. The initial motivation was to add a
 way for constants to be marked as deprecated, so that MediaWiki could use that
 feature to signal deprecated constants instead of relying solely on
 documentation.</p>
-<h2><a id="content-background" href="#content-background" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Background</h2>
+<h2><a id="content-background" href="#content-background" class="heading-permalink" aria-hidden="true" tabindex="-1" title="Permalink"></a>Background</h2>
 <p>PHP 8 introduced support for <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://www.php.net/manual/en/language.attributes.overview.php">attributes</a>, which allowed recording
 metadata for classes, functions, methods, class properties, class constants,
 and function parameters. In my presentation at the Fall 2024 edition of the
@@ -56,7 +56,7 @@ constants. But, since global constants were not something that even supported
 attributes, this wasn't merely a question of updating the engine to handle the
 <code>#[\Deprecated]</code> attribute and make it usable on constants. First, PHP needed
 to add support for attributes on constants in general.</p>
-<h2><a id="content-feature" href="#content-feature" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Feature</h2>
+<h2><a id="content-feature" href="#content-feature" class="heading-permalink" aria-hidden="true" tabindex="-1" title="Permalink"></a>Feature</h2>
 <p>The feature presented in the RFC is to allow using attributes on compile-time
 non-class constants. By &quot;compile-time&quot;, I meant constants that were declared
 like</p>
@@ -77,7 +77,7 @@ the information is retrieved via reflection. Trying to support a parameter to
 <code>define()</code> that would allow passing in attributes but not evaluating them was
 something that I thought would be trickier; in retrospect, it might have been
 easier than adding support for attributes on the <code>const</code>-defined constants.</p>
-<h3><a id="content-compile-time-or-not" href="#content-compile-time-or-not" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Compile time or not</h3>
+<h3><a id="content-compile-time-or-not" href="#content-compile-time-or-not" class="heading-permalink" aria-hidden="true" tabindex="-1" title="Permalink"></a>Compile time or not</h3>
 <p>The line between compile-time and run-time constants is not as straightforward
 as just the use of <code>const</code> or the use of <code>define()</code>.</p>
 <p>Consider the following PHP file (<code>include_class.php</code>):</p>
@@ -148,7 +148,7 @@ PHP file (<code>include_constant.php</code>):</p>
 are applied to the constant would need to be processed <em>at runtime</em>, something
 that wasn't previously done because all other supported attribute targets were
 compile-time constructs (classes, functions, parameters, etc.).</p>
-<h3><a id="content-optimization-of-define" href="#content-optimization-of-define" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Optimization of <code>define()</code></h3>
+<h3><a id="content-optimization-of-define" href="#content-optimization-of-define" class="heading-permalink" aria-hidden="true" tabindex="-1" title="Permalink"></a>Optimization of <code>define()</code></h3>
 <p>The line gets even blurrier when looking at PHP's built-in optimizer. As part
 of &quot;pass 1&quot; with simple local optimizations (<a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/php/php-src/blob/3f03f7ed3d988567b5a59ae542579fd91cdfde42/Zend/Optimizer/pass1.c">pass1.c as of merge</a>),
 for any function call where</p>
@@ -165,7 +165,7 @@ actually defined at compile time, but only when the declaration gets executed.</
 <li>the opcodes for the declaration of a runtime constant can be changed to match
 those of a compile-time constant.</li>
 </ul>
-<h3><a id="content-implementation" href="#content-implementation" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Implementation</h3>
+<h3><a id="content-implementation" href="#content-implementation" class="heading-permalink" aria-hidden="true" tabindex="-1" title="Permalink"></a>Implementation</h3>
 <p>If you want to take a look at the actual code, the implementing PR is available
 <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://github.com/php/php-src/pull/16952">on GitHub</a>. I'm not going to explain it in depth here, just with
 broad strokes. The first three parts are for general attribute support, the last
@@ -189,7 +189,7 @@ the attributes, the <code>CONST_DEPRECATED</code> flag is added to the constant.
 warning will be emitted, including any details included in the <code>#[\Deprecated]</code>
 declaration.</li>
 </ol>
-<h2><a id="content-using" href="#content-using" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Using</h2>
+<h2><a id="content-using" href="#content-using" class="heading-permalink" aria-hidden="true" tabindex="-1" title="Permalink"></a>Using</h2>
 <p>Now that constants support attributes, developers can apply userland attributes
 to their constants to add various metadata. But, for me, the real power is in
 the attributes that PHP itself provides, since those are able to hook into parts
@@ -214,7 +214,7 @@ DEPRECATED_CONST_4 in {file} on line {line}</p>
 <p>My hope is that MediaWiki and other libraries will apply this attribute to send
 warnings where previously only documentation could be used to indicate
 deprecations.</p>
-<h3><a id="content-backwards-compatibility" href="#content-backwards-compatibility" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Backwards compatibility</h3>
+<h3><a id="content-backwards-compatibility" href="#content-backwards-compatibility" class="heading-permalink" aria-hidden="true" tabindex="-1" title="Permalink"></a>Backwards compatibility</h3>
 <p>However, using this attribute in MediaWiki, and more generally, in any tool that
 supports versions of PHP before 8.5 (which isn't even out yet!) presents a
 problem: because using attributes on constants requires syntax that was invalid
@@ -256,7 +256,7 @@ along the lines of <code>define_deprecated( 'NAME', 'MyValue' );</code> and then
 that would trigger <code>eval()</code> with the constant, and in PHP 8.4 it would just
 delegate to the <code>define()</code> function. I might spend a few days developing that
 library if I get the urge to write some code.</p>
-<h3><a id="content-in-php-stubs" href="#content-in-php-stubs" class="heading-permalink" aria-hidden="true" title="Permalink"></a>In PHP stubs</h3>
+<h3><a id="content-in-php-stubs" href="#content-in-php-stubs" class="heading-permalink" aria-hidden="true" tabindex="-1" title="Permalink"></a>In PHP stubs</h3>
 <p>Now that constants can be deprecated with attributes, the various constants that
 PHP provides can be updated with more informative error messages by adding the
 attribute to those internal constants. This would mirror the addition of the
@@ -283,7 +283,7 @@ no longer emitted in {file} on line {line}</p>
 updated to support attributes on constants. Only once a new version of the
 parser is available that supports the new syntax will it be possible to populate
 more helpful error messages for internal constants.</p>
-<h2><a id="content-next-steps" href="#content-next-steps" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Next steps</h2>
+<h2><a id="content-next-steps" href="#content-next-steps" class="heading-permalink" aria-hidden="true" tabindex="-1" title="Permalink"></a>Next steps</h2>
 <p>Now that it is possible to have the engine trigger deprecation notices for
 global constants, I've started looking into the other places where
 <code>#[\Deprecated]</code> support would be useful, either for MediaWiki or for libraries
