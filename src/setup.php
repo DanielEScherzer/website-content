@@ -20,3 +20,5 @@ if ( ( $_SERVER['REQUEST_METHOD'] ?? 'GET' ) === 'POST' ) {
 
 // Autoloading from composer
 require_once __DIR__ . '/../vendor/autoload.php';
+
+set_exception_handler( [ \DanielWebsite\Pages\InternalErrorPage::class, 'handleException' ] );
