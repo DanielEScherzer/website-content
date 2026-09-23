@@ -3,9 +3,14 @@
   <channel>
     <title>Daniel Scherzer's Blog</title>
     <description>Entries from Daniel Scherzer' personal blog</description>
-    <pubDate>Wed, 09 Sep 2026 00:00:00 +0000</pubDate>
+    <pubDate>Wed, 23 Sep 2026 00:00:00 +0000</pubDate>
     <generator>https://github.com/DanielEScherzer/website-content</generator>
     <link>https://scherzer.dev/Blog</link>
+    <item>
+      <title>No PHP 8.6.0RC1</title>
+      <pubDate>Wed, 23 Sep 2026 00:00:00 +0000</pubDate>
+      <link>https://scherzer.dev/Blog/20260923-no-php86-rc-1</link>
+    </item>
     <item>
       <title>Joining the PHP Ecosystem Security Team</title>
       <pubDate>Wed, 09 Sep 2026 00:00:00 +0000</pubDate>
