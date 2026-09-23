@@ -69,6 +69,8 @@ class StaticOutputTest extends TestCase {
 		yield 'Blog - exists' => [ 'GET', '/Blog/20250409-website-launch', 'blog-launch.html' ];
 		yield 'Blog - missing' => [ 'GET', '/Blog/missing', 'blog-missing.html', 404 ];
 		yield 'Blog - index' => [ 'GET', '/Blog', 'blog-index.html' ];
+		yield 'Blog - tag filter' => [ 'GET', '/Blog?tag=WEBSITE', 'blog-tag-filter.html' ];
+		yield 'Blog - tag unknown' => [ 'GET', '/Blog?tag=missing', 'blog-tag-unknown.html' ];
 		yield 'Tools - index' => [ 'GET', '/Tools', 'tools-index.html' ];
 		yield 'Tools - missing' => [ 'GET', '/Tools/missing', 'tools-missing.html', 404 ];
 		yield 'Tools - dvorak' => [ 'GET', '/Tools/dvorak', 'tools-dvorak.html' ];

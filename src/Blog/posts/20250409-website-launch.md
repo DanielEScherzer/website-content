@@ -1,5 +1,6 @@
 ---
 title: Website Launch
+tags: ["website"]
 ---
 
 # Website launch

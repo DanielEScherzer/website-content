@@ -2,6 +2,7 @@
 title: The Story of PHP 8.5.0 Release Candidate 5
 extra-classes:
   - blog-page--sidebar-image
+tags: ["php", "php-rm", "php-rm-85"]
 ---
 
 # The Story of PHP 8.5.0 Release Candidate 5

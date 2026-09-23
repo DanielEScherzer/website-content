@@ -1,5 +1,6 @@
 ---
 title: Notes for PHP Release Managers, Part 2
+tags: ["php", "php-rm"]
 ---
 
 # Notes for PHP Release Managers, Part 2

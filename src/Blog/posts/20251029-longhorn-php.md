@@ -2,6 +2,7 @@
 extensions:
   toc: true
 title: Longhorn PHP 2025
+tags: ["conferences", "php"]
 ---
 
 # Longhorn PHP 2025

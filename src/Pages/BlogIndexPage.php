@@ -7,6 +7,7 @@ use DanielEScherzer\HTMLBuilder\FluentHTML;
 use DanielEScherzer\HTMLBuilder\RawHTML;
 use DanielWebsite\Blog\BlogDisplay;
 use DanielWebsite\Blog\BlogPostStore;
+use DanielWebsite\Blog\BlogTags;
 use DanielWebsite\SitemapEntry;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
@@ -18,29 +19,65 @@ use League\CommonMark\Renderer\HtmlRenderer;
 #[SitemapEntry( 'Blog' )]
 class BlogIndexPage extends BasePage {
 
-	public function __construct() {
-		parent::__construct();
+	private readonly ?string $tag;
+
+	public function __construct( array $matches ) {
+		$query = $matches['_url']->getQuery();
+		$tag = null;
+		if ( $query ) {
+			$params = [];
+			parse_str( $query, $params );
+			if ( isset( $params['tag'] ) ) {
+				$tag = strtolower( $params['tag'] );
+			}
+		}
+		$this->tag = $tag;
+		parent::__construct( $tag !== null );
 		$this->head->append(
 			FluentHTML::fromTag( 'title' )->addChild( 'Blog index' )
 		);
 	}
 
 	protected function build(): void {
+		$this->contentWrapper->addClass( 'blog-index' );
 		$this->addStyleSheet( 'blog-styles.css' );
+		$tagFilter = $this->checkTagFilter();
+
+		$heading = 'Blog index';
+		if ( $tagFilter ) {
+			$desc = BlogTags::getDescription( $this->tag );
+			$heading = "Blog posts about $desc";
+		}
 		$this->contentWrapper->append(
-			FluentHTML::make( 'h1', [], 'Blog index' )
+			FluentHTML::make( 'h1', [], $heading )
 		);
+		if ( $tagFilter ) {
+			$this->contentWrapper->append(
+				FluentHTML::make(
+					'span',
+					[ 'class' => 'blog-index--clear-filter' ],
+					[
+						'(',
+						FluentHTML::make( 'a', [ 'href' => '/Blog' ], 'clear filter' ),
+						')',
+					]
+				)
+			);
+		}
 		$store = new BlogPostStore();
 		$posts = $store->listBlogPosts();
 
-		// Use `League\CommonMark` library for parsing, since I write all of
-		// the blog posts no need to escape unsecure stuff
-		$env = BlogDisplay::makeCommonMarkEnv( false );
-
-		$parser = new MarkdownParser( $env );
-		$renderer = new HtmlRenderer( $env );
-
 		foreach ( $posts as $post ) {
+			$env = BlogDisplay::makeCommonMarkEnv( $post );
+
+			$tags = $post->getTags();
+			if ( $tagFilter && !in_array( $this->tag, $tags, true ) ) {
+				continue;
+			}
+
+			$parser = new MarkdownParser( $env );
+			$renderer = new HtmlRenderer( $env );
+
 			$parsedResult = $parser->parse( $post->markdown );
 
 			// For any links in the first paragraph of a blog post that are
@@ -65,10 +102,20 @@ class BlogIndexPage extends BasePage {
 				->findOne( $parsedResult );
 			$firstParagraph = $renderer->renderNodes( $firstParagraph->children() );
 
+			$tags = $post->getTags();
+			$previewClasses = [ 'blog-preview' ];
+			if ( $tags ) {
+				$tags = FluentHTML::make(
+					'div',
+					[ 'class' => 'blog-tags' ],
+					BlogTags::getListForTags( $tags ),
+				);
+				$previewClasses[] = 'blog-preview--has-tags';
+			}
 			$this->contentWrapper->append(
 				FluentHTML::make(
 					'div',
-					[ 'class' => 'blog-preview' ],
+					[ 'class' => $previewClasses ],
 					[
 						FluentHTML::make( 'h2', [], new RawHTML( $firstHeading ) ),
 						FluentHTML::make(
@@ -76,6 +123,7 @@ class BlogIndexPage extends BasePage {
 							[ 'class' => 'blog-preview-date' ],
 							$post->date->format( 'l, d F Y' )
 						),
+						$tags ? $tags : [],
 						FluentHTML::make(
 							'p',
 							[],
@@ -93,6 +141,36 @@ class BlogIndexPage extends BasePage {
 				)
 			);
 		}
+	}
+
+	/**
+	 * Returns whether to filter for only posts with the requested tag, and
+	 * adds a warning if an unknown tag is requested.
+	 */
+	private function checkTagFilter(): bool {
+		if ( !$this->tag ) {
+			return false;
+		}
+		if ( BlogTags::isKnown( $this->tag ) ) {
+			return true;
+		}
+
+		$tag = $this->tag;
+		$this->addStyleSheet( 'error-styles.css' );
+		$this->contentWrapper->append(
+			FluentHTML::make(
+				'div',
+				[ 'class' => 'warning-box' ],
+				[
+					FluentHTML::make(
+						'p',
+						[],
+						"The requested blog tag '$tag' is not recognized; no filtering is applied"
+					),
+				]
+			)
+		);
+		return false;
 	}
 
 }
