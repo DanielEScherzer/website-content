@@ -2,6 +2,7 @@
 title: "#[\\DelayedTargetValidation] Attribute Explained"
 extensions:
   pygments: true
+tags: ["php", "php-dev"]
 ---
 
 # #[\DelayedTargetValidation] Attribute Explained

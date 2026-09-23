@@ -1,5 +1,6 @@
 ---
 title: PHP 8.5 Release Manager
+tags: ["php", "php-rm", "php-rm-85"]
 ---
 
 # PHP 8.5 Release Manager

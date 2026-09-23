@@ -3,6 +3,7 @@ extensions:
   footnotes: true
   pygments: true
 title: Friends in PHP
+tags: ["php", "php-dev"]
 ---
 
 # Friends in PHP

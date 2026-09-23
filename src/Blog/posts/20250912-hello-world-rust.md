@@ -2,6 +2,7 @@
 title: "\"Hello, World!\" in Rust"
 extensions:
   pygments: true
+tags: ["rust"]
 ---
 
 # "Hello, World!" in Rust

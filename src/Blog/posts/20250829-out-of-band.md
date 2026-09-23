@@ -1,5 +1,6 @@
 ---
 title: "Out-of-Band Signaling"
+tags: ["php", "php-dev"]
 ---
 
 # Out-of-Band Signaling

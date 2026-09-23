@@ -18,6 +18,7 @@ use DanielWebsite\Pages\ToolPage;
 use DanielWebsite\Pages\WorkPage;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
+use Uri\WhatWg\Url;
 
 class Router {
 
@@ -28,32 +29,25 @@ class Router {
 		string $requestMethod,
 		string $requestURI
 	): AbstractPage {
-		// Remove any query parameters
-		if ( str_contains( $requestURI, '?' ) ) {
-			$pos = strpos( $requestURI, '?' );
-			$requestURI = substr( $requestURI, 0, $pos );
-		}
-		$requestURI = rawurldecode( $requestURI );
-		$requestURI = trim( $requestURI, '/' );
-		// Router is case insensitive
-		$requestURI = strtolower( $requestURI );
-		// Prefer uppercase first letter in the strings and error messages
-		$requestURI = ucfirst( $requestURI );
+		$url = new Url( $requestURI, new Url( 'https://scherzer.dev' ) );
+		$path = $url->getPath()
+			|> ( static fn ( string $path ): string => trim( $path, '/' ) )
+			|> strtolower( ... )
+			|> ucfirst( ... );
 
 		// phpcs:ignore MediaWiki.WhiteSpace.SpaceyParenthesis
 		$dispatcher = \FastRoute\simpleDispatcher( self::addRoutesCb(...) );
-		$routeInfo = $dispatcher->dispatch( $requestMethod, $requestURI );
+		$routeInfo = $dispatcher->dispatch( $requestMethod, $path );
 		switch ( $routeInfo[0] ) {
 			case Dispatcher::NOT_FOUND:
-				return new Error404Page( $requestURI );
+				return new Error404Page( $path );
 			case Dispatcher::METHOD_NOT_ALLOWED:
-				return new Error405Page( $requestURI, $requestMethod, $routeInfo[1] );
+				return new Error405Page( $path, $requestMethod, $routeInfo[1] );
 			case Dispatcher::FOUND:
 				$clazz = $routeInfo[1];
 				$matches = $routeInfo[2];
-				if ( $clazz === RedirectPage::class ) {
-					$matches = [ 'title' => $requestURI ];
-				}
+				$matches['_path'] = $path;
+				$matches['_url'] = $url;
 				return new $clazz( $matches );
 		}
 	}
