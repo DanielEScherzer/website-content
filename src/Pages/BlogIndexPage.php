@@ -123,7 +123,7 @@ class BlogIndexPage extends BasePage {
 							[ 'class' => 'blog-preview-date' ],
 							$post->date->format( 'l, d F Y' )
 						),
-						$tags ? $tags : [],
+						$tags ? $tags : '',
 						FluentHTML::make(
 							'p',
 							[],
