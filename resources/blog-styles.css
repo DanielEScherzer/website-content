@@ -182,7 +182,7 @@
 
 	&.blog-tags--pill-php,
 	&[class*=" blog-tags--pill-php-"] {
-		background-color: #4f5b93;
+		background-color: #474A8A;
 		a {
 			color: #fff;
 		}
