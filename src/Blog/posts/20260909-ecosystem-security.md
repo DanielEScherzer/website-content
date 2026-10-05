@@ -1,5 +1,6 @@
 ---
 title: Joining the PHP Ecosystem Security Team
+tags: ["php"]
 ---
 
 # Joining the PHP Ecosystem Security Team

@@ -3,6 +3,7 @@ extensions:
   footnotes: true
   pygments: true
 title: Rewriting Reflection with Rust
+tags: ["php", "php-dev", "rust"]
 ---
 
 # Rewriting Reflection with Rust

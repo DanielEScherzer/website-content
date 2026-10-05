@@ -29,6 +29,10 @@ class BlogPost {
 		return $this->config['title'] ?? $this->slug;
 	}
 
+	public function getTags(): array {
+		return $this->config['tags'] ?? [];
+	}
+
 	public function getExtraClasses(): array {
 		if ( $this->config !== null ) {
 			$extraClasses = $this->config['extra-classes'] ?? [];

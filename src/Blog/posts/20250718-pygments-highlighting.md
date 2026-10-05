@@ -4,6 +4,7 @@ extensions:
   pygments: true
   toc: true
 title: Pygments Syntax Highlighting for Markdown
+tags: ["php"]
 ---
 
 # Pygments Syntax Highlighting for Markdown

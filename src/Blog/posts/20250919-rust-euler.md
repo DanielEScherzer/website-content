@@ -5,6 +5,7 @@ extensions:
 extra-classes:
   - blog-page--unhighlighted-block
 title: Project Euler in Rust
+tags: ["rust"]
 ---
 
 # Project Euler in Rust

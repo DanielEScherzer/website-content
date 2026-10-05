@@ -7,6 +7,7 @@ use DanielEScherzer\HTMLBuilder\FluentHTML;
 use DanielEScherzer\HTMLBuilder\RawHTML;
 use DanielWebsite\Blog\BlogDisplay;
 use DanielWebsite\Blog\BlogPostStore;
+use DanielWebsite\Blog\BlogTags;
 use DanielWebsite\SitemapEntry;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
@@ -132,7 +133,7 @@ END
 
 		// Use `League\CommonMark` library for parsing, since I write all of
 		// the blog posts no need to escape unsecure stuff
-		$env = BlogDisplay::makeCommonMarkEnv( false );
+		$env = BlogDisplay::makeCommonMarkEnv( $latestPost );
 
 		$parser = new MarkdownParser( $env );
 		$renderer = new HtmlRenderer( $env );
@@ -175,10 +176,20 @@ END
 			)
 		);
 
+		$tags = $latestPost->getTags();
+		$previewClasses = [ 'blog-preview' ];
+		if ( $tags ) {
+			$tags = FluentHTML::make(
+				'div',
+				[ 'class' => 'blog-tags' ],
+				BlogTags::getListForTags( $tags ),
+			);
+			$previewClasses[] = 'blog-preview--has-tags';
+		}
 		$this->contentWrapper->append(
 			FluentHTML::make(
 				'div',
-				[ 'class' => 'blog-preview' ],
+				[ 'class' => $previewClasses ],
 				[
 					FluentHTML::make( 'h3', [], new RawHTML( $firstHeading ) ),
 					FluentHTML::make(
@@ -186,6 +197,7 @@ END
 						[ 'class' => 'blog-preview-date' ],
 						$latestPost->date->format( 'l, d F Y' )
 					),
+					$tags ? $tags : '',
 					FluentHTML::make(
 						'p',
 						[],

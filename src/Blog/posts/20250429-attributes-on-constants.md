@@ -3,6 +3,7 @@ extensions:
   pygments: true
   toc: true
 title: Attributes on Constants
+tags: ["php", "php-dev"]
 ---
 
 # Attributes on constants

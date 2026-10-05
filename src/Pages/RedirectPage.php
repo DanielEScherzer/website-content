@@ -17,7 +17,7 @@ class RedirectPage extends AbstractPage {
 	private string $title;
 
 	public function __construct( array $params ) {
-		$title = $params['title'];
+		$title = $params['_path'];
 		$this->title = $title;
 	}
 

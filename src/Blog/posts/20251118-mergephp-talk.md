@@ -1,5 +1,6 @@
 ---
 title: MergePHP, November 2025
+tags: ["conferences", "php"]
 ---
 
 # MergePHP, November 2025

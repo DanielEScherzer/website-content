@@ -7,6 +7,7 @@ use DanielEScherzer\HTMLBuilder\FluentHTML;
 use DanielEScherzer\HTMLBuilder\RawHTML;
 use DanielWebsite\Blog\BlogDisplay;
 use DanielWebsite\Blog\BlogPostStore;
+use DanielWebsite\Blog\BlogTags;
 use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Emphasis;
@@ -158,13 +159,27 @@ class BlogPostPage extends BasePage {
 			);
 		}
 
-		$this->contentWrapper->append(
-			FluentHTML::make(
-				'div',
-				[ 'class' => 'blog-content' ],
-				new RawHTML( $html )
-			)
+		$content = FluentHTML::make(
+			'div',
+			[ 'class' => 'blog-content' ],
+			new RawHTML( $html )
 		);
+
+		$tags = $post->getTags();
+		if ( $tags ) {
+			$content->append(
+				FluentHTML::make(
+					'div',
+					[ 'class' => 'blog-tags' ],
+					[
+						'Tags: ',
+						BlogTags::getListForTags( $tags ),
+					],
+				)
+			);
+		}
+
+		$this->contentWrapper->append( $content );
 		$this->contentWrapper->addClass( 'blog-page' );
 	}
 

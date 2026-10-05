@@ -9,7 +9,7 @@ namespace DanielWebsite\Tests;
 use DanielWebsite\Blog\BlogPostStore;
 use DanielWebsite\Router;
 use DanielWebsite\SitemapEntry;
-use FastRoute\DataGenerator\MarkBased;
+use FastRoute\DataGenerator\CharCountBased;
 use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -30,7 +30,7 @@ class SitemapGeneratorTest extends TestCase {
 	}
 
 	private function generateSitemap( string $location ): void {
-		$collector = new RouteCollector( new Std(), new MarkBased() );
+		$collector = new RouteCollector( new Std(), new CharCountBased() );
 		Router::addRoutesCb( $collector );
 		$getPaths = $collector->getData()[0]['GET'];
 		$pages = array_unique( $getPaths );

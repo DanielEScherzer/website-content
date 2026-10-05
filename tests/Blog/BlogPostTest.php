@@ -22,6 +22,7 @@ class BlogPostTest extends TestCase {
 		$this->assertSame( 'random-content', $p->markdown );
 
 		$this->assertSame( '20251201-testing', $p->getTitle() );
+		$this->assertSame( [], $p->getTags() );
 		$this->assertSame( [], $p->getExtraClasses() );
 
 		$p->setConfig( [
@@ -30,11 +31,16 @@ class BlogPostTest extends TestCase {
 				'toc' => true,
 			],
 			'extra-classes' => [ 'foo' ],
+			'tags' => [ 'baz' ],
 		] );
 		$this->assertSame( 'Example', $p->getTitle() );
 		$this->assertSame(
 			[ 'foo', 'blog-page--has-toc' ],
 			$p->getExtraClasses()
+		);
+		$this->assertSame(
+			[ 'baz' ],
+			$p->getTags()
 		);
 
 		$this->expectException( RuntimeException::class );

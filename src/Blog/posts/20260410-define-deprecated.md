@@ -2,6 +2,7 @@
 extensions:
   pygments: true
 title: Introducing define_deprecated() for PHP
+tags: ["php"]
 ---
 
 # Introducing define_deprecated() for PHP

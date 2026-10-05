@@ -2,6 +2,7 @@
 title: Unplanned Downtime, November 2025
 extensions:
   footnotes: true
+tags: ["website"]
 ---
 
 # Unplanned Downtime, November 2025

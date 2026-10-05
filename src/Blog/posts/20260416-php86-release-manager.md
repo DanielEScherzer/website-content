@@ -1,5 +1,6 @@
 ---
 title: PHP 8.6 Release Manager
+tags: ["php", "php-rm", "php-rm-86"]
 ---
 
 # PHP 8.6 Release Manager
