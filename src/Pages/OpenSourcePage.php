@@ -62,7 +62,8 @@ class OpenSourcePage extends BasePage {
 					'conf' => 'Longhorn PHP Conference',
 					'loc' => 'Austin, Texas',
 					'date' => 'October 2026',
-					'upcoming' => true,
+					'slides' => '20261016 Longhorn PHP presentation.pdf',
+					'blog' => '20261019-longhorn-php',
 				],
 			],
 		],
@@ -98,7 +99,7 @@ class OpenSourcePage extends BasePage {
 					'conf' => 'Longhorn PHP Conference',
 					'loc' => 'Austin, Texas',
 					'date' => 'October 2026',
-					'upcoming' => true,
+					'blog' => '20261019-longhorn-php',
 				],
 			],
 		],
@@ -259,12 +260,18 @@ END,
 				( $details['upcoming'] ?? false ) ? [ '. Upcoming.' ] :
 				[
 					'. (',
-					FluentHTML::make(
-						'a',
-						[ 'href' => './files/' . $details['slides'] ],
-						'Slides'
+					...(
+						( $details['slides'] ?? false ) ?
+							[
+								FluentHTML::make(
+									'a',
+									[ 'href' => './files/' . $details['slides'] ],
+									'Slides'
+								),
+								', ',
+							]
+							: []
 					),
-					', ',
 					FluentHTML::make(
 						'a',
 						[ 'href' => './blog/' . $details['blog'] ],
