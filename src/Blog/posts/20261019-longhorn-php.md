@@ -110,7 +110,7 @@ the internet issues that I encountered [last year][blog-mergephp].
 [site-Len]: https://lenwoodward.com/
 [site-Lincoln]: https://lincolnwebs.com/
 [site-Steve]: https://stevegrunwell.com/
-[slides]: ./../20261016%20Longhorn%20PHP%20presentation.pdf
+[slides]: ./../files/20261016%20Longhorn%20PHP%20presentation.pdf
 [talk-code]: https://longhornphp.com/sessions#code-review-for-me-you
 [talk-future]: https://longhornphp.com/sessions#the-commit-you-cant-take-back-conscience-in-a-career-that-builds-the-future
 [talk-onboard]: https://longhornphp.com/sessions#onboard-like-a-php-staff-engineer
