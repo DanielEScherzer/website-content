@@ -225,6 +225,10 @@
 	.blog-preview--has-tags {
 		columns: unset;
 
+		h2, h3 {
+			width: unset;
+		}
+
 		p {
 			margin-top: 10px;
 		}
