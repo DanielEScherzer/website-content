@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM php:8.5.10-apache
+FROM php:8.5.12-apache
 
 # Add git
 RUN apt-get -y update
