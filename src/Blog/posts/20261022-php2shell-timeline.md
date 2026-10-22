@@ -90,7 +90,7 @@ releases were originally scheduled for 14:00 UTC on Thursday, October 22.[^phpf]
 response to the discussion, the release was rescheduled from 14:00 UTC on
 Thursday, October 22, to Wednesday, October 21, at the same time.[^phpf]
 * 19:25: the [php/web-php][gh-web-php] repository on GitHub
-[is updated][commit-prerelease] to include a pre-release announcement for the
+[was updated][commit-prerelease] to include a pre-release announcement for the
 upcoming security releases. That repository controls the news items shown on
 [php.net][site-php], and is periodically synced to the live website.[^git-web]
 * 19:33: the PHP security team announces on the [php-announce][list-announce]
