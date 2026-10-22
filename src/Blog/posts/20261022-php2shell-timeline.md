@@ -10,7 +10,7 @@ title: "PHP2Shell: a Timeline"
 
 Much has been written about the [PHP2Shell][php2shell] vulnerabilities in recent
 days, and much more will be published in the coming weeks. My goal in this
-article is to provide a concrete timeline of some key events, without passing
+article is to provide a concrete timeline of key events, without passing
 judgement. I have my own thoughts on how things played out, but will reserve
 them for a future blog post.
 
@@ -39,7 +39,7 @@ problem behind [CVE-2026-109618][cve-618]".[^phpf]
 Security Team".[^eco]
 * 2026.07.30: [Calif][calif] began an audit of the PHP project as part of the
 [Patch the Planet][openai-ptp] project.[^phpf]
-* 2026.08.01: Calif began the discovery of code paths that lead to the remote
+* 2026.08.01: Calif began the discovery of code paths that led to the remote
 code execution vulnerabilities.[^calif]
 * 2026.08.11: Calif reported an unconditional remote code execution
 vulnerability with the same underlying cause as the out of memory issue found
@@ -86,9 +86,9 @@ releases were originally scheduled for 14:00 UTC on Thursday, October 22.[^phpf]
 ### Tuesday, 2026.10.20
 
 * ~15:00: online discussion of the two CVE IDs ([CVE-2026-109618][cve-618] and
-[CVE-2026-109619][cve-619]) is noted, though with incorrect details. In response,
-the release is rescheduled from 14:00 UTC on Thursday, October 22, to Wednesday,
-October 21, at the same time.[^phpf]
+[CVE-2026-109619][cve-619]) was noted, though with some incorrect details. In
+response to the discussion, the release was rescheduled from 14:00 UTC on
+Thursday, October 22, to Wednesday, October 21, at the same time.[^phpf]
 * 19:25: the [php/web-php][gh-web-php] repository on GitHub
 [is updated][commit-prerelease] to include a pre-release announcement for the
 upcoming security releases. That repository controls the news items shown on
@@ -108,10 +108,11 @@ For the claim of "other places" in addition to php-announce:
 
 ### Wednesday, 2026.10.21
 
-* morning (exact time unknown): Chainguard published patched versions of PHP
-8.2, 8.3, 8.4, and 8.5. The PHP Foundation reports that Chainguard unilaterally
-broke embargo at 07:41,[^phpf] while reports on Hacker News suggest that the
-patched builds were available at least since 06:07.[^hn-chainguard]
+* Morning (exact time unknown): [Chainguard][chainguard] published patched
+versions of PHP 8.2, 8.3, 8.4, and 8.5. The PHP Foundation reports that
+Chainguard unilaterally broke embargo at 07:41,[^phpf] while reports on Hacker
+News suggest that the patched builds were available at least since
+06:07.[^hn-chainguard]
 * 13:31: the [php/web-php-distributions][gh-php-dist] repository was updated with
 the tarballs for PHP 8.2.35, 8.3.36, 8.4.27, and 8.5.12.[^logs-php-dist]
 * 13:33: the [php/web-php][gh-web-php] repository was updated with release
@@ -207,6 +208,7 @@ PHP Foundation, October 21, 2026.
 [blog-notes-1]: ./20260218-release-manager-notes
 [calif]: https://calif.io/
 [calif-php2shell]: https://calif.io/php2shell
+[chainguard]: https://www.chainguard.dev/
 [commit-prerelease]: https://github.com/php/web-php/commit/04b67f5e36f668e9bb57b4a6f28c8641bd92f347
 [cve-618]: https://nvd.nist.gov/vuln/detail/cve-2026-109618
 [cve-619]: https://nvd.nist.gov/vuln/detail/cve-2026-109619
