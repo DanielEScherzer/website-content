@@ -61,7 +61,7 @@ All times given are in UTC.
 * 07:30: tag for `php-8.2.35` was created.[^git-src]
 * 07:38: tarballs for PHP 8.2.35 were created.[^git-dist]
 * 14:00: tag for `php-8.3.36` was created.[^git-src]
-* 14:13: tarballs for PHP 8.3.36 were created. [^git-dist]
+* 14:13: tarballs for PHP 8.3.36 were created.[^git-dist]
 * 14:44: tag for `php-8.4.27` was created.[^git-src]
 * 14:53: tarballs for PHP 8.4.27 were created.[^git-dist]
 * 17:04: tag for `php-8.5.12` was created.[^git-src]
@@ -122,8 +122,8 @@ including the fact that source-only backports have been created for PHP 7.4,
 PHP 8.0, and PHP 8.1.[^logs-web-php] The php.net website was shortly thereafter
 synced to include the announcements.
 * 13:34: the GitHub advisories (["RCE via stale global state"][ghsa-6wmf] and
-["RCE via OOM corruption"][ghsa-w8hw]) for the vulnerabilities were published.
-[^ghsa]
+["RCE via OOM corruption"][ghsa-w8hw]) for the vulnerabilities were
+published.[^ghsa]
 * 13:35: the [php/php-src][gh-php-src] repository was updated with:[^logs-php-src]
 	* A new `PHP-7.4-CVE-2026-109618-109619` branch that includes the fixes,
 	backported for PHP 7.4
