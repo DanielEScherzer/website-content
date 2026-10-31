@@ -13,10 +13,10 @@ relating to the [PHP2Shell][php2shell] vulnerabilities. That post was based only
 on public information, and even though I did some of the things listed in the
 timeline, I tried to separate myself from the content.
 
-Here, I want to go into a bit more detail regarding the steps that I was
-personally responsible for. To be clear, I was not responsible for discovering
-the vulnerabilities, triaging them, or mitigating them; I was only involved in
-the release process because I am a release manager for PHP 8.5.
+Here, I want to go into a bit more detail regarding the steps for which I was
+personally responsible. To be clear, I was not responsible for discovering the
+vulnerabilities, triaging them, or mitigating them; I was only involved in the
+release process because I am a release manager for PHP 8.5.
 
 ## Monday, 2026.10.19
 
@@ -27,7 +27,7 @@ one who
 * created the tarballs for PHP 8.5.12.
 
 The process of preparing the release was almost identical to that of previous
-security releases that I have done, most recently PHP 8.5.8 in July. The only
+security releases that I had done, most recently PHP 8.5.8 in July. The only
 difference was that, instead of uploading the code to [php/php-src][gh-php-src]
 and the tarballs to [php/web-php-distributions][gh-php-dist], the code and
 tarballs were uploaded to separate, private GitHub repositories, so that the
@@ -38,10 +38,10 @@ While doing the builds on Monday rather than Tuesday
 
 ## Tuesday, 2026.10.20
 
-On Tuesday afternoon local time, once it was already Wednesday in UTC, I started
-working on the updates to the [php/web-php][gh-web-php] repository.[^script-utc]
-I made extra sure that I wouldn't accidentally push the changes publicly by
-changing my Git remote URL to be `NOT_YET`.
+On Tuesday afternoon in Seattle (but once it was already Wednesday in UTC) I
+started working on the updates to the [php/web-php][gh-web-php]
+repository.[^script-utc] I made extra sure that I wouldn't accidentally push the
+changes publicly by changing my Git remote URL to be `NOT_YET`.
 
 Since it had been decided that I would be pushing the updates to
 [php/web-php][gh-web-php], I ran through the process of updating the various
@@ -52,7 +52,7 @@ instructions slightly.[^php-cycle]
 
 ## Wednesday, 2026.10.21
 
-On Wednesday (both local time and in UTC), during a Zoom meeting with a number
+On Wednesday (both in Seattle and in UTC), during a Zoom meeting with a number
 of other release managers and members of the security team (among others), the
 actual fixes were released. Of the actions noted in my timeline
 [for Wednesday][blog-timeline-wed], I personally:
