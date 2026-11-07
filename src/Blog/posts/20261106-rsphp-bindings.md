@@ -28,14 +28,14 @@ is how to tell Rust about the types and functions in C that are relevant. For
 PHP extensions written in C, they can just import the relevant C header files,
 but that isn't an option in Rust.
 
-Types in Rust can [use the `#[repr(C)]` attribute][ref-repr-c], which tells the
+Types in Rust can use [the `#[repr(C)]` attribute][ref-repr-c], which tells the
 Rust compiler to represent the type in a manner interoperable with C code.
 External C functions that will be called from Rust are indicated using an
 ["extern" block][ref-extern] with function declarations that don't have bodies.
 
 For example, the PHP function [`highlight_file()`][docs-highlight_file] internally
-uses a C function to do the highlighting. The relevant parts
-[of zend_highlight.h][gh-zend_highlight] are:
+[uses a C function of the same name][gh-impl-highlight] to do the highlighting.
+The relevant parts [of zend_highlight.h][gh-zend_highlight] are:
 
 ```c
 typedef struct _zend_syntax_highlighter_ini {
@@ -93,7 +93,7 @@ configuration. To implement this functionality, PHP uses dynamic linking, via
 [`GetProcAddress()`][man-GetProcAddress] on Windows, to look for the
 `get_module` symbol in the compiled extension file. The bare minimum needed to
 implement a dynamically loadable PHP extension is to define an exported
-function `get_module` that, when called, returns a pointer to a
+function named `get_module` that, when called, returns a pointer to a
 `zend_module_entry` object.
 
 But, what does that module entry type look like? From
@@ -146,7 +146,7 @@ functions for various lifecycle events. Even the pointer to a `_zend_module_dep`
 array isn't too challenging to write out bindings for if you
 [examine that type][bind-zend-mod-dep]. The `_zend_ini_entry` pointer
 [is a bit more complicated][bind-zend-ini-entry] as it brings in a few other
-types that need to be declared in Rust, but still manageable.
+types that need to be declared in Rust, but is still manageable.
 
 The real pain point is the pointer to a `_zend_function_entry` - check out
 that type in the [generated binding documentation][bind-zend-fe].
@@ -247,6 +247,7 @@ detail.
 [docs-dl]: https://www.php.net/manual/en/function.dl.php
 [docs-rs-build-script]: https://docs.rs/crate/rsphp-sys/0.1.2/source/build.rs
 [docs-rs-sys]: https://docs.rs/rsphp-sys/0.1.2/rsphp_sys/
+[gh-impl-highlight]: https://github.com/php/php-src/blob/PHP-8.5.12/ext/standard/basic_functions.c#L1789
 [gh-zend_highlight]: https://github.com/php/php-src/blob/PHP-8.5.12/Zend/zend_highlight.h
 [gh-zend_modules]: https://github.com/php/php-src/blob/PHP-8.5.12/Zend/zend_modules.h
 [ini-extension]: https://www.php.net/manual/en/ini.core.php#ini.extension
