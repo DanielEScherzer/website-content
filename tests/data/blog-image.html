@@ -1,9 +1,69 @@
 <!DOCTYPE html>
-<html lang="en"><head><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"><link rel="stylesheet" type="text/css" href="/resources/default-styles.css"><meta property="og:type" content="article"><meta property="article:author" content="Daniel Scherzer"><meta property="article:published_time" content="2025-08-01"><link rel="stylesheet" type="text/css" href="/resources/blog-styles.css"><title>Blog: No PHP 8.5.0alpha3</title><meta property="og:image" content="https://scherzer.dev/resources/missing-3-confusion.svg"></head><body><div class="des-navbar"><a href="/Home">Home</a><a href="/files/Resume.pdf">Résumé</a><a href="/OpenSource">Open Source</a><a href="/Work">Work</a><a href="/Blog">Blog</a></div><div class="content-wrapper blog-page--sidebar-image blog-page"><div class="blog-content"><h1>No PHP 8.5.0alpha3</h1><em>Friday, 01 August 2025</em>
+<html lang="en"><head><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"><link rel="stylesheet" type="text/css" href="/resources/default-styles.css"><script src="/resources/dark-mode.js"></script><meta property="og:type" content="article"><meta property="article:author" content="Daniel Scherzer"><meta property="article:published_time" content="2025-08-01"><link rel="stylesheet" type="text/css" href="/resources/blog-styles.css"><title>Blog: No PHP 8.5.0alpha3</title><meta property="og:image" content="https://scherzer.dev/resources/missing-3-confusion.svg"></head><body><div class="des-navbar"><a href="/Home">Home</a><a href="/files/Resume.pdf">Résumé</a><a href="/OpenSource">Open Source</a><a href="/Work">Work</a><a href="/Blog">Blog</a></div><div class="btn-theme-toggle--wrapper" style="display: none;"><button id="btn-theme-toggle"><img src="/resources/sun-24.svg" class="btn-theme-toggle--light" title="Switch to light mode"><img src="/resources/moon-24.svg" class="btn-theme-toggle--dark" title="Switch to dark mode"></button></div><div class="content-wrapper blog-page--sidebar-image blog-page"><div class="blog-content"><h1>No PHP 8.5.0alpha3</h1><em>Friday, 01 August 2025</em>
 <p>Yesterday, I <a rel="noopener noreferrer" target="_blank" class="external-link" href="https://www.php.net/archive/2025.php#2025-07-31-3">announced the release</a> of the last alpha version
 of PHP 8.5.0, labeled <code>8.5.0alpha4</code>. This comes two weeks after the previous
 version, <code>8.5.0alpha2</code>, was announced. So, what happened to <code>8.5.0alpha3</code>?</p>
-<p><img src="/resources/missing-3-confusion.svg" alt="Missing alpha3 confusion" /></p>
+<p><span class="inlined-svg-image"><svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 124 124">
+  <defs>
+    <style type="text/css">
+      g {
+        stroke: light-dark(black, white);
+      }
+      g.stroke-red {
+        stroke: red;
+      }
+      text {
+        fill: light-dark(black, white);
+      }
+      .four {
+        fill: red;
+        font-weight: bold
+      }
+    </style>
+  </defs>
+  <g stroke-width=".5" fill="none">
+    <circle cx="100" cy="70" r="10"/>
+    <circle cx="97" cy="67" r="1"/>
+    <circle cx="103" cy="67" r="1"/>
+    <path d="M 96,73 q 4,-1,8,0"/>
+    <line x1="100" y1="80" x2="100" y2="105"/>
+    <line x1="100" y1="105" x2="88" y2="120"/>
+    <line x1="100" y1="105" x2="112" y2="120"/>
+    <line x1="90" y1="95" x2="100" y2="95"/>
+    <line x1="100" y1="95" x2="110" y2="90"/>
+  </g>
+  <g fill="none">
+    <circle cx="90" cy="55" r="2" stroke-width="1" />
+    <circle cx="80" cy="45" r="4" stroke-width="1.5" />
+    <path stroke-miterlimit="1"
+      d="M 70,35
+        q -5,10,-9,0
+          -5,10,-9,0
+          -5,10,-9,0
+          -5,10,-9,0
+          -5,10,-9,0
+          -5,10,-9,0
+          -10,-5,0,-10
+          -10,-5,0,-10
+          5,-10,9,0
+          5,-10,9,0
+          5,-10,9,0
+          5,-10,9,0
+          5,-10,9,0
+          5,-10,9,0
+          10,5,0,10
+          10,5,0,10
+        "
+      stroke-width="2"
+      />
+  </g>
+  <text x="15" y="30" letter-spacing="4">123<tspan class="four" letter-spacing="0">4?</tspan></text>
+  <g class="stroke-red" stroke-width=".5" opacity="1">
+  <line x1="39" y1="17" x2="50" y2="31"/>
+  <line x1="39" y1="31" x2="50" y2="17"/>
+    </g>
+</svg>
+</span></p>
 <p>Up until the day before the announcement, the plan was for the release to be
 <code>8.5.0alpha3</code>. However, there were some complications that necessitated
 incorporating a few more code changes.</p>

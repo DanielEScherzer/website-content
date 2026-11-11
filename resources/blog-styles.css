@@ -1,3 +1,9 @@
+:root {
+	--blog-preview-border-color: light-dark(#000000, #ffffff);
+	--blog-highight-background-color: light-dark(#f8f8f8, #070707);
+	--blog-toc-background-color: light-dark(#f6f6f6, #090909);
+}
+
 .blog-index {
 	h1 {
 		display: inline-block;
@@ -15,7 +21,7 @@
 }
 
 .blog-preview {
-	border: 1px dashed black;
+	border: 1px dashed var( --blog-preview-border-color );
 	margin-bottom: 25px;
 	padding: 5px;
 
@@ -64,7 +70,7 @@
 		margin-bottom: 0px;
 	}
 
-	img {
+	img, .inlined-svg-image {
 		width: 50%;
 		display: block;
 		margin: auto;
@@ -90,7 +96,7 @@
 	}
 
 	.pygments-highlighter pre {
-		background-color: #f8f8f8;
+		background-color: var( --blog-highight-background-color );
 		overflow-x: auto;
 	}
 
@@ -101,19 +107,23 @@
 }
 
 .blog-page--sidebar-image {
-	img {
+	img, .inlined-svg-image {
 		width: fit-content;
 	}
 
-	p:has(img) {
+	p:has(img, .inlined-svg-image) {
 		width: 40%;
 		float: right;
+	}
+
+	p:has(.inlined-svg-image) {
+		font-size: unset;
 	}
 }
 
 .blog-page--unhighlighted-block pre:not(.pygments-highlighter pre) {
 	/* Multi-line blocks */
-	background-color: #f8f8f8;
+	background-color: var( --blog-highight-background-color );
 
 	code {
 		white-space: pre;
@@ -130,7 +140,7 @@
 	height: fit-content;
 	position: sticky;
 	top: 50px;
-	background-color: #f6f6f6;
+	background-color: var( --blog-toc-background-color );
 	max-width: fit-content;
 	padding: 10px;
 	margin-right: 10px;
@@ -213,10 +223,10 @@
 		margin-top: 20px;
 	}
 	.blog-page--sidebar-image {
-		img {
+		img, .inlined-svg-image {
 			max-width: 100%;
 		}
-		p:has(img) {
+		p:has(img, .inlined-svg-image) {
 			float: unset;
 			margin: auto;
 			max-width: 100%;
