@@ -22,7 +22,7 @@
     <circle cx="100" cy="55" r="2" stroke-width="1" />
     <circle cx="95" cy="45" r="4" stroke-width="1.5" />
     <path stroke-miterlimit="1"
-      d="M 90,35
+      d="M 115,35
         q -5,10,-9,0
           -5,10,-9,0
           -5,10,-9,0
@@ -32,8 +32,14 @@
           -5,10,-9,0
           -5,10,-9,0
           -5,10,-9,0
+          -5,10,-9,0
+          -5,10,-9,0
+          -5,10,-9,0
           -10,-5,0,-10
           -10,-5,0,-10
+          5,-10,9,0
+          5,-10,9,0
+          5,-10,9,0
           5,-10,9,0
           5,-10,9,0
           5,-10,9,0
@@ -49,7 +55,7 @@
       stroke-width="2"
       />
   </g>
-  <text x="12" y="30" fill="#000" letter-spacing="4">12345<tspan class="red" letter-spacing="0">6?</tspan></text>
+  <text x="12" y="30" fill="#000" letter-spacing="4">12345<tspan class="red" letter-spacing="0">... 7??</tspan></text>
   <g stroke="red" stroke-width=".5" opacity="1">
     <line x1="12" y1="17" x2="20" y2="31"/>
     <line x1="12" y1="31" x2="20" y2="17"/>
