@@ -38,6 +38,7 @@ abstract class BasePage extends AbstractPage {
 				)
 		);
 		$this->addStyleSheet( 'default-styles.css' );
+		$this->addScript( 'dark-mode.js' );
 		// Not shown in tests, or in staging
 		if ( !defined( 'PHPUNIT_TESTS_RUNNING' ) &&
 			!getenv( 'DANIEL_WEBSITE_STAGING' )
@@ -142,10 +143,42 @@ END
 		);
 	}
 
+	private function getDarkModeToggle(): FluentHTML {
+		$btn = FluentHTML::make(
+			'button',
+			[ 'id' => 'btn-theme-toggle' ],
+			[
+				FluentHTML::make(
+					'span',
+					[
+						'class' => 'btn-theme-toggle--light',
+						'title' => 'Switch to light mode',
+					],
+					new RawHTML( file_get_contents( dirname( __DIR__, 2 ) . '/resources/sun-24.svg' ) ),
+				),
+				FluentHTML::make(
+					'span',
+					[
+						'class' => 'btn-theme-toggle--dark',
+						'title' => 'Switch to dark mode',
+					],
+					new RawHTML( file_get_contents( dirname( __DIR__, 2 ) . '/resources/moon-24.svg' ) ),
+				),
+			]
+		);
+		// Display none so that it is hidden until JavaScript loads
+		return FluentHTML::make(
+			'div',
+			[ 'class' => 'btn-theme-toggle--wrapper', 'style' => 'display: none;' ],
+			$btn
+		);
+	}
+
 	public function getPageOutput(): string {
 		$this->build();
 		$contents = [
 			$this->getNavBar(),
+			$this->getDarkModeToggle(),
 			$this->contentWrapper,
 			$this->getFooter(),
 		];
@@ -156,8 +189,8 @@ END
 		) {
 			// Inlining the error box styles
 			$styles = [
-				'background-color' => '#fcdad4',
-				'border' => '3px solid #fc9685',
+				'background-color' => 'light-dark(#fcdad4, #c47568)',
+				'border' => '3px solid light-dark(#fc9685, #fcdad4)',
 				'padding' => '10px',
 				'margin-top' => '20px',
 				'margin-left' => 'auto',

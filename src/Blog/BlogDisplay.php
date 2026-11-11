@@ -38,6 +38,9 @@ class BlogDisplay {
 				'style' => 'ordered',
 				'min_heading_level' => 2,
 			],
+			'embed_svgs' => [
+				'base_path' => dirname( __DIR__, 2 ),
+			],
 		];
 
 		$env = new Environment( $config );
@@ -70,6 +73,9 @@ class BlogDisplay {
 			}
 			if ( $extensions['footnotes'] ?? false ) {
 				$env->addExtension( new FootnoteExtension() );
+			}
+			if ( $extensions['embed-svgs'] ?? false ) {
+				$env->addExtension( new EmbedSVGsExtension() );
 			}
 			$post->setConfig( $cfg ?? [] );
 		}

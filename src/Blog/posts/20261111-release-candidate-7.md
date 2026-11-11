@@ -1,5 +1,6 @@
 ---
 extensions:
+  embed-svgs: true
   pygments: true
   toc: true
 extra-classes:

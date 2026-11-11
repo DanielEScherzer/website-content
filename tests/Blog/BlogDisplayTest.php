@@ -6,6 +6,7 @@ namespace DanielWebsite\Tests\Blog;
 use DanielEScherzer\CommonMarkPygmentsHighlighter\PygmentsHighlighterExtension;
 use DanielWebsite\Blog\BlogDisplay;
 use DanielWebsite\Blog\BlogPost;
+use DanielWebsite\Blog\EmbedSVGsExtension;
 use DanielWebsite\Tests\TraversableContainsInstanceOf;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
@@ -66,13 +67,18 @@ class BlogDisplayTest extends TestCase {
 			"---\nextensions:\n  footnotes: true\n---\n# Demo",
 			[ ...$defaultExts, FootnoteExtension::class ],
 		];
+		yield 'YAML loads embed-svgs' => [
+			"---\nextensions:\n  embed-svgs: true\n---\n# Demo",
+			[ ...$defaultExts, EmbedSVGsExtension::class ],
+		];
 		yield 'YAML loads all' => [
-			"---\nextensions:\n  toc: true\n  pygments: true\n  footnotes: true\n---\n# Demo",
+			"---\nextensions:\n  toc: true\n  pygments: true\n  embed-svgs: true\n  footnotes: true\n---\n# Demo",
 			[
 				...$defaultExts,
 				HeadingPermaLinkExtension::class,
 				TableOfContentsExtension::class,
 				PygmentsHighlighterExtension::class,
+				EmbedSVGsExtension::class,
 				FootnoteExtension::class,
 			],
 		];
