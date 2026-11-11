@@ -177,7 +177,7 @@ because a separate issue prompted building a newer release candidate; see
 [my writeup of PHP 8.5.6RC3 for details][blog-856-rc3]. To be clear, RC6 was
 built but never announced or officially released.
 
-In addition to the aforementioned regression fix, RC7 also included a memory
+In addition to the aforementioned regression fix, RC7 also includes a memory
 fix, [php/php-src#25211][pr-25211]. The memory fix was considered a fix for a
 security issue that only affected PHP 8.6, meaning that it could be included
 without an extra release candidate. But, since there is a new release candidate,
