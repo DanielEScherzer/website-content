@@ -126,8 +126,8 @@ class OpenSourcePage extends BasePage {
 					'date' => 'February 2027',
 					'upcoming' => true,
 				],
-			]
-		]
+			],
+		],
 	];
 
 	private const PHP_RFCS = [
