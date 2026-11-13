@@ -65,6 +65,19 @@ class OpenSourcePage extends BasePage {
 					'slides' => '20261016 Longhorn PHP presentation.pdf',
 					'blog' => '20261019-longhorn-php',
 				],
+				[
+					'conf' => 'MergePHP',
+					'loc' => 'Remote',
+					'date' => 'November 2026',
+					'slides' => '20261112 MergePHP presentation.pdf',
+					'blog' => '20261113-mergephp-talk',
+				],
+				[
+					'conf' => 'ConFoo Montreal 2027',
+					'loc' => 'Montreal, Canada',
+					'date' => 'February 2027',
+					'upcoming' => true,
+				],
 			],
 		],
 		'PHP-SemVer' => [
@@ -103,6 +116,18 @@ class OpenSourcePage extends BasePage {
 				],
 			],
 		],
+		'PHP2Shell-Tales-Front-Lines' => [
+			'title' => 'PHP2Shell: Tales from the Front Lines',
+			'keynote' => true,
+			'iterations' => [
+				[
+					'conf' => 'ConFoo Montreal 2027',
+					'loc' => 'Montreal, Canada',
+					'date' => 'February 2027',
+					'upcoming' => true,
+				],
+			]
+		]
 	];
 
 	private const PHP_RFCS = [
@@ -284,6 +309,7 @@ END,
 		$list = FluentHTML::fromTag( 'ul' );
 		foreach ( array_reverse( self::OPEN_SOURCE_PRESENTATIONS ) as $details ) {
 			$workshop = ( $details['workshop'] ?? false ) ? '[workshop] ' : '';
+			$keynote = ( $details['keynote'] ?? false ) ? '[keynote] ' : '';
 			if ( count( $details['iterations'] ) === 1 ) {
 				$once = $details['iterations'][0];
 				$item = FluentHTML::make(
@@ -291,6 +317,7 @@ END,
 					[],
 					[
 						$workshop,
+						$keynote,
 						'"' . $details['title'] . '," ',
 						...( $makeDetails( $details['iterations'][0] ) ),
 					]
