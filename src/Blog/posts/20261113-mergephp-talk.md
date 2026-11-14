@@ -5,7 +5,7 @@ tags: ["conferences", "php"]
 
 # MergePHP, November 2026
 
-This week, I presented "PHP 8.6: The Inside Scoop" for a third time, this time
+Yesterday, I presented "PHP 8.6: The Inside Scoop" for a third time, this time
 [through MergePHP][mergephp-talk], an online meetup combining multiple PHP user
 groups. This was my second time presenting for MergePHP, following my
 [talk last year][blog-mergephp-2025] about PHP 8.5.
