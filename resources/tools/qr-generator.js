@@ -80,7 +80,7 @@ const onLoad = () => {
 
 	const downloadNote = document.createElement( 'p' );
 	downloadNote.innerText = 'To download, right click on the image and save the image.';
-	downloadNote.innerText += 'You can submit a new URL to generate a new QR code.'
+	downloadNote.innerText += ' You can submit a new URL to generate a new QR code.'
 
 	const downloadNoteHolder = document.createElement( 'div' );
 	target.append( downloadNoteHolder );
