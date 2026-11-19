@@ -11,9 +11,11 @@ RUN docker-php-ext-install zip && docker-php-ext-enable zip
 
 # Add composer
 COPY --from=composer:2.10.3 /usr/bin/composer /usr/local/bin/composer
+# Add pie
+COPY --from=ghcr.io/php/pie:1.5.5-bin /pie /usr/local/bin/pie
 
 # For test coverage
-RUN pecl install pcov
+RUN pie install pecl/pcov --skip-enable-extension
 
 # For code highlighting
 RUN apt-get install -y python3
