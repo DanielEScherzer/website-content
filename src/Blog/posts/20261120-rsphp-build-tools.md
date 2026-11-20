@@ -141,15 +141,19 @@ block ([documentation][rustdoc-assume-rust]).
 Since I use these build tools for the version of `rsphp-sys` that is documented
 on docs.rs, I want the `zend_ini_parse_quantity()` documentation to treat the
 indented parts of the comment as text -
-[see the result][docs-zend_ini_parse_quantity]. However, others probably aren't
-going to be generating the documentation for their overridden `rsphp-sys`
-dependency, in which case they are free to skip using the `CommentProcessor`.
+[see the result][docs-zend_ini_parse_quantity]. It isn't perfect, as shown by
+one of the bullet points having the second line be treated as a code block, but
+at least it avoids the warnings from rustdoc.
+
+Others probably aren't going to be generating the documentation for their
+overridden `rsphp-sys` dependency, in which case they are free to skip using the
+`CommentProcessor`.
 
 ### ExplicitIntTypesCallbacks
 
 The [`ExplicitIntTypesCallbacks`][docs-ExplicitIntTypesCallbacks] struct is used
 to force some of the Rust integer constants corresponding to C preprocessor
-constants have specific types. I mentioned this briefly in my last post - by
+constants to have specific types. I mentioned this briefly in my last post - by
 default, bindgen will store the values in 32-bit types (`i32` or `u32`), which
 prompts Rust to complain when trying to use the values in places expecting other
 types.
@@ -183,7 +187,7 @@ value wraps around, and becomes the maximum unsigned value for a 32-bit integer,
 with the resulting value and also telling bindgen what integer type to use for
 the resulting constant. Currently, the utility handles `uint32_t` and `uint16_t`
 casts in the C code, but it can be expanded to others if needed, e.g. some other
-C preprocessor macros use `size_t` or `unsigned int`.
+C preprocessor macros in PHP use `size_t` or `unsigned int`.
 
 <!--
 * size_t: ZEND_MM_CHUNK_SIZE (Zend/zend_alloc_sizes.h)
@@ -199,11 +203,12 @@ the C header files in PHP's `Zend/` directory that bindings should be generated
 for. While bindgen can be instructed to include all headers in a given
 directory, a number of the header files in that directory are internal and
 don't have anything useful to process, e.g. the definition of the Zend
-virtual machine ([zend_vm_def.h][gh-zend_vm_def.h]) (currently over 10k lines
-of code) or the resulting generated [zend_vm_execute.h][gh-zend_vm_execute.h],
+virtual machine ([zend_vm_def.h][gh-zend_vm_def.h], currently over 10k lines of
+code) or the resulting generated [zend_vm_execute.h][gh-zend_vm_execute.h],
 which is currently over 120k lines of code. I'm not sure how quickly bindgen
 would process these files, or even if it could, since at least the definition
-file isn't actually valid C code.
+file isn't actually valid C code. Either way, bindings for them are not needed,
+so having a list of allowed header files makes it easy to avoid them.
 
 ## PhpConfigRunner
 
@@ -227,7 +232,7 @@ and the `rsphp-build-tools` crate, which simplifies building those bindings, but
 that isn't the end of the story. I've heard it said that PHP isn't really
 written in C, but rather in a macro language built on top of C, and to some
 extent, that is true. PHP uses macros *everywhere*, and without corresponding
-Rust macros extension development would be a lot harder. In my next post, I'll
+Rust macros, extension development would be a lot harder. In my next post, I'll
 dive into the [`rsphp-macros-c`][crate-macros-c] crate, which provides some
 Rust macros to match the C ones.
 
